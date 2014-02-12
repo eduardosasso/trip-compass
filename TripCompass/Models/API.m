@@ -75,22 +75,6 @@
     NSLog(@"Error, %@", jsonError);
   }
 }
-
-//TODO DRY - too much repeated stuff here
--(void)getPlacesNearby {
-  [self getPlacesNearbyPage:1];
-}
-
--(void)getPlacesNearbyPage:(NSInteger)page {
-  NSDictionary *params = @{
-                           @"lat"  : [[NSNumber numberWithDouble: lat] stringValue],
-                           @"lng"  : [[NSNumber numberWithDouble: lng] stringValue],
-                           @"page" : [[NSNumber numberWithInt: page] stringValue]
-                          };
-  
-  [self makeRequestWithEndpoint:NEARBY_ENDPOINT params:params];
-}
-
 -(void)searchPlacesNearby:(NSString *)query {
   NSDictionary *params = @{
                            @"lat" : [[NSNumber numberWithDouble: lat] stringValue],
@@ -101,33 +85,37 @@
   [self makeRequestWithEndpoint:NEARBY_ENDPOINT params:params];
 }
 
--(void)getRestaurantsNearby {
+-(void)requestPlacesNearby:(NSInteger)page {
   NSDictionary *params = @{
-                           @"lat" : [[NSNumber numberWithDouble: lat] stringValue],
-                           @"lng" : [[NSNumber numberWithDouble: lng] stringValue],
-                           @"type" : @"Restaurant"
+                           @"lat"  : [[NSNumber numberWithDouble: lat] stringValue],
+                           @"lng"  : [[NSNumber numberWithDouble: lng] stringValue],
+                           @"page" : [[NSNumber numberWithInt: page] stringValue]
                            };
   
   [self makeRequestWithEndpoint:NEARBY_ENDPOINT params:params];
 }
 
--(void)getAttractionsNearby {
+- (void)requestPlacesNearbyByType:(NSInteger)page type:(NSString *)type {
   NSDictionary *params = @{
-                           @"lat" : [[NSNumber numberWithDouble: lat] stringValue],
-                           @"lng" : [[NSNumber numberWithDouble: lng] stringValue],
-                           @"type" : @"Attraction"
+                           @"lat"  : [[NSNumber numberWithDouble: lat] stringValue],
+                           @"lng"  : [[NSNumber numberWithDouble: lng] stringValue],
+                           @"page" : [[NSNumber numberWithInt: page] stringValue],
+                           @"type" : type
                            };
   
   [self makeRequestWithEndpoint:NEARBY_ENDPOINT params:params];
 }
 
--(void)getHotelsNearby {
-  NSDictionary *params = @{
-                           @"lat" : [[NSNumber numberWithDouble: lat] stringValue],
-                           @"lng" : [[NSNumber numberWithDouble: lng] stringValue],
-                           @"type" : @"Hotel"
-                           };
-  [self makeRequestWithEndpoint:NEARBY_ENDPOINT params:params];
+-(void)requestRestaurantsNearby:(NSInteger)page {
+  [self requestPlacesNearbyByType:page type:@"Restaurant"];
+}
+
+-(void)requestAttractionsNearby:(NSInteger)page {
+  [self requestPlacesNearbyByType:page type:@"Attraction"];
+}
+
+-(void)requestHotelsNearby:(NSInteger)page {
+  [self requestPlacesNearbyByType:page type:@"Hotel"];
 }
 
 @end

@@ -13,15 +13,14 @@
 
 -(id)initWithLatitude:(double)latitude longitude:(double)longitude;
 
--(void)getPlacesNearby;
--(void)getPlacesNearbyPage:(NSInteger)page;
+-(void)requestPlacesNearby:(NSInteger)page;
 
 -(void)searchPlacesNearby:(NSString *)query;
 
--(void) getRestaurantsNearby;
+-(void)requestRestaurantsNearby:(NSInteger)page;
 
--(void) getAttractionsNearby;
+-(void)requestAttractionsNearby:(NSInteger)page;
 
--(void) getHotelsNearby;
+-(void)requestHotelsNearby:(NSInteger)page;
 
 @end

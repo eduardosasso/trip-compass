@@ -29,9 +29,9 @@
   
   [self checkInternetConnectivity];
   
-  UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-  MainViewController *controller = (MainViewController *)navigationController.topViewController;
-  controller.managedObjectContext = self.managedObjectContext;
+//  UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+//  MainViewController *controller = (MainViewController *)navigationController.topViewController;
+//  controller.managedObjectContext = self.managedObjectContext;
   
   BOOL isMetric = [[[NSLocale currentLocale] objectForKey:NSLocaleUsesMetricSystem] boolValue];
   
@@ -48,8 +48,8 @@
   }
   
   //Gives a blur/frost effect to the bars
-  [[UINavigationBar appearance] setBarTintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.0f]];
-  [[UITabBar appearance] setBarTintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.0f]];
+//  [[UINavigationBar appearance] setBarTintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.0f]];
+//  [[UITabBar appearance] setBarTintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.0f]];
   
   return YES;
 }
