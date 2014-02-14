@@ -1,4 +1,5 @@
 #import "PlaceViewController.h"
+#import <CoreLocation/CoreLocation.h>
 #import "Place.h"
 #import "PlaceModel.h"
 #import "AppDelegate.h"
@@ -16,7 +17,10 @@
   NSString *placeType;
   UIView *defaultTableHeaderView;
   API *api;
-
+  
+  CLLocationManager *locationManager;
+  CLLocation *currentLocation;
+  
   NSMutableArray *results;
   NSArray *apiResults;
   
@@ -28,7 +32,15 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+//  UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"NoInternetView" owner:self options:nil] firstObject];
+//  
+//  [self.view addSubview:view];
+//  [self.view bringSubviewToFront:view];
+//  
+//  [view removeFromSuperview];
+  
   [self resetTableViewData];
+  [self startTrackingLocation];
 
   [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
   
@@ -40,21 +52,12 @@
   appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //  self.managedObjectContext = [appDelegate managedObjectContext];
   
-  self.tabBarController.delegate = self;
-  defaultTableHeaderView = [self.tableView tableHeaderView];
+//  self.tabBarController.delegate = self;
+//  defaultTableHeaderView = [self.tableView tableHeaderView];
   
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-//  [self.refreshControl endRefreshing];
-//  self.tabBarController.navigationItem.title = @"Nearby Search";
-//  self.tabBarController.navigationItem.rightBarButtonItem = nil;
-}
-
-//- (void)viewDidAppear:(BOOL)animated {
-//  [self requestUpdateTableViewData];
-//}
 
 #pragma mark API
 - (void)apiResultsNotificationReceived:(NSNotification *)notification {
@@ -70,9 +73,10 @@
 }
 
 - (void)requestUpdateTableViewData{
-  CLLocationCoordinate2D currentLocation = [(AppDelegate*)appDelegate currentLocation];
-  api = [[API alloc] initWithLatitude:currentLocation.latitude longitude:currentLocation.longitude];
-
+  if (!currentLocation) return;
+  
+  api = [[API alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
+  
   NSArray *placeTypes = @[@"Attractions", @"Hotels", @"Restaurants"];
   int item = [placeTypes indexOfObject:placeType];
   switch (item) {
@@ -91,7 +95,7 @@
   }
 }
 
-- (void)willPaginateTableView {
+- (void)requestUpdateTableViewDataWithPagination {
   results.count == 0 ? page=1 : page++;
   [self requestUpdateTableViewData];
 }
@@ -112,9 +116,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  if (page > 1 && apiResults.count == 0) {
-    return results.count;
-  }
+  if (page > 1 && apiResults.count == 0) return results.count;
   
   [results addObjectsFromArray:apiResults];
   
@@ -129,7 +131,7 @@
     Place *place = [self getPlace:indexPath.row];
     
     customCell.placeLabel.text = place.name;
-    customCell.detailLabel.text = [place formattedDistanceTo:[(AppDelegate*)appDelegate currentLocation]];
+    customCell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
     
     return customCell;
   } else {
@@ -153,8 +155,8 @@
 //}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-  //if the current cell is the loading one we should fetch next page
-  if ([cell.reuseIdentifier isEqualToString:@"loadingCell"]) [self willPaginateTableView];
+  //this delegate is the starting point to show data in the tableview
+  if ([cell.reuseIdentifier isEqualToString:@"loadingCell"]) [self requestUpdateTableViewDataWithPagination];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -290,6 +292,30 @@
   self.searchDisplayController.searchResultsTableView.hidden = YES;
 }
 
+#pragma mark Location Manager
+- (void)startTrackingLocation {
+  locationManager = [[CLLocationManager alloc] init];
+  locationManager.delegate = self;
+  locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+  if([CLLocationManager locationServicesEnabled]) [locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+  currentLocation = (CLLocation *)[locations lastObject];
+  [manager stopUpdatingLocation];
+  
+  [self updateViewWithLocation:currentLocation];
+}
+
+- (void)updateViewWithLocation:(CLLocation *)location {
+  CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
+  [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+    [self requestUpdateTableViewData];
+    
+    CLPlacemark *placemark = [placemarks objectAtIndex:0];
+    self.navigationItem.title = placemark.locality;
+  }];
+}
 
 #pragma mark Undefined
 - (Place *)getPlace:(NSInteger)row {
@@ -311,7 +337,6 @@
 - (NSString *)googleAnalyticsScreenName {
   return @"Place";
 }
-
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if([[segue identifier] isEqualToString:@"placeType"]) {

@@ -5,7 +5,7 @@
 #import "PlaceTypeViewController.h"
 #import "GAUITableViewController.h"
 
-@interface PlaceViewController : GAUITableViewController <UISearchBarDelegate, UITabBarControllerDelegate, PlaceTypeDelegate>
+@interface PlaceViewController : GAUITableViewController <CLLocationManagerDelegate, PlaceTypeDelegate>
 
 //@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 //@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -14,6 +14,7 @@
 //@property (nonatomic, assign) BOOL searching;
 
 - (IBAction)pullToRefresh:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *plainView;
 
 @end
 

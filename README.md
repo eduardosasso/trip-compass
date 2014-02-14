@@ -1,6 +1,11 @@
 Trip Compass
 ============
 
+
+TODO
+UIRequiredDeviceCapabilities
+locationServicesEnabled
+
 References
 
 http://www.raywenderlich.com/934/core-data-tutorial-for-ios-getting-started
@@ -33,5 +38,4 @@ http://lfhck.com/question/226457/instantiating-a-uiview-subclass-with-a-delegate
 http://stackoverflow.com/questions/5146791/instantiating-a-uiview-subclass-with-a-delegate-using-a-nib-file
 http://stackoverflow.com/questions/13534502/ios-loadnibnamed-confusion-what-is-best-practice
 http://stackoverflow.com/questions/15405916/correct-way-to-load-a-nib-for-a-uiview-subclass
-http://www.indelible.org/ink/nib-loading/
 http://answers.oreilly.com/topic/2578-loading-a-nib-file-programmatically-objective-c/

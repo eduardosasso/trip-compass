@@ -634,7 +634,7 @@
             </objects>
             <point key="canvasLocation" x="-1808" y="3280"/>
         </scene>
-        <!--Place View Controller - San Francisco-->
+        <!--Place View Controller - Loading...-->
         <scene sceneID="VO0-RA-O0D">
             <objects>
                 <tableViewController id="ub2-AU-ASg" customClass="PlaceViewController" sceneMemberID="viewController">
@@ -664,7 +664,7 @@
                             <outlet property="delegate" destination="ub2-AU-ASg" id="QuV-Pt-hiW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="San Francisco" id="vCB-Yu-l0L">
+                    <navigationItem key="navigationItem" title="Loading..." id="vCB-Yu-l0L">
                         <barButtonItem key="leftBarButtonItem" title="Filter" id="Cbf-99-Gse">
                             <connections>
                                 <segue destination="Ya6-Ie-EEG" kind="modal" identifier="placeType" id="VWG-FT-1nu"/>
@@ -678,8 +678,16 @@
                             <action selector="pullToRefresh:" destination="ub2-AU-ASg" eventType="valueChanged" id="GAb-dp-XCw"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <outlet property="plainView" destination="YIt-Pn-fB2" id="utv-7l-hN6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amD-0q-1El" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="YIt-Pn-fB2">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="-1282" y="1922"/>
         </scene>

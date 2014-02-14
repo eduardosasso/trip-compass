@@ -50,6 +50,7 @@
 		3D8E2CE61787B44900AA0F0D /* CompassHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8E2CE51787B44900AA0F0D /* CompassHelperTests.m */; };
 		3D8E2CEF178EF4AD00AA0F0D /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8E2CEE178EF4AD00AA0F0D /* PlaceViewController.m */; };
 		3DA654AA179D7B4A00424430 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA654A9179D7B4A00424430 /* Util.m */; };
+		3DAC8C3A18AE75E400E78C17 /* NoInternetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */; };
 		3DB281C81827F7AE008C7B82 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DB281C71827F7AE008C7B82 /* CustomCell.xib */; };
 		3DB8FAF0184F950A005853D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB8FAEF184F950A005853D6 /* SystemConfiguration.framework */; };
 		3DB8FAFA1850E524005853D6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB8FAF91850E524005853D6 /* CoreTelephony.framework */; };
@@ -152,6 +153,7 @@
 		3D8E2CF0179049CC00AA0F0D /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
 		3DA654A8179D7B4A00424430 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		3DA654A9179D7B4A00424430 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoInternetView.xib; sourceTree = "<group>"; };
 		3DB281C71827F7AE008C7B82 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		3DB8FAED184F94C0005853D6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3DB8FAEF184F950A005853D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -358,6 +360,7 @@
 				3DE62CD21827FE7300FD7522 /* CustomCell.m */,
 				3DB281C71827F7AE008C7B82 /* CustomCell.xib */,
 				3D76BECF1853A2FC002FD16F /* BookmarkCell.xib */,
+				3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				3DCFBB1F18995B7700D5E64D /* 845-location-target.png in Resources */,
 				3D49860017A16A5500CB2CF2 /* numbers.png in Resources */,
 				3DCFBB1A18995B7700D5E64D /* 752-credit-card@2x.png in Resources */,
+				3DAC8C3A18AE75E400E78C17 /* NoInternetView.xib in Resources */,
 				3DCFBB2118995B7700D5E64D /* 879-mountains@2x.png in Resources */,
 				3D76BED01853A2FC002FD16F /* BookmarkCell.xib in Resources */,
 				3DCFBB1318995B7700D5E64D /* 715-globe@2x.png in Resources */,

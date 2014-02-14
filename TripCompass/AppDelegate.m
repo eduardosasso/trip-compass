@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import <CoreLocation/CoreLocation.h>
 #import "Reachability.h"
 #import "GAI.h"
 
@@ -23,6 +22,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  // TODO verify this
   [NewRelicAgent startWithApplicationToken:@"AA95f3a9d6f4639454016ea81cba6b6205c22a448d"];
 
   [self setupGoogleAnalytics];
@@ -40,12 +40,6 @@
     [defaults setBool:isMetric forKey:@"isMetric"];
   }
   
-  locationManager = [[CLLocationManager alloc] init];
-  locationManager.delegate = self;
-  locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-  if( [CLLocationManager locationServicesEnabled] &&  [CLLocationManager headingAvailable]) {
-    [locationManager startUpdatingLocation];
-  }
   
   //Gives a blur/frost effect to the bars
 //  [[UINavigationBar appearance] setBarTintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.0f]];
@@ -75,10 +69,6 @@
   self.online = [reachability isReachable];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-  self.currentLocation = [[locations lastObject] coordinate];
-}
-
 - (void)applicationWillResignActive:(UIApplication *)application
 {
   // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -98,6 +88,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+  NSLog(@"applicationDidBecomeActive");
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
