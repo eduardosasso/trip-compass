@@ -22,7 +22,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  // TODO verify this
   [NewRelicAgent startWithApplicationToken:@"AA95f3a9d6f4639454016ea81cba6b6205c22a448d"];
 
   [self setupGoogleAnalytics];

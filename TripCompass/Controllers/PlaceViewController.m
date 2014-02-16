@@ -5,6 +5,8 @@
 #import "AppDelegate.h"
 #import "API.h"
 #import "CustomCell.h"
+#import "NoInternetView.h"
+#import "Reachability.h"
 
 @interface PlaceViewController ()
 @end
@@ -25,6 +27,9 @@
   NSArray *apiResults;
   
   NSInteger page;
+  
+  Reachability *internetConnection;
+  NoInternetView *noInternetView;
 }
 
 #pragma mark Controller Lifecycle
@@ -32,16 +37,10 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-//  UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"NoInternetView" owner:self options:nil] firstObject];
-//  
-//  [self.view addSubview:view];
-//  [self.view bringSubviewToFront:view];
-//  
-//  [view removeFromSuperview];
-  
   [self resetTableViewData];
   [self startTrackingLocation];
-
+  [self checkInternetConnection];
+  
   [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
   
   //todo get the initial size dynamically from the constraints
@@ -57,7 +56,6 @@
   
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
 }
-
 
 #pragma mark API
 - (void)apiResultsNotificationReceived:(NSNotification *)notification {
@@ -315,6 +313,39 @@
     CLPlacemark *placemark = [placemarks objectAtIndex:0];
     self.navigationItem.title = placemark.locality;
   }];
+}
+
+#pragma mark Internet Connection
+- (void)checkInternetConnection {
+  noInternetView = [[NoInternetView alloc] init];
+  [self.view addSubview:noInternetView];
+  
+  internetConnection = [Reachability reachabilityForInternetConnection];
+  
+  [self toggleInternetView:[internetConnection isReachable]];
+  
+  [internetConnection startNotifier];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(internetConnectionDidChange:) name:kReachabilityChangedNotification object:nil];
+}
+
+- (void)internetConnectionDidChange:(NSNotification *)notification {
+  internetConnection = (Reachability *)[notification object];
+  [self toggleInternetView:[internetConnection isReachable]];
+}
+
+- (void)toggleInternetView:(BOOL)connected {
+  [noInternetView setHidden:connected];
+  [noInternetView setFrame: self.tableView.bounds];
+  self.tableView.scrollEnabled = connected;
+
+  if (connected) {
+    if (results.count == 0) [locationManager startUpdatingLocation];
+    [self.view sendSubviewToBack:noInternetView];
+  } else {
+    [self.view bringSubviewToFront:noInternetView];
+  }
+  
 }
 
 #pragma mark Undefined

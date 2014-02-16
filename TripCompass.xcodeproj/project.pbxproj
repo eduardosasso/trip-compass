@@ -51,6 +51,7 @@
 		3D8E2CEF178EF4AD00AA0F0D /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8E2CEE178EF4AD00AA0F0D /* PlaceViewController.m */; };
 		3DA654AA179D7B4A00424430 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA654A9179D7B4A00424430 /* Util.m */; };
 		3DAC8C3A18AE75E400E78C17 /* NoInternetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */; };
+		3DAC8C3D18B12F1900E78C17 /* NoInternetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC8C3C18B12F1900E78C17 /* NoInternetView.m */; };
 		3DB281C81827F7AE008C7B82 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DB281C71827F7AE008C7B82 /* CustomCell.xib */; };
 		3DB8FAF0184F950A005853D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB8FAEF184F950A005853D6 /* SystemConfiguration.framework */; };
 		3DB8FAFA1850E524005853D6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB8FAF91850E524005853D6 /* CoreTelephony.framework */; };
@@ -154,6 +155,8 @@
 		3DA654A8179D7B4A00424430 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		3DA654A9179D7B4A00424430 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoInternetView.xib; sourceTree = "<group>"; };
+		3DAC8C3B18B12F1900E78C17 /* NoInternetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoInternetView.h; sourceTree = "<group>"; };
+		3DAC8C3C18B12F1900E78C17 /* NoInternetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoInternetView.m; sourceTree = "<group>"; };
 		3DB281C71827F7AE008C7B82 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		3DB8FAED184F94C0005853D6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3DB8FAEF184F950A005853D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -361,6 +364,8 @@
 				3DB281C71827F7AE008C7B82 /* CustomCell.xib */,
 				3D76BECF1853A2FC002FD16F /* BookmarkCell.xib */,
 				3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */,
+				3DAC8C3B18B12F1900E78C17 /* NoInternetView.h */,
+				3DAC8C3C18B12F1900E78C17 /* NoInternetView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -612,6 +617,7 @@
 				3DDBDFE2184CEA5F00C48C08 /* MainUITabBarController.m in Sources */,
 				3D8E2CEF178EF4AD00AA0F0D /* PlaceViewController.m in Sources */,
 				3DA654AA179D7B4A00424430 /* Util.m in Sources */,
+				3DAC8C3D18B12F1900E78C17 /* NoInternetView.m in Sources */,
 				3D4E6B59187C551700454293 /* NSString+URLEncoding.m in Sources */,
 				3D4E6B56187C548600454293 /* NSDictionary+QueryString.m in Sources */,
 				3D32397517A953B2005ACF01 /* Place.m in Sources */,
