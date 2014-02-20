@@ -5,7 +5,7 @@
 #import "PlaceTypeViewController.h"
 #import "GAUITableViewController.h"
 
-@interface PlaceViewController : GAUITableViewController <CLLocationManagerDelegate, PlaceTypeDelegate>
+@interface PlaceViewController : GAUITableViewController <CLLocationManagerDelegate, PlaceTypeDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
 //@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 //@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

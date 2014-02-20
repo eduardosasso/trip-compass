@@ -12,18 +12,17 @@
 @end
 
 @implementation PlaceViewController {
-  NSArray *searchFilters;
   AppDelegate *appDelegate;
-  NSString *lat;
-  NSString *lng;
+  
   NSString *placeType;
-  UIView *defaultTableHeaderView;
-  API *api;
   
   CLLocationManager *locationManager;
   CLLocation *currentLocation;
   
   NSMutableArray *results;
+  NSMutableArray *searchResults;
+
+  API *api;
   NSArray *apiResults;
   
   NSInteger page;
@@ -37,14 +36,17 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  [self resetTableViewData];
+  [self resetTableView];
   [self startTrackingLocation];
   [self checkInternetConnection];
   
   [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
-  
+
   //todo get the initial size dynamically from the constraints
   //self.tableView.estimatedRowHeight = self.tabBarController.topLayoutGuide.length;
+  
+  //hide search bar under the navigation bar
+  self.tableView.contentOffset = CGPointMake(0, self.searchDisplayController.searchBar.frame.size.height);
 
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(apiResultsNotificationReceived:) name:@"apiResultsNotification" object:nil];
   
@@ -57,20 +59,32 @@
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+//   [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+//   self.tableView.contentOffset = CGPointMake(0, self.searchDisplayController.searchBar.frame.size.height - self.tableView.contentOffset.y);
+//  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
 #pragma mark API
 - (void)apiResultsNotificationReceived:(NSNotification *)notification {
   apiResults = [[notification userInfo] valueForKey:@"results"];
-
+  
   [self.refreshControl endRefreshing];
   [self.tableView reloadData];
 }
 
-- (void)resetTableViewData{
+- (void)resetTableView{
   page = 1;
   results = [[NSMutableArray alloc] initWithCapacity:0];
+  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (void)requestUpdateTableViewData{
+  //TODO check if location services enabled...
+  //it hangs here if no location on simulator
   if (!currentLocation) return;
   
   api = [[API alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
@@ -102,21 +116,24 @@
 
 - (void)didSelectPlaceType:(NSString *)type {
   placeType = type;
-  [self resetTableViewData];
+  [self resetTableView];
   [self requestUpdateTableViewData];
 }
 
 #pragma mark UITableView
 
 - (IBAction)pullToRefresh:(id)sender {
-  [self resetTableViewData];
+  [self resetTableView];
   [self requestUpdateTableViewData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  if (page > 1 && apiResults.count == 0) return results.count;
-  
   [results addObjectsFromArray:apiResults];
+  
+  BOOL noMoreResults = page > 1 && apiResults.count == 0;
+  BOOL noMoreSearchResults = tableView == self.searchDisplayController.searchResultsTableView && results.count > 0;
+
+  if (noMoreResults || noMoreSearchResults) return results.count;
   
   //+1 for the loading cell
   return results.count + 1;
@@ -124,9 +141,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row < results.count) {
-    CustomCell *customCell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
-    
-    Place *place = [self getPlace:indexPath.row];
+    CustomCell *customCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
+
+    Place *place = [self convertDictionaryToPlace:[results objectAtIndex:indexPath.row]];
     
     customCell.placeLabel.text = place.name;
     customCell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
@@ -154,7 +171,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
   //this delegate is the starting point to show data in the tableview
-  if ([cell.reuseIdentifier isEqualToString:@"loadingCell"]) [self requestUpdateTableViewDataWithPagination];
+  if ([cell.reuseIdentifier isEqualToString:@"loadingCell"] && tableView != self.searchDisplayController.searchResultsTableView) [self requestUpdateTableViewDataWithPagination];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -239,55 +256,15 @@
 }
 
 #pragma mark Search
-
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-//  [self setEditing:NO animated:YES];
-//  self.searching = YES;
-//  [searchBar setShowsCancelButton:YES animated:YES];
-//  [self.tableView reloadData];
-//  return YES;
-}
-
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
-//  self.searching = NO;
-//	[searchBar sizeToFit];
-//  
-//	[searchBar setShowsCancelButton:NO animated:YES];
-//  
-//  NSLog(@"searchBarShouldEndEditing");
-//  
-//	return YES;
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-//  [api searchPlacesNearby:searchText];
-//  
-//  self.searching = NO;
-//  //  [self reloadTableViewData];
-}
-
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-//  [searchBar resignFirstResponder];
-//  self.searching = NO;
-//  searchBar.text = nil;
-  
-//  [api getPlacesNearby];
-  //  [self reloadTableViewData];
+  [self resetTableView];
+  [self requestUpdateTableViewData];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-  [searchBar resignFirstResponder];
-}
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView {
-  self.searchDisplayController.searchResultsTableView.hidden = YES;
-}
-
-- (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller {
-  //  [self.searchDisplayController.searchBar becomeFirstResponder];
-  //  [self.searchDisplayController.searchBar setText:@"whole"];
-  //  [self.view addSubview:self.searchDisplayController.searchResultsTableView];
-  self.searchDisplayController.searchResultsTableView.hidden = YES;
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+  [api searchPlacesNearby:searchString];
+  [self resetTableView];
+  return YES;
 }
 
 #pragma mark Location Manager
@@ -349,18 +326,16 @@
 }
 
 #pragma mark Undefined
-- (Place *)getPlace:(NSInteger)row {
-  NSDictionary *result = [results objectAtIndex:row];
-  
-  id place_lat = [result valueForKeyPath:@"address.lat"];
-  id place_lng = [result valueForKeyPath:@"address.lng"];
+- (Place *)convertDictionaryToPlace:(NSDictionary *)dictionary {
+  id place_lat = [dictionary valueForKeyPath:@"address.lat"];
+  id place_lng = [dictionary valueForKeyPath:@"address.lng"];
   
   Place *place = [[Place alloc] init];
-  place.name = [result objectForKey:@"name"];
-  place.address = [result valueForKeyPath:@"address.address"];
+  place.name = [dictionary objectForKey:@"name"];
+  place.address = [dictionary valueForKeyPath:@"address.address"];
   place.lat = [NSNumber numberWithDouble:[place_lat doubleValue]];
   place.lng = [NSNumber numberWithDouble:[place_lng doubleValue]];
-  place.area = [result objectForKey:@"travel_unit"];
+  place.area = [dictionary objectForKey:@"travel_unit"];
   
   return place;
 }
