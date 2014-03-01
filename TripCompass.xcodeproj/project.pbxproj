@@ -36,7 +36,7 @@
 		3D62760C1781C65B00A4B675 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D62760B1781C65B00A4B675 /* main.m */; };
 		3D6276101781C65B00A4B675 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D62760F1781C65B00A4B675 /* AppDelegate.m */; };
 		3D6276191781C65B00A4B675 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D6276171781C65B00A4B675 /* MainStoryboard.storyboard */; };
-		3D62761F1781C65B00A4B675 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D62761E1781C65B00A4B675 /* MainViewController.m */; };
+		3D62761F1781C65B00A4B675 /* CompassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D62761E1781C65B00A4B675 /* CompassViewController.m */; };
 		3D62762A1781C65B00A4B675 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6276291781C65B00A4B675 /* SenTestingKit.framework */; };
 		3D62762B1781C65B00A4B675 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6275FD1781C65B00A4B675 /* UIKit.framework */; };
 		3D62762C1781C65B00A4B675 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6275FF1781C65B00A4B675 /* Foundation.framework */; };
@@ -72,6 +72,7 @@
 		3DCFBB2018995B7700D5E64D /* 849-radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCFBB1018995B7700D5E64D /* 849-radar@2x.png */; };
 		3DCFBB2118995B7700D5E64D /* 879-mountains@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCFBB1118995B7700D5E64D /* 879-mountains@2x.png */; };
 		3DCFBB2218995B7700D5E64D /* 881-globe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCFBB1218995B7700D5E64D /* 881-globe@2x.png */; };
+		3DD30D9218C2434C00CA941E /* compass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DD30D9118C2434C00CA941E /* compass@2x.png */; };
 		3DD93F2E1787A6F1003908A7 /* CompassHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD93F2D1787A6F1003908A7 /* CompassHelper.m */; };
 		3DDBDFE2184CEA5F00C48C08 /* MainUITabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDBDFE1184CEA5F00C48C08 /* MainUITabBarController.m */; };
 		3DDDDE5A17D8CD22006FD52D /* LocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDDDE5917D8CD22006FD52D /* LocationSearchViewController.m */; };
@@ -135,8 +136,8 @@
 		3D62760E1781C65B00A4B675 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3D62760F1781C65B00A4B675 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3D6276181781C65B00A4B675 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		3D62761D1781C65B00A4B675 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		3D62761E1781C65B00A4B675 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		3D62761D1781C65B00A4B675 /* CompassViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompassViewController.h; sourceTree = "<group>"; };
+		3D62761E1781C65B00A4B675 /* CompassViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompassViewController.m; sourceTree = "<group>"; };
 		3D6276281781C65B00A4B675 /* TripCompassTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripCompassTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D6276291781C65B00A4B675 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3D6276321781C65B00A4B675 /* TripCompassTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TripCompassTests-Info.plist"; sourceTree = "<group>"; };
@@ -178,6 +179,7 @@
 		3DCFBB1018995B7700D5E64D /* 849-radar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "849-radar@2x.png"; sourceTree = "<group>"; };
 		3DCFBB1118995B7700D5E64D /* 879-mountains@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "879-mountains@2x.png"; sourceTree = "<group>"; };
 		3DCFBB1218995B7700D5E64D /* 881-globe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "881-globe@2x.png"; sourceTree = "<group>"; };
+		3DD30D9118C2434C00CA941E /* compass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compass@2x.png"; sourceTree = "<group>"; };
 		3DD93F2C1787A6F1003908A7 /* CompassHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompassHelper.h; sourceTree = "<group>"; };
 		3DD93F2D1787A6F1003908A7 /* CompassHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompassHelper.m; sourceTree = "<group>"; };
 		3DDBDFE0184CEA5F00C48C08 /* MainUITabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainUITabBarController.h; sourceTree = "<group>"; };
@@ -320,8 +322,8 @@
 		3D76BEC6185398D3002FD16F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D62761D1781C65B00A4B675 /* MainViewController.h */,
-				3D62761E1781C65B00A4B675 /* MainViewController.m */,
+				3D62761D1781C65B00A4B675 /* CompassViewController.h */,
+				3D62761E1781C65B00A4B675 /* CompassViewController.m */,
 				3DDBDFE0184CEA5F00C48C08 /* MainUITabBarController.h */,
 				3DDBDFE1184CEA5F00C48C08 /* MainUITabBarController.m */,
 				3D8E2CED178EF4AD00AA0F0D /* PlaceViewController.h */,
@@ -402,6 +404,7 @@
 		3D76BED21853B14B002FD16F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3DD30D9118C2434C00CA941E /* compass@2x.png */,
 				3D177EB918A53BB100DB599A /* Default-568h@2x.png */,
 				3D177EBA18A53BB100DB599A /* Default.png */,
 				3D177EBB18A53BB100DB599A /* Default@2x.png */,
@@ -531,6 +534,7 @@
 				3DCFBB1F18995B7700D5E64D /* 845-location-target.png in Resources */,
 				3D49860017A16A5500CB2CF2 /* numbers.png in Resources */,
 				3DCFBB1A18995B7700D5E64D /* 752-credit-card@2x.png in Resources */,
+				3DD30D9218C2434C00CA941E /* compass@2x.png in Resources */,
 				3DAC8C3A18AE75E400E78C17 /* NoInternetView.xib in Resources */,
 				3DCFBB2118995B7700D5E64D /* 879-mountains@2x.png in Resources */,
 				3D76BED01853A2FC002FD16F /* BookmarkCell.xib in Resources */,
@@ -608,7 +612,7 @@
 				3D62760C1781C65B00A4B675 /* main.m in Sources */,
 				3DF62A9418576D970052D245 /* GAUITableViewController.m in Sources */,
 				3D6276101781C65B00A4B675 /* AppDelegate.m in Sources */,
-				3D62761F1781C65B00A4B675 /* MainViewController.m in Sources */,
+				3D62761F1781C65B00A4B675 /* CompassViewController.m in Sources */,
 				3D5CBCE018634A2B009BFDAD /* GogobotSignature.m in Sources */,
 				3DD93F2E1787A6F1003908A7 /* CompassHelper.m in Sources */,
 				3DF62A9B1860AAFE0052D245 /* NSString+QueryString.m in Sources */,

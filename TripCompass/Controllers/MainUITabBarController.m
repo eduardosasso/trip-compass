@@ -7,42 +7,38 @@
 //
 
 #import "MainUITabBarController.h"
-#import "Reachability.h"
 #import "AppDelegate.h"
 
 @interface MainUITabBarController ()
 @end
 
 @implementation MainUITabBarController {
-  AppDelegate *appDelegate;
-  Reachability *reachability;
+  
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+}
+
+- (void)transitionToCompassView {
+  int controllerIndex = 1;
   
-  appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
-
-  [self updateTabBarItem];
-  [self selectActiveTab];
-}
-
-- (void)selectActiveTab {
-  int searchTab = 0;
-  int favoritesTab = 1;
+  UITabBarController *tabBarController = self.tabBarController;
+  UIView * fromView = tabBarController.selectedViewController.view;
   
-  self.selectedIndex = appDelegate.isOnline ? searchTab : favoritesTab;
+  UIView * toView = [[tabBarController.viewControllers objectAtIndex:controllerIndex] view];
+  
+  // Transition using a page curl.
+  [UIView transitionFromView:fromView
+                      toView:toView
+                    duration:0.5
+                     options:(UIViewAnimationOptionTransitionCrossDissolve)
+                  completion:^(BOOL finished) {
+                    if (finished) {
+                      tabBarController.selectedIndex = controllerIndex;
+                    }
+                  }];
+  
 }
 
-- (void)updateTabBarItem {
-  UITabBarItem* searchButton = [[self.tabBar items] objectAtIndex:0];
-  searchButton.badgeValue = appDelegate.isOnline ? nil : @"!";
-}
-
-- (void)reachabilityDidChange:(NSNotification *)notification {
-  [self updateTabBarItem];
-}
-//http://www.lextech.com/2012/10/ios-6-pull-to-refresh-tutorial/
 @end

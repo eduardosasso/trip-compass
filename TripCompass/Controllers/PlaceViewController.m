@@ -1,7 +1,7 @@
 #import "PlaceViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "Place.h"
-#import "PlaceModel.h"
+//#import "PlaceModel.h"
 #import "AppDelegate.h"
 #import "API.h"
 #import "CustomCell.h"
@@ -26,7 +26,7 @@
   NSArray *apiResults;
   
   NSInteger page;
-  
+  BOOL loading;
   Reachability *internetConnection;
   NoInternetView *noInternetView;
 }
@@ -59,27 +59,27 @@
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-//   [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-//   self.tableView.contentOffset = CGPointMake(0, self.searchDisplayController.searchBar.frame.size.height - self.tableView.contentOffset.y);
-//  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-}
-
 #pragma mark API
 - (void)apiResultsNotificationReceived:(NSNotification *)notification {
   apiResults = [[notification userInfo] valueForKey:@"results"];
   
   [self.refreshControl endRefreshing];
   [self.tableView reloadData];
+  
+  loading = false;
+  
+  //hide the search bar when reloading
+  if (page ==1) {
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+  }
 }
 
 - (void)resetTableView{
   page = 1;
   results = [[NSMutableArray alloc] initWithCapacity:0];
-  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+//  [self.tableView reloadData];
+  
 }
 
 - (void)requestUpdateTableViewData{
@@ -87,6 +87,7 @@
   //it hangs here if no location on simulator
   if (!currentLocation) return;
   
+  loading = true;
   api = [[API alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
   
   NSArray *placeTypes = @[@"Attractions", @"Hotels", @"Restaurants"];
@@ -123,8 +124,9 @@
 #pragma mark UITableView
 
 - (IBAction)pullToRefresh:(id)sender {
+  currentLocation = nil;
   [self resetTableView];
-  [self requestUpdateTableViewData];
+  [self startTrackingLocation];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -169,37 +171,22 @@
 //  }
 //}
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-  //this delegate is the starting point to show data in the tableview
-  if ([cell.reuseIdentifier isEqualToString:@"loadingCell"] && tableView != self.searchDisplayController.searchResultsTableView) [self requestUpdateTableViewDataWithPagination];
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+  //load more records if at the bottom of the page
+  if (scrollView.contentSize.height - scrollView.contentOffset.y < (self.view.bounds.size.height)) {
+    if (!loading) {
+      [self requestUpdateTableViewDataWithPagination];
+      //TODO this is calling the api if tries to scroll results
+      //if ([cell.reuseIdentifier isEqualToString:@"loadingCell"] && tableView != self.searchDisplayController.searchResultsTableView) [self requestUpdateTableViewDataWithPagination];
+    }
+  }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//  if ([cell.reuseIdentifier isEqual: @"FilterCell"]) {
-//    [self.searchBar resignFirstResponder];
-//    self.searching = NO;
-//    self.searchBar.text = nil;
-//    
-////    NSString *source = @"create";
-////    
-////    if ([type isEqual: @"Popular"]) {
-////      type = @"all";
-////      source = @"explore";
-////    }
-//    
-////    NSString *apiUrl = [NSString stringWithFormat:@"http://api.gogobot.com/api/v2/search/nearby.json?_v=2.3.8&type=%@&page=1&lng=%@&lat=%@&per_page=20&source=%@&bypass=1", type, lng, lat, source];
-//    
-////    [self keywordSearch:apiUrl];
-////    [self reloadTableViewData];
-//    NSString *type = cell.textLabel.text;
-//    
-//    if ([type isEqualToString:@"Restaurants"]) [api getRestaurantsNearby];
-//    if ([type isEqualToString:@"Attractions"]) [api getAttractionsNearby];
-//    if ([type isEqualToString:@"Hotels"]) [api getHotelsNearby];
-//  } else {
-//    [self performSegueWithIdentifier:@"toMainView" sender:self];
-//  }
+  [self performSegueWithIdentifier:@"CompassViewController" sender:self];
+//  MainUITabBarController *tabBarController = (MainUITabBarController *)self.tabBarController;
+//  tabBarController.place = [self convertDictionaryToPlace:[results objectAtIndex:indexPath.row]];
+//  [tabBarController transitionToCompassView];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -272,14 +259,18 @@
   locationManager = [[CLLocationManager alloc] init];
   locationManager.delegate = self;
   locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+  locationManager.distanceFilter = 100;
   if([CLLocationManager locationServicesEnabled]) [locationManager startUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-  currentLocation = (CLLocation *)[locations lastObject];
-  [manager stopUpdatingLocation];
-  
-  [self updateViewWithLocation:currentLocation];
+  // The value is not older than 1 sec.
+  if (!currentLocation || [manager.location.timestamp timeIntervalSinceNow] > -1.0) {
+    currentLocation = (CLLocation *)[locations lastObject];
+    [self updateViewWithLocation:currentLocation];
+    [manager stopUpdatingLocation];
+    [manager setDelegate:nil];
+  }
 }
 
 - (void)updateViewWithLocation:(CLLocation *)location {
@@ -287,6 +278,7 @@
   [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
     [self requestUpdateTableViewData];
     
+    //change the title to match the city name
     CLPlacemark *placemark = [placemarks objectAtIndex:0];
     self.navigationItem.title = placemark.locality;
   }];
@@ -341,7 +333,7 @@
 }
 
 - (NSString *)googleAnalyticsScreenName {
-  return @"Place";
+  return @"PlaceViewController";
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -353,16 +345,27 @@
     //pass the current filter back so we can highlight the current selection
     placeTypeViewController.placeType = placeType;
   }
+
+  if ([segue.destinationViewController respondsToSelector:@selector(setPlace:)]) {
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    Place *selectedPlace = [self convertDictionaryToPlace:[results objectAtIndex:path.row]];
+    
+    [segue.destinationViewController performSelector:@selector(setPlace:)
+                                          withObject:selectedPlace];
+  }
+
+//  UIViewController *addViewController = [(UITabBarController *)[[segue.destinationViewController viewControllers] objectAtIndex:1];
+//  self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:2];
   
-  //  if([[segue identifier] isEqualToString:@"toMainView"]) {
-  //    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-  //
-  //    UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
-  //    MainViewController *mainViewController = [[navigationController viewControllers] lastObject];
-  //
-  //    Place *place = [self getPlace:path.row];
-  //    mainViewController.place = place;
-  //  }
+//  self.tabBarController.selectedIndex = 1;
+//  [self.tabBarController.selectedViewController viewDidAppear:YES];
+//  self.tabBarController.selectedViewController = [segue destinationViewController];
+  
+//  [[[self.tabviewController viewControllers] objectAtIndex:2]
+//   setBadgeValue:[NSString stringWithFormat:@"%d",[myArray count]];
+//   
+//   http://agilewarrior.wordpress.com/2012/02/10/how-to-programmatically-transition-between-views-in-tab-bar-controller/
+
 }
 
 - (IBAction)unwindToSearchController:(UIStoryboardSegue *)segue {

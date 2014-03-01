@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Place.h"
 
 @interface MainUITabBarController : UITabBarController <UITabBarControllerDelegate>
+
+@property (strong, nonatomic) Place *place;
+
+- (void)transitionToCompassView;
 
 @end

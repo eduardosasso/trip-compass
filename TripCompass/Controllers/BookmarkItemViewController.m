@@ -1,7 +1,7 @@
 #import "BookmarkItemViewController.h"
 #import "PlaceModel.h"
 #import "Place.h"
-#import "MainViewController.h"
+#import "CompassViewController.h"
 #import "AppDelegate.h"
 
 @interface BookmarkItemViewController ()
@@ -75,7 +75,7 @@
   
   cell.placeLabel.text = place.name;
 
-  cell.detailLabel.text = [place formattedDistanceTo:[(AppDelegate*)delegate currentLocation]];
+//  cell.detailLabel.text = [place formattedDistanceTo:[(AppDelegate*)delegate currentLocation]];
 
   return cell;
 }
@@ -123,7 +123,7 @@
   NSIndexPath *path = [self.tableView indexPathForSelectedRow];
 
   UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
-  MainViewController *mainViewController = [[navigationController viewControllers] lastObject];
+  CompassViewController *mainViewController = [[navigationController viewControllers] lastObject];
 
   PlaceModel *placeModel = [self.savedPlaces objectAtIndex:path.row];
   Place *place = [[Place alloc] init];

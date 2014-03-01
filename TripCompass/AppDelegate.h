@@ -17,10 +17,6 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-@property (nonatomic, assign) CLLocationCoordinate2D currentLocation;
-@property (strong, nonatomic) Place *selectedLocation;
-@property (nonatomic, assign, getter=isOnline) BOOL online;
-
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

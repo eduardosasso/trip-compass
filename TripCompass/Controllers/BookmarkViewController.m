@@ -1,5 +1,5 @@
 #import "BookmarkViewController.h"
-#import "MainViewController.h"
+#import "CompassViewController.h"
 #import "BookmarkItemViewController.h"
 #import "Place.h"
 #import "PlaceModel.h"

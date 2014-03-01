@@ -7,13 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
-#import "Reachability.h"
+#import "CompassViewController.h"
 #import "GAI.h"
 
 @implementation AppDelegate {
-  CLLocationManager *locationManager;
-  Reachability *reachability;
 }
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -25,8 +22,6 @@
   [NewRelicAgent startWithApplicationToken:@"AA95f3a9d6f4639454016ea81cba6b6205c22a448d"];
 
   [self setupGoogleAnalytics];
-  
-  [self checkInternetConnectivity];
   
 //  UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
 //  MainViewController *controller = (MainViewController *)navigationController.topViewController;
@@ -52,20 +47,6 @@
   //TODO should change the loglevel for final app
   [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
   [[GAI sharedInstance] trackerWithTrackingId:@"UA-17707312-2"];
-}
-
-- (void)checkInternetConnectivity {
-  reachability = [Reachability reachabilityForInternetConnection];
-  self.online = [reachability isReachable];
-  
-  [reachability startNotifier];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
-}
-
-- (void)reachabilityDidChange:(NSNotification *)notification {
-  reachability = (Reachability *)[notification object];
-  self.online = [reachability isReachable];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -37,12 +37,12 @@
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
   NSString *encodedSearchString = [searchString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
   
-  NSString *lat = [NSString stringWithFormat:@"%.5f", appDelegate.currentLocation.longitude];
-  NSString *lon = [NSString stringWithFormat:@"%.5f", appDelegate.currentLocation.latitude];
+//  NSString *lat = [NSString stringWithFormat:@"%.5f", appDelegate.currentLocation.longitude];
+//  NSString *lon = [NSString stringWithFormat:@"%.5f", appDelegate.currentLocation.latitude];
   
-  NSString *apiUrl = [NSString stringWithFormat:@"http://api.gogobot.com/api/v3/places/region_search.json?_v=2.1&lng=%@&lat=%@&term=%@&bypass=1", lon , lat, encodedSearchString];
+//  NSString *apiUrl = [NSString stringWithFormat:@"http://api.gogobot.com/api/v3/places/region_search.json?_v=2.1&lng=%@&lat=%@&term=%@&bypass=1", lon , lat, encodedSearchString];
   
-  [self keywordSearch:apiUrl];
+//  [self keywordSearch:apiUrl];
 
   [self.tableView reloadData];
 
@@ -120,7 +120,7 @@
   
   if ([cell.reuseIdentifier isEqual: @"DefaultCell"]) {
     Place *place = [self.places objectAtIndex:(indexPath.row-1)];
-    appDelegate.selectedLocation = place;
+//    appDelegate.selectedLocation = place;
   }
 }
 
