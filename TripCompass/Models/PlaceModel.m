@@ -2,27 +2,29 @@
 //  PlaceModel.m
 //  TripCompass
 //
-//  Created by Eduardo Sasso on 7/31/13.
-//  Copyright (c) 2013 Context Software. All rights reserved.
+//  Created by Eduardo Sasso on 3/5/14.
+//  Copyright (c) 2014 Context Software. All rights reserved.
 //
 
 #import "PlaceModel.h"
 
-
 @implementation PlaceModel
 
-@dynamic name;
-@dynamic lat;
-@dynamic lng;
-@dynamic created;
-@dynamic desc;
 @dynamic address;
 @dynamic checkpoint;
-@dynamic area;
+@dynamic created;
+@dynamic desc;
+@dynamic lat;
+@dynamic lng;
+@dynamic name;
+@dynamic key;
+@dynamic city;
+@dynamic country;
+@dynamic state;
 
 - (void)awakeFromInsert {
   [super awakeFromInsert];
-  self.created = [NSDate date];  
+  self.created = [NSDate date];
 }
 
 @end

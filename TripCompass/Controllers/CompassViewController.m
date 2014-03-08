@@ -120,7 +120,7 @@
     
     placeModel.name = name;
     placeModel.checkpoint = YES;
-    placeModel.area = @"Checkpoints";
+//    placeModel.area = @"Checkpoints";
     
     
     placeModel.lat = [NSNumber numberWithFloat:self.currentLocation.coordinate.latitude];

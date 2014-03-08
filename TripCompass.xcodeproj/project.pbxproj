@@ -19,8 +19,10 @@
 		3D177EBD18A53BB100DB599A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D177EBA18A53BB100DB599A /* Default.png */; };
 		3D177EBE18A53BB100DB599A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D177EBB18A53BB100DB599A /* Default@2x.png */; };
 		3D177EC118A6889800DB599A /* UINavigationItem+BackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D177EC018A6889800DB599A /* UINavigationItem+BackButton.m */; };
+		3D24E08718C6384300127A6B /* 726-star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D24E08618C6384300127A6B /* 726-star-selected@2x.png */; };
+		3D24E08A18C77AA300127A6B /* PlaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D24E08918C77AA300127A6B /* PlaceModel.m */; };
+		3D24E08D18CA1F6700127A6B /* PlaceDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D24E08C18CA1F6700127A6B /* PlaceDataManager.m */; };
 		3D32397517A953B2005ACF01 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D32397417A953B2005ACF01 /* Place.m */; };
-		3D32397817A9549A005ACF01 /* PlaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D32397717A9549A005ACF01 /* PlaceModel.m */; };
 		3D32397B17AAA3EF005ACF01 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D32397A17AAA3EF005ACF01 /* BookmarkViewController.m */; };
 		3D49860017A16A5500CB2CF2 /* numbers.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4985FD17A16A5500CB2CF2 /* numbers.png */; };
 		3D49860117A16A5500CB2CF2 /* pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4985FE17A16A5500CB2CF2 /* pointer.png */; };
@@ -73,6 +75,7 @@
 		3DCFBB2118995B7700D5E64D /* 879-mountains@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCFBB1118995B7700D5E64D /* 879-mountains@2x.png */; };
 		3DCFBB2218995B7700D5E64D /* 881-globe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCFBB1218995B7700D5E64D /* 881-globe@2x.png */; };
 		3DD30D9218C2434C00CA941E /* compass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DD30D9118C2434C00CA941E /* compass@2x.png */; };
+		3DD30D9418C4E2EE00CA941E /* 726-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DD30D9318C4E2EE00CA941E /* 726-star@2x.png */; };
 		3DD93F2E1787A6F1003908A7 /* CompassHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD93F2D1787A6F1003908A7 /* CompassHelper.m */; };
 		3DDBDFE2184CEA5F00C48C08 /* MainUITabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDBDFE1184CEA5F00C48C08 /* MainUITabBarController.m */; };
 		3DDDDE5A17D8CD22006FD52D /* LocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDDDE5917D8CD22006FD52D /* LocationSearchViewController.m */; };
@@ -109,9 +112,12 @@
 		3D177EBB18A53BB100DB599A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3D177EBF18A6889800DB599A /* UINavigationItem+BackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationItem+BackButton.h"; path = "TripCompass/Categories/UINavigationItem+BackButton.h"; sourceTree = SOURCE_ROOT; };
 		3D177EC018A6889800DB599A /* UINavigationItem+BackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationItem+BackButton.m"; path = "TripCompass/Categories/UINavigationItem+BackButton.m"; sourceTree = SOURCE_ROOT; };
+		3D24E08618C6384300127A6B /* 726-star-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "726-star-selected@2x.png"; sourceTree = "<group>"; };
+		3D24E08818C77AA300127A6B /* PlaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceModel.h; sourceTree = "<group>"; };
+		3D24E08918C77AA300127A6B /* PlaceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceModel.m; sourceTree = "<group>"; };
+		3D24E08B18CA1F6700127A6B /* PlaceDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceDataManager.h; sourceTree = "<group>"; };
+		3D24E08C18CA1F6700127A6B /* PlaceDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceDataManager.m; sourceTree = "<group>"; };
 		3D32397417A953B2005ACF01 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
-		3D32397617A9549A005ACF01 /* PlaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceModel.h; sourceTree = "<group>"; };
-		3D32397717A9549A005ACF01 /* PlaceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceModel.m; sourceTree = "<group>"; };
 		3D32397917AAA3EF005ACF01 /* BookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkViewController.h; sourceTree = "<group>"; };
 		3D32397A17AAA3EF005ACF01 /* BookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkViewController.m; sourceTree = "<group>"; };
 		3D4985FD17A16A5500CB2CF2 /* numbers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = numbers.png; sourceTree = "<group>"; };
@@ -180,6 +186,7 @@
 		3DCFBB1118995B7700D5E64D /* 879-mountains@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "879-mountains@2x.png"; sourceTree = "<group>"; };
 		3DCFBB1218995B7700D5E64D /* 881-globe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "881-globe@2x.png"; sourceTree = "<group>"; };
 		3DD30D9118C2434C00CA941E /* compass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compass@2x.png"; sourceTree = "<group>"; };
+		3DD30D9318C4E2EE00CA941E /* 726-star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "726-star@2x.png"; sourceTree = "<group>"; };
 		3DD93F2C1787A6F1003908A7 /* CompassHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompassHelper.h; sourceTree = "<group>"; };
 		3DD93F2D1787A6F1003908A7 /* CompassHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompassHelper.m; sourceTree = "<group>"; };
 		3DDBDFE0184CEA5F00C48C08 /* MainUITabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainUITabBarController.h; sourceTree = "<group>"; };
@@ -348,12 +355,14 @@
 			isa = PBXGroup;
 			children = (
 				3D76BECB1853A0D8002FD16F /* TripCompass.xcdatamodeld */,
+				3D24E08818C77AA300127A6B /* PlaceModel.h */,
+				3D24E08918C77AA300127A6B /* PlaceModel.m */,
 				3D8E2CF0179049CC00AA0F0D /* Place.h */,
-				3D32397617A9549A005ACF01 /* PlaceModel.h */,
 				3D32397417A953B2005ACF01 /* Place.m */,
-				3D32397717A9549A005ACF01 /* PlaceModel.m */,
 				3DF62A961858CAC00052D245 /* API.h */,
 				3DF62A971858CAC00052D245 /* API.m */,
+				3D24E08B18CA1F6700127A6B /* PlaceDataManager.h */,
+				3D24E08C18CA1F6700127A6B /* PlaceDataManager.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -404,6 +413,8 @@
 		3D76BED21853B14B002FD16F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3D24E08618C6384300127A6B /* 726-star-selected@2x.png */,
+				3DD30D9318C4E2EE00CA941E /* 726-star@2x.png */,
 				3DD30D9118C2434C00CA941E /* compass@2x.png */,
 				3D177EB918A53BB100DB599A /* Default-568h@2x.png */,
 				3D177EBA18A53BB100DB599A /* Default.png */,
@@ -533,9 +544,11 @@
 				3D0F70971898693800CAA80A /* 932-utensils@2x.png in Resources */,
 				3DCFBB1F18995B7700D5E64D /* 845-location-target.png in Resources */,
 				3D49860017A16A5500CB2CF2 /* numbers.png in Resources */,
+				3D24E08718C6384300127A6B /* 726-star-selected@2x.png in Resources */,
 				3DCFBB1A18995B7700D5E64D /* 752-credit-card@2x.png in Resources */,
 				3DD30D9218C2434C00CA941E /* compass@2x.png in Resources */,
 				3DAC8C3A18AE75E400E78C17 /* NoInternetView.xib in Resources */,
+				3DD30D9418C4E2EE00CA941E /* 726-star@2x.png in Resources */,
 				3DCFBB2118995B7700D5E64D /* 879-mountains@2x.png in Resources */,
 				3D76BED01853A2FC002FD16F /* BookmarkCell.xib in Resources */,
 				3DCFBB1318995B7700D5E64D /* 715-globe@2x.png in Resources */,
@@ -610,6 +623,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D62760C1781C65B00A4B675 /* main.m in Sources */,
+				3D24E08D18CA1F6700127A6B /* PlaceDataManager.m in Sources */,
 				3DF62A9418576D970052D245 /* GAUITableViewController.m in Sources */,
 				3D6276101781C65B00A4B675 /* AppDelegate.m in Sources */,
 				3D62761F1781C65B00A4B675 /* CompassViewController.m in Sources */,
@@ -622,11 +636,11 @@
 				3D8E2CEF178EF4AD00AA0F0D /* PlaceViewController.m in Sources */,
 				3DA654AA179D7B4A00424430 /* Util.m in Sources */,
 				3DAC8C3D18B12F1900E78C17 /* NoInternetView.m in Sources */,
+				3D24E08A18C77AA300127A6B /* PlaceModel.m in Sources */,
 				3D4E6B59187C551700454293 /* NSString+URLEncoding.m in Sources */,
 				3D4E6B56187C548600454293 /* NSDictionary+QueryString.m in Sources */,
 				3D32397517A953B2005ACF01 /* Place.m in Sources */,
 				3D177EC118A6889800DB599A /* UINavigationItem+BackButton.m in Sources */,
-				3D32397817A9549A005ACF01 /* PlaceModel.m in Sources */,
 				3D32397B17AAA3EF005ACF01 /* BookmarkViewController.m in Sources */,
 				3D0F70831896C17F00CAA80A /* TestViewController.m in Sources */,
 				3D4F871417C262500032B61C /* BookmarkItemViewController.m in Sources */,

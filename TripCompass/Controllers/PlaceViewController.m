@@ -1,7 +1,6 @@
 #import "PlaceViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "Place.h"
-//#import "PlaceModel.h"
 #import "AppDelegate.h"
 #import "API.h"
 #import "CustomCell.h"
@@ -24,6 +23,8 @@
 
   API *api;
   NSArray *apiResults;
+  
+  CLPlacemark *placemark;
   
   NSInteger page;
   BOOL loading;
@@ -144,11 +145,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row < results.count) {
     CustomCell *customCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
-
-    Place *place = [self convertDictionaryToPlace:[results objectAtIndex:indexPath.row]];
     
-    customCell.placeLabel.text = place.name;
-    customCell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
+    Place *place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withPlacemark:placemark];
+    [customCell setPlaceWithLocation:place location:currentLocation];
     
     return customCell;
   } else {
@@ -183,63 +182,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
   [self performSegueWithIdentifier:@"CompassViewController" sender:self];
-//  MainUITabBarController *tabBarController = (MainUITabBarController *)self.tabBarController;
-//  tabBarController.place = [self convertDictionaryToPlace:[results objectAtIndex:indexPath.row]];
-//  [tabBarController transitionToCompassView];
+  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
   return  UITableViewCellEditingStyleInsert;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//  if ([self.tableView isEditing]) {
-//    Place *place = [self getPlace:indexPath.row];
-//    
-//    NSError *error;
-//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PlaceModel" inManagedObjectContext:self.managedObjectContext];
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//    
-//    [fetchRequest setEntity:entity];
-//    
-//    //  TODO should compare with id
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", place.name];
-//    [fetchRequest setPredicate:predicate];
-//    
-//    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-//    
-//    return [results count] == 0;
-//  } else {
-//    return YES;
-//  }
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-  //  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-  
-//  if (editingStyle == UITableViewCellEditingStyleDelete) {
-//    //delete code here
-//  }
-//  else if (editingStyle == UITableViewCellEditingStyleInsert) {
-//    Place *place = [self getPlace:indexPath.row];
-//    
-//    NSManagedObjectContext *context = [self managedObjectContext];
-//    
-//    PlaceModel *placeModel = [NSEntityDescription insertNewObjectForEntityForName:@"PlaceModel" inManagedObjectContext:context];
-//    placeModel.name = place.name;
-//    placeModel.lat = place.lat;
-//    placeModel.lng = place.lng;
-//    placeModel.area = place.area;
-//    
-//    NSError *error;
-//    if (![context save:&error]) {
-//      NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-//    }
-//    
-//    [self.tableView reloadData];
-//  }
-//  
 }
 
 #pragma mark Search
@@ -279,8 +228,8 @@
     [self requestUpdateTableViewData];
     
     //change the title to match the city name
-    CLPlacemark *placemark = [placemarks objectAtIndex:0];
-    self.navigationItem.title = placemark.locality;
+    placemark = [placemarks objectAtIndex:0];
+    self.navigationItem.title = placemark.locality;;
   }];
 }
 
@@ -318,23 +267,12 @@
 }
 
 #pragma mark Undefined
-- (Place *)convertDictionaryToPlace:(NSDictionary *)dictionary {
-  id place_lat = [dictionary valueForKeyPath:@"address.lat"];
-  id place_lng = [dictionary valueForKeyPath:@"address.lng"];
-  
-  Place *place = [[Place alloc] init];
-  place.name = [dictionary objectForKey:@"name"];
-  place.address = [dictionary valueForKeyPath:@"address.address"];
-  place.lat = [NSNumber numberWithDouble:[place_lat doubleValue]];
-  place.lng = [NSNumber numberWithDouble:[place_lng doubleValue]];
-  place.area = [dictionary objectForKey:@"travel_unit"];
-  
-  return place;
-}
 
 - (NSString *)googleAnalyticsScreenName {
   return @"PlaceViewController";
 }
+
+#pragma mark Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if([[segue identifier] isEqualToString:@"placeType"]) {
@@ -348,24 +286,11 @@
 
   if ([segue.destinationViewController respondsToSelector:@selector(setPlace:)]) {
     NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-    Place *selectedPlace = [self convertDictionaryToPlace:[results objectAtIndex:path.row]];
+    Place *selectedPlace = [Place convertFromDictionary:[results objectAtIndex:path.row] withPlacemark:placemark];
     
     [segue.destinationViewController performSelector:@selector(setPlace:)
                                           withObject:selectedPlace];
   }
-
-//  UIViewController *addViewController = [(UITabBarController *)[[segue.destinationViewController viewControllers] objectAtIndex:1];
-//  self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:2];
-  
-//  self.tabBarController.selectedIndex = 1;
-//  [self.tabBarController.selectedViewController viewDidAppear:YES];
-//  self.tabBarController.selectedViewController = [segue destinationViewController];
-  
-//  [[[self.tabviewController viewControllers] objectAtIndex:2]
-//   setBadgeValue:[NSString stringWithFormat:@"%d",[myArray count]];
-//   
-//   http://agilewarrior.wordpress.com/2012/02/10/how-to-programmatically-transition-between-views-in-tab-bar-controller/
-
 }
 
 - (IBAction)unwindToSearchController:(UIStoryboardSegue *)segue {

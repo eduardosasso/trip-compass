@@ -11,14 +11,28 @@
 
 @interface Place : NSObject
 
+@property (nonatomic, copy) NSNumber *key;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSNumber *lat;
 @property (nonatomic, copy) NSNumber *lng;
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, strong) NSString *address;
-@property (nonatomic, strong) NSString *area;
+@property (nonatomic, strong) NSString *country;
+@property (nonatomic, strong) NSString *state;
+@property (nonatomic, strong) NSString *city;
 
--(double)distanceTo:(CLLocationCoordinate2D)location;
--(NSString *)formattedDistanceTo:(CLLocationCoordinate2D)location;
--(CLLocationCoordinate2D)getCoordinate;
+- (void)save;
+
+- (void)destroy;
+
+- (BOOL)saved;
+
+- (double)distanceTo:(CLLocationCoordinate2D)location;
+
+- (NSString *)formattedDistanceTo:(CLLocationCoordinate2D)location;
+
+- (CLLocationCoordinate2D)getCoordinate;
+
++(Place *)convertFromDictionary:(NSDictionary *)dictionary withPlacemark:(CLPlacemark *)placemark;
+
 @end
