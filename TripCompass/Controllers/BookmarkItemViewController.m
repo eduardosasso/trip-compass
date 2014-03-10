@@ -1,54 +1,28 @@
 #import "BookmarkItemViewController.h"
-#import "PlaceModel.h"
-#import "Place.h"
-#import "CompassViewController.h"
-#import "AppDelegate.h"
-
-@interface BookmarkItemViewController ()
-@end
+#import "PlaceDataManager.h"
+//#import "PlaceModel.h"
+//#import "Place.h"
+//#import "CompassViewController.h"
+//#import "AppDelegate.h"
 
 @implementation BookmarkItemViewController {
-  NSUInteger savedPlacesCount;
-  id delegate;
+  NSMutableArray *places;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
-  delegate = [[UIApplication sharedApplication] delegate];
-  self.managedObjectContext = [delegate managedObjectContext];
   
   [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
   
   //TODO: get the initial size dynamically from the constraints
-  self.tableView.estimatedRowHeight = 43;
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preferredContentSizeChanged:) name:UIContentSizeCategoryDidChangeNotification object:nil];
-}
-
-- (void)preferredContentSizeChanged:(NSNotification *)aNotification {
-  [self.tableView reloadData];
-}
-
--(NSString *)googleAnalyticsScreenName {
-  return @"Bookmark Item";
+  //self.tableView.estimatedRowHeight = 43;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
   self.navigationItem.rightBarButtonItem = self.editButtonItem;
-  self.navigationItem.title = self.selectedAreaGroup;
+  self.navigationItem.title = self.city;
   
-  NSError *error;
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"PlaceModel" inManagedObjectContext:self.managedObjectContext];
-  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-  
-  [fetchRequest setEntity:entity];
-
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"area == %@", self.selectedAreaGroup];
-  [fetchRequest setPredicate:predicate];
-  
-  self.savedPlaces = [[NSMutableArray alloc] initWithArray: [self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
-  savedPlacesCount = [self.savedPlaces count];
+  places = [NSMutableArray arrayWithArray:[PlaceDataManager findPlacesByCity:self.city]];
   
   [self.tableView reloadData];
 }
@@ -58,14 +32,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-  return savedPlacesCount;
+  return places.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *CellIdentifier = @"customCell";
-  CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+  CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell" forIndexPath:indexPath];
   
-  PlaceModel *placeModel = [self.savedPlaces objectAtIndex:indexPath.row];
+  PlaceModel *placeModel = [places objectAtIndex:indexPath.row];
   
   Place *place = [[Place alloc] init];
   place.name = placeModel.name;
@@ -80,59 +53,50 @@
   return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
-  PlaceModel *placeModel = [self.savedPlaces objectAtIndex:indexPath.row];
-  
-  return [cell calculateHeight:placeModel.name];
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//  CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
+//  PlaceModel *placeModel = [self.savedPlaces objectAtIndex:indexPath.row];
+//  
+//  return [cell calculateHeight:placeModel.name];
+//}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSDictionary *place = [self.savedPlaces objectAtIndex:indexPath.row];
+  PlaceModel *place = [places objectAtIndex:indexPath.row];
   
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"PlaceModel" inManagedObjectContext:self.managedObjectContext];
-  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-  
-  [fetchRequest setEntity:entity];
-  
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"area == %@ AND name == %@", [place valueForKey:@"area"], [place valueForKey:@"name"]];
-  [fetchRequest setPredicate:predicate];
-  NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
-  
-  for (NSManagedObject *managedObject in results) {
-    [self.managedObjectContext deleteObject:managedObject];
-  }
-  
-  --savedPlacesCount;
-  [self.savedPlaces removeObjectAtIndex:indexPath.row];
+  //TODO return key
+  [PlaceDataManager destroy:place.key];
+  [places removeObjectAtIndex:indexPath.row];
   [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
   
-  [self.managedObjectContext save:nil];
-  
-  if (savedPlacesCount == 0) {
+  if (places == 0) {
+    //TODO check to see if return to previous view
     [self.navigationController popViewControllerAnimated:YES];
   }
-  [self.tableView reloadData];
+//  [self.tableView reloadData];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  [self performSegueWithIdentifier:@"toMainViewController" sender:self];
+  [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+  [self performSegueWithIdentifier:@"CompassViewController" sender:self];
+  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   NSIndexPath *path = [self.tableView indexPathForSelectedRow];
 
-  UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
-  CompassViewController *mainViewController = [[navigationController viewControllers] lastObject];
-
-  PlaceModel *placeModel = [self.savedPlaces objectAtIndex:path.row];
+  PlaceModel *placeModel = [places objectAtIndex:path.row];
   Place *place = [[Place alloc] init];
   place.name = placeModel.name;
   place.address = placeModel.address;
   place.lat = placeModel.lat;
   place.lng = placeModel.lng;
+  
+  [segue.destinationViewController performSelector:@selector(setPlace:)
+                                        withObject:place];
+}
 
-  mainViewController.place = place;
+-(NSString *)googleAnalyticsScreenName {
+  return @"Bookmark Item";
 }
 
 @end

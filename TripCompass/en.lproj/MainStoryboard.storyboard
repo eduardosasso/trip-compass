@@ -194,7 +194,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="mnT-nW-E2e" kind="relationship" relationship="viewControllers" id="Yhb-tu-LSG"/>
-                        <segue destination="gaM-0B-UNw" kind="relationship" relationship="viewControllers" id="hxu-V5-tWc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1u1-5m-ZWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -341,18 +340,17 @@
             </objects>
             <point key="canvasLocation" x="-457" y="-1045"/>
         </scene>
-        <!--Bookmark View Controller-->
+        <!--Bookmark View Controller - Bookmarks-->
         <scene sceneID="gvs-hK-yLW">
             <objects>
                 <tableViewController id="gaM-0B-UNw" customClass="BookmarkViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kAw-pD-V67">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BookmarkCell" id="wcs-jL-z26">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wcs-jL-z26" id="IdG-vd-obi">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -374,9 +372,6 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <connections>
-                                    <segue destination="U9B-2u-bCJ" kind="push" identifier="toBookmarkItemController" id="nVV-Oo-Eoa"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -386,10 +381,14 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="Fkz-bI-A0e"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Bookmarks" id="eqh-KS-8IO"/>
+                    <connections>
+                        <segue destination="U9B-2u-bCJ" kind="push" identifier="BookmarkItemViewController" id="WDD-4y-krc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Iq-SA-ga6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-449" y="-165"/>
+            <point key="canvasLocation" x="-1282" y="3432"/>
         </scene>
         <!--Place Type View Controller - Filter-->
         <scene sceneID="hyg-QR-YoI">
@@ -488,29 +487,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8C-ww-8aW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-250" y="1710"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Ui7-7l-uZN">
-            <objects>
-                <viewController id="pVf-5H-WGt" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="P8r-1U-epi"/>
-                        <viewControllerLayoutGuide type="bottom" id="7tI-3s-9Ua"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="f77-3N-Tq8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="tzG-35-EBc"/>
-                    <connections>
-                        <segue destination="VTE-dE-fwI" kind="push" identifier="CompassViewController" id="hQg-JG-cdg"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qVJ-kL-Njp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1282" y="3432"/>
+            <point key="canvasLocation" x="-194" y="774"/>
         </scene>
         <!--Compass View Controller-->
         <scene sceneID="bdB-1R-OD2">
@@ -572,7 +549,7 @@
             <objects>
                 <tableViewController id="U9B-2u-bCJ" customClass="BookmarkItemViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="H9t-Oi-pcE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections/>
@@ -583,12 +560,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="RNm-zP-7nb"/>
                     <connections>
-                        <segue destination="BNG-Bj-k6r" kind="modal" identifier="toMainViewController" modalTransitionStyle="crossDissolve" id="z1L-cf-o0m"/>
+                        <segue destination="VTE-dE-fwI" kind="push" identifier="CompassViewController" id="gaT-rY-Plr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wq-Qv-vju" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2222" y="627"/>
+            <point key="canvasLocation" x="-776" y="3432"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wh1-fy-r27">
@@ -635,21 +612,6 @@
             </objects>
             <point key="canvasLocation" x="-2628" y="2600"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="PRV-t6-U5O">
-            <objects>
-                <tabBarController definesPresentationContext="YES" id="pAY-zV-YD3" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="db9-gA-AdS">
-                        <rect key="frame" x="129" y="330" width="163" height="49"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tJp-HJ-lPU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3712" y="1262"/>
-        </scene>
         <!--Navigation Controller - Places-->
         <scene sceneID="TpH-rR-fnK">
             <objects>
@@ -681,7 +643,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="pVf-5H-WGt" kind="relationship" relationship="rootViewController" id="tji-XA-hOq"/>
+                        <segue destination="gaM-0B-UNw" kind="relationship" relationship="rootViewController" id="nJ7-nn-Q4K"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D8a-Bl-cMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -780,7 +742,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1pn-jg-wm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-776" y="1710"/>
+            <point key="canvasLocation" x="-720" y="774"/>
         </scene>
     </scenes>
     <resources>
@@ -798,8 +760,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="MjL-hS-Hqs"/>
         <segue reference="0wb-gz-HNK"/>
-        <segue reference="hQg-JG-cdg"/>
+        <segue reference="gaT-rY-Plr"/>
     </inferredMetricsTieBreakers>
 </document>

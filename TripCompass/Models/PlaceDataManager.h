@@ -16,7 +16,13 @@
 
 + (void)destroy:(NSNumber *)id;
 
++ (void)destroyByCity:(NSString *)city;
+
 + (PlaceModel *)findById:(NSNumber *)id;
+
++ (NSArray *)findCities;
+
++ (NSArray *)findPlacesByCity:(NSString *)city;
 
 //+ (NSArray *)findByCity:(NSString *)city;
 
