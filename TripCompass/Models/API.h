@@ -9,18 +9,26 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+@protocol APIDelegate <NSObject>
+- (void)didReceiveAPIResults:(NSDictionary *)dictionary;
+@end
+
 @interface API : NSObject
 
--(id)initWithLatitude:(double)latitude longitude:(double)longitude;
+@property (nonatomic, weak) id<APIDelegate> delegate;
 
--(void)requestPlacesNearby:(NSInteger)page;
+- (id)initWithLatitude:(double)latitude longitude:(double)longitude;
 
--(void)searchPlacesNearby:(NSString *)query;
+- (void)requestPlacesNearby:(NSInteger)page;
 
--(void)requestRestaurantsNearby:(NSInteger)page;
+- (void)searchPlacesNearby:(NSString *)query;
 
--(void)requestAttractionsNearby:(NSInteger)page;
+- (void)requestRestaurantsNearby:(NSInteger)page;
 
--(void)requestHotelsNearby:(NSInteger)page;
+- (void)requestAttractionsNearby:(NSInteger)page;
+
+- (void)requestHotelsNearby:(NSInteger)page;
+
+- (void)searchLocation:(NSString *)query;
 
 @end

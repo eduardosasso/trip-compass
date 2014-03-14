@@ -13,6 +13,7 @@
 
 #define BASE_URL @"http://api.gogobot.com/api/v3"
 #define NEARBY_ENDPOINT @"/search/nearby_search.json"
+#define REGIONS_ENDPOINT @"/search/regions.json"
 
 @implementation API {
   double lat;
@@ -56,8 +57,9 @@
                                                 [self handleResults:data];
                                               } else {
                                                 //TODO verify if need this else statement.
-                                                NSString *error = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                                NSLog(@"Received HTTP %d: %@", httpResponse.statusCode, error);
+                                                //NSString *error = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                                //TODO force error to see if its capture on newrelic or crashlitcs
+                                                //NSLog(@"Received HTTP %d: %@", httpResponse.statusCode, error);
                                               }
                                             });
                                           }];
@@ -69,13 +71,14 @@
   NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
   
   if (response) {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"apiResultsNotification" object:self userInfo:response];
+    [self.delegate didReceiveAPIResults:response];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"apiResultsNotification" object:self userInfo:response];
   } else {
     //TODO this error should go somewhere
     NSLog(@"Error, %@", jsonError);
   }
 }
--(void)searchPlacesNearby:(NSString *)query {
+- (void)searchPlacesNearby:(NSString *)query {
   NSDictionary *params = @{
                            @"lat" : [[NSNumber numberWithDouble: lat] stringValue],
                            @"lng" : [[NSNumber numberWithDouble: lng] stringValue],
@@ -85,11 +88,11 @@
   [self makeRequestWithEndpoint:NEARBY_ENDPOINT params:params];
 }
 
--(void)requestPlacesNearby:(NSInteger)page {
+- (void)requestPlacesNearby:(NSInteger)page {
   NSDictionary *params = @{
                            @"lat"  : [[NSNumber numberWithDouble: lat] stringValue],
                            @"lng"  : [[NSNumber numberWithDouble: lng] stringValue],
-                           @"page" : [[NSNumber numberWithInt: page] stringValue]
+                           @"page" : [[NSNumber numberWithLong: page] stringValue]
                            };
   
   [self makeRequestWithEndpoint:NEARBY_ENDPOINT params:params];
@@ -99,23 +102,34 @@
   NSDictionary *params = @{
                            @"lat"  : [[NSNumber numberWithDouble: lat] stringValue],
                            @"lng"  : [[NSNumber numberWithDouble: lng] stringValue],
-                           @"page" : [[NSNumber numberWithInt: page] stringValue],
+                           @"page" : [[NSNumber numberWithLong: page] stringValue],
                            @"type" : type
                            };
   
   [self makeRequestWithEndpoint:NEARBY_ENDPOINT params:params];
 }
 
--(void)requestRestaurantsNearby:(NSInteger)page {
+- (void)requestRestaurantsNearby:(NSInteger)page {
   [self requestPlacesNearbyByType:page type:@"Restaurant"];
 }
 
--(void)requestAttractionsNearby:(NSInteger)page {
+- (void)requestAttractionsNearby:(NSInteger)page {
   [self requestPlacesNearbyByType:page type:@"Attraction"];
 }
 
--(void)requestHotelsNearby:(NSInteger)page {
+- (void)requestHotelsNearby:(NSInteger)page {
   [self requestPlacesNearbyByType:page type:@"Hotel"];
+}
+
+- (void)searchLocation:(NSString *)query {
+  NSDictionary *params = @{
+                           @"lat"  : [[NSNumber numberWithDouble: lat] stringValue],
+                           @"lng"  : [[NSNumber numberWithDouble: lng] stringValue],
+                           @"term" : query,
+                           @"type" : @"City"
+                           };
+  
+  [self makeRequestWithEndpoint:REGIONS_ENDPOINT params:params];
 }
 
 @end

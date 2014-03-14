@@ -3,18 +3,15 @@
 #import <CoreData/CoreData.h>
 #import "Place.h"
 #import "PlaceTypeViewController.h"
+#import "LocationSearchViewController.h"
 #import "GAUITableViewController.h"
+#import "API.h"
 
-@interface PlaceViewController : GAUITableViewController <CLLocationManagerDelegate, PlaceTypeDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+@interface PlaceViewController : GAUITableViewController <CLLocationManagerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, APIDelegate, PlaceTypeDelegate, LocationSearchDelegate>
 
-//@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-//@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
-//@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-//@property (nonatomic, assign) BOOL searching;
+@property (strong, nonatomic) IBOutlet UIView *plainView;
 
 - (IBAction)pullToRefresh:(id)sender;
-@property (strong, nonatomic) IBOutlet UIView *plainView;
 
 @end
 

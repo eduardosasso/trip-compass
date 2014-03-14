@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,33 +13,59 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Place" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="216" translatesAutoresizingMaskIntoConstraints="NO" id="1tt-4d-l3U">
-                        <rect key="frame" x="15" y="3" width="216" height="20"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Whole Foods Market" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="164" translatesAutoresizingMaskIntoConstraints="NO" id="1tt-4d-l3U">
+                        <rect key="frame" x="15" y="2" width="164" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="C54-T7-gM2"/>
+                        </constraints>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" text="300ft" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Gg-yk-b3z">
+                    <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="300ft" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Gg-yk-b3z">
                         <rect key="frame" x="29" y="23" width="61" height="20"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="61" id="mO6-Qt-8tE"/>
+                        </constraints>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                         <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" text="in" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcW-lD-I0I">
+                    <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="in" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcW-lD-I0I">
                         <rect key="frame" x="15" y="23" width="14" height="20"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="14" id="Soh-6N-4BO"/>
+                        </constraints>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                         <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="726-star.png" highlightedImage="726-star-selected.png" translatesAutoresizingMaskIntoConstraints="NO" id="pha-57-zog">
+                    <imageView multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="726-star.png" highlightedImage="726-star-selected.png" translatesAutoresizingMaskIntoConstraints="NO" id="pha-57-zog">
                         <rect key="frame" x="273" y="2" width="47" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="47" id="3kZ-Cg-qJJ"/>
+                        </constraints>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="pha-57-zog" secondAttribute="bottom" constant="1" id="2QU-vt-7Ii"/>
+                    <constraint firstItem="GcW-lD-I0I" firstAttribute="top" secondItem="WHQ-fP-eT1" secondAttribute="top" constant="23" id="6K9-zg-Kwn"/>
+                    <constraint firstItem="1tt-4d-l3U" firstAttribute="leading" secondItem="WHQ-fP-eT1" secondAttribute="leading" constant="15" id="CRh-cl-RGv"/>
+                    <constraint firstItem="1tt-4d-l3U" firstAttribute="top" secondItem="pha-57-zog" secondAttribute="top" id="L4v-Bc-bm7"/>
+                    <constraint firstItem="8Gg-yk-b3z" firstAttribute="top" secondItem="1tt-4d-l3U" secondAttribute="bottom" id="OJq-Kh-As0"/>
+                    <constraint firstItem="pha-57-zog" firstAttribute="leading" secondItem="1tt-4d-l3U" secondAttribute="trailing" constant="94" id="XGI-f5-HQK"/>
+                    <constraint firstItem="GcW-lD-I0I" firstAttribute="baseline" secondItem="8Gg-yk-b3z" secondAttribute="baseline" id="cHa-oY-62d"/>
+                    <constraint firstItem="8Gg-yk-b3z" firstAttribute="leading" secondItem="GcW-lD-I0I" secondAttribute="trailing" id="dnE-dq-N5n"/>
+                    <constraint firstItem="1tt-4d-l3U" firstAttribute="leading" secondItem="GcW-lD-I0I" secondAttribute="leading" id="fdt-Mf-eKy"/>
+                    <constraint firstAttribute="trailing" secondItem="pha-57-zog" secondAttribute="trailing" id="kcQ-Ne-W7g"/>
+                    <constraint firstItem="1tt-4d-l3U" firstAttribute="top" secondItem="WHQ-fP-eT1" secondAttribute="top" constant="2" id="pdP-ac-QNl"/>
+                    <constraint firstAttribute="bottom" secondItem="8Gg-yk-b3z" secondAttribute="bottom" id="yKs-WG-ZsC"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="detailLabel" destination="8Gg-yk-b3z" id="AIH-QD-E8t"/>

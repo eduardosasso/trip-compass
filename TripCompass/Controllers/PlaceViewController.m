@@ -7,9 +7,6 @@
 #import "NoInternetView.h"
 #import "Reachability.h"
 
-@interface PlaceViewController ()
-@end
-
 @implementation PlaceViewController {
   AppDelegate *appDelegate;
   
@@ -49,7 +46,7 @@
   //hide search bar under the navigation bar
   self.tableView.contentOffset = CGPointMake(0, self.searchDisplayController.searchBar.frame.size.height);
 
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(apiResultsNotificationReceived:) name:@"apiResultsNotification" object:nil];
+  //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(apiResultsNotificationReceived:) name:@"apiResultsNotification" object:nil];
   
   appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //  self.managedObjectContext = [appDelegate managedObjectContext];
@@ -61,8 +58,9 @@
 }
 
 #pragma mark API
-- (void)apiResultsNotificationReceived:(NSNotification *)notification {
-  apiResults = [[notification userInfo] valueForKey:@"results"];
+
+- (void)didReceiveAPIResults:(NSDictionary *)dictionary {
+  apiResults = [dictionary valueForKey:@"results"];
   
   [self.refreshControl endRefreshing];
   [self.tableView reloadData];
@@ -75,21 +73,33 @@
   }
 }
 
-- (void)resetTableView{
+//- (void)apiResultsNotificationReceived:(NSNotification *)notification {
+//  apiResults = [[notification userInfo] valueForKey:@"results"];
+//  
+//  [self.refreshControl endRefreshing];
+//  [self.tableView reloadData];
+//  
+//  loading = false;
+//  
+//  //hide the search bar when reloading
+//  if (page ==1) {
+//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//  }
+//}
+
+- (void)resetTableView {
   page = 1;
   results = [[NSMutableArray alloc] initWithCapacity:0];
-
-//  [self.tableView reloadData];
-  
 }
 
-- (void)requestUpdateTableViewData{
+- (void)requestUpdateTableViewData {
   //TODO check if location services enabled...
   //it hangs here if no location on simulator
   if (!currentLocation) return;
   
   loading = true;
   api = [[API alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
+  [api setDelegate:self];
   
   NSArray *placeTypes = @[@"Attractions", @"Hotels", @"Restaurants"];
   int item = [placeTypes indexOfObject:placeType];
@@ -122,6 +132,17 @@
   [self requestUpdateTableViewData];
 }
 
+- (void)didSelectLocation:(CLLocation *)location city:(NSString *)city {
+  [self resetTableView];
+  apiResults = [[NSArray alloc] init];
+  
+  [self.tableView reloadData];
+  
+  currentLocation = location;
+  [self requestUpdateTableViewData];
+  self.navigationItem.title = city;
+}
+
 #pragma mark UITableView
 
 - (IBAction)pullToRefresh:(id)sender {
@@ -147,6 +168,7 @@
     CustomCell *customCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
     
     Place *place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withPlacemark:placemark];
+    
     [customCell setPlaceWithLocation:place location:currentLocation];
     
     return customCell;
@@ -159,6 +181,9 @@
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//  CustomCell *customCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
+//  Place *place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withPlacemark:placemark];
+//  return [customCell calculateHeight:place.name];
 //  if (indexPath.row < results.count) {
 //    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
 //    Place *place = [self getPlace:indexPath.row];
@@ -229,7 +254,7 @@
     
     //change the title to match the city name
     placemark = [placemarks objectAtIndex:0];
-    self.navigationItem.title = placemark.locality;;
+    self.navigationItem.title = placemark.locality;
   }];
 }
 
@@ -275,13 +300,19 @@
 #pragma mark Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  if([[segue identifier] isEqualToString:@"placeType"]) {
+  if([[segue identifier] isEqualToString:@"PlaceTypeViewController"]) {
     PlaceTypeViewController * placeTypeViewController = (PlaceTypeViewController *)[segue.destinationViewController topViewController];
     //register this class as a delegate so it will receive events defined in the delegate class
     [placeTypeViewController setDelegate:self];
     
     //pass the current filter back so we can highlight the current selection
     placeTypeViewController.placeType = placeType;
+  }
+  
+  if([[segue identifier] isEqualToString:@"LocationSearchViewController"]) {
+    LocationSearchViewController * locationSearchViewController = (LocationSearchViewController *)[segue.destinationViewController topViewController];
+    //register this class as a delegate so it will receive events defined in the delegate class
+    [locationSearchViewController setDelegate:self];
   }
 
   if ([segue.destinationViewController respondsToSelector:@selector(setPlace:)]) {
@@ -291,13 +322,6 @@
     [segue.destinationViewController performSelector:@selector(setPlace:)
                                           withObject:selectedPlace];
   }
-}
-
-- (IBAction)unwindToSearchController:(UIStoryboardSegue *)segue {
-  //  LocationSearchViewController *locationSearchViewController = [segue sourceViewController];
-  ////  locationSearchViewController
-  //  self.searching = locationSearchViewController.closeButtonClicked;
-  //  [self reloadTableViewData];
 }
 
 @end

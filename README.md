@@ -42,3 +42,6 @@ http://answers.oreilly.com/topic/2578-loading-a-nib-file-programmatically-object
 
 
 https://mdev.gogobot.com/api/v3/search/regions.json?_v=2.1&lat=37.451940&lng=-122.181111&page=1&per_page=20&term=Pa&bypass=1
+
+
+http://stackoverflow.com/questions/20687391/ios7-boundingrectwithsizeboundingsize-not-returning-the-needed-label-height

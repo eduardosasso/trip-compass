@@ -1,76 +1,56 @@
 #import "LocationSearchViewController.h"
-#import "AppDelegate.h"
-//#import "SearchViewController.h"
-
-@interface LocationSearchViewController ()
-
-@property (nonatomic) NSMutableArray *results;
-@property (retain, nonatomic) NSMutableArray *places;
-
-@end
+#import "API.h"
 
 @implementation LocationSearchViewController {
-  AppDelegate *appDelegate;
+  API *api;
+  NSArray *results;
+}
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  
+  self.navigationItem.rightBarButtonItem = self.closeButton;
+  
+  api = [[API alloc] initWithLatitude:0.0 longitude:0.0];
+  [api setDelegate:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
   [self.searchBar becomeFirstResponder];
 }
 
-- (NSString *)googleAnalyticsScreenName {
-  return @"Location Search";
-}
+#pragma mark API
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  self.places = [[NSMutableArray alloc] init];
-  appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+-(void)didReceiveAPIResults:(NSDictionary *)dictionary {
+  results = [dictionary valueForKey:@"results"];
   
-  self.navigationItem.rightBarButtonItem = nil;
-  self.navigationItem.leftBarButtonItem = self.closeButton;
+  [self.refreshControl endRefreshing];
+  [self.tableView reloadData];
 }
 
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-}
+//- (void)apiResultsNotificationReceived:(NSNotification *)notification {
+//  results = [[notification userInfo] valueForKey:@"results"];
+//  
+//  [self.refreshControl endRefreshing];
+//  [self.tableView reloadData];
+//}
+
+#pragma mark Search Delegate
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-  NSString *encodedSearchString = [searchString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-  
-//  NSString *lat = [NSString stringWithFormat:@"%.5f", appDelegate.currentLocation.longitude];
-//  NSString *lon = [NSString stringWithFormat:@"%.5f", appDelegate.currentLocation.latitude];
-  
-//  NSString *apiUrl = [NSString stringWithFormat:@"http://api.gogobot.com/api/v3/places/region_search.json?_v=2.1&lng=%@&lat=%@&term=%@&bypass=1", lon , lat, encodedSearchString];
-  
-//  [self keywordSearch:apiUrl];
-
-  [self.tableView reloadData];
-
-  return YES;
+  if ([searchString length] >=3) {
+    [api searchLocation:searchString];
+    [self.tableView reloadData];
+    return YES;
+  }
+  return NO;
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-  [self.results removeAllObjects];
-  [self.tableView reloadData];
+//  [results removeAllObjects];
+//  [self.tableView reloadData];
 }
 
-- (void)keywordSearch:(NSString *)apiUrl {
-//  NSURL *url = [NSURL URLWithString:apiUrl];
-//  NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//  
-//  [self.places removeAllObjects];
-//  
-//  AFJSONRequestOperation *operation = [AFJSONRequestOperation
-//                                       JSONRequestOperationWithRequest:request
-//                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
-//                                         self.results = [[json objectForKey:@"results"] mutableCopy];
-//                                         [self.tableView reloadData];
-//                                       } failure:^(NSURLRequest *request , NSURLResponse *response , NSError *error , id JSON){
-//                                         NSLog(@"Failed: %@",[error localizedDescription]);
-//                                       }];
-//  
-//  [operation start];
-}
 
 #pragma mark Table View
 
@@ -79,39 +59,22 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.results.count + 1;
+  //return results.count + 1;
+  return results.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell;
   
-  if (indexPath.row == 0) {
-    cell = [self.tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
-  } else {
+//  if (indexPath.row == 0) {
+//    cell = [self.tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
+//  } else {
     cell = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultCell"];
-    NSDictionary *result = [[self.results objectAtIndex:(indexPath.row -1)] mutableCopy];
-    
-    Place *place = [[Place alloc] init];
-    place.name = [result objectForKey:@"name"];
-    place.lat = [NSNumber numberWithDouble:[[result valueForKeyPath:@"address.lat"] doubleValue]];
-    place.lng = [NSNumber numberWithDouble:[[result valueForKeyPath:@"address.lng"] doubleValue]];
-    
-    [self.places addObject:place];
-    cell.textLabel.text = place.name;
-    
-    if ([result objectForKey:@"travel_unit"] != [NSNull null]) {
-      cell.detailTextLabel.text = [result objectForKey:@"travel_unit"];
-    }
-    
-  }
+    NSDictionary *region = [results objectAtIndex:indexPath.row];
+    cell.textLabel.text = [region objectForKey:@"long_name"];
+//  }
   
   return cell;
-}
-- (IBAction)closeButtonClick:(id)sender {
-  self.closeButtonClicked = YES;
-  [self performSegueWithIdentifier:@"unwindToSearchController" sender:self];
-
-//  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -119,10 +82,33 @@
   //  NSIndexPath *indexPathx = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
   
   if ([cell.reuseIdentifier isEqual: @"DefaultCell"]) {
-    Place *place = [self.places objectAtIndex:(indexPath.row-1)];
-//    appDelegate.selectedLocation = place;
+//    Place *place = [places objectAtIndex:(indexPath.row-1)];
+    //    appDelegate.selectedLocation = place;
   }
+
+  NSDictionary *city = [results objectAtIndex:indexPath.row];
+  
+  NSString *name = [city valueForKeyPath:@"name"];
+  NSNumber *lat = [city valueForKeyPath:@"lat"];
+  NSNumber *lng = [city valueForKeyPath:@"lng"];
+  
+  CLLocation *location = [[CLLocation alloc]initWithLatitude:[lat doubleValue] longitude:[lng doubleValue]];
+
+  [self.delegate didSelectLocation:location city:name];
+  
+//  [[NSNotificationCenter defaultCenter] postNotificationName:@"newLocationSelected" object:self userInfo:location];
+  
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (IBAction)closeButtonClick:(id)sender {
+  [self dismissViewControllerAnimated:YES completion:nil];
+//  self.closeButtonClicked = YES;
+//  [self performSegueWithIdentifier:@"unwindToSearchController" sender:self];
+
+//  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 //  NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
@@ -136,5 +122,8 @@
 //  
 //}
 
+- (NSString *)googleAnalyticsScreenName {
+  return @"Location Search";
+}
 
 @end

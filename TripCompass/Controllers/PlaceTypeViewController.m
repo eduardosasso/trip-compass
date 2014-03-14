@@ -1,8 +1,5 @@
 #import "PlaceTypeViewController.h"
 
-@interface PlaceTypeViewController ()
-@end
-
 @implementation PlaceTypeViewController
 
 - (void)viewDidLoad {

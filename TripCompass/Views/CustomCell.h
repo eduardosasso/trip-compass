@@ -16,6 +16,6 @@
 
 - (void)setPlaceWithLocation:(Place *)selectedPlace location:(CLLocation *)location;
 
-- (CGFloat) calculateHeight:(NSString *)text;
+- (CGFloat)calculateHeight:(NSString *)text;
 
 @end

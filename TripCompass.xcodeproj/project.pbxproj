@@ -497,6 +497,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Context Software";
+				TargetAttributes = {
+					3D6275F91781C65B00A4B675 = {
+						DevelopmentTeam = 2S8FJ3GGJ3;
+					};
+				};
 			};
 			buildConfigurationList = 3D6275F51781C65B00A4B675 /* Build configuration list for PBXProject "TripCompass" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -757,7 +762,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eduardo Sasso (P9L3K9LEWJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/eduardosasso/Dropbox/TripCompass,
@@ -768,7 +773,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "F532E1E0-A37F-4C1A-B5EF-29C89D801017";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -778,7 +783,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eduardo Sasso (P9L3K9LEWJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/eduardosasso/Dropbox/TripCompass,

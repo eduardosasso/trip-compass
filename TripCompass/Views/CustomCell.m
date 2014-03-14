@@ -57,19 +57,32 @@
   }];
 }
 
-- (CGFloat) calculateHeight:(NSString *)text {
-  self.placeLabel.text =  text;
-  self.placeLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-  
-  [self.contentView setNeedsLayout];
-  [self.contentView layoutIfNeeded];
-  
-  CGFloat height = [self.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+- (CGFloat)calculateHeight:(NSString *)text {
+  return [text boundingRectWithSize:self.placeLabel.frame.size
+                            options:NSStringDrawingUsesLineFragmentOrigin
+                         attributes:@{NSFontAttributeName:self.placeLabel.font}
+                            context:nil].size.height;
   
   //+1 is the only way to get the height right, seems to be a bug from Apple
-  return height + 1;
+//  return height + 1;
+  
+//  self.frame= [self.text boundingRectWithSize:self.frame.size
+//                                      options:NSStringDrawingUsesLineFragmentOrigin
+//                                   attributes:@{NSFontAttributeName:self.font}
+//                                      context:nil];
+  
+//  CGFloat questionTitleHeight = [questionTitle boundingRectWithSize: cellConstraintSize
+//                                                            options: NSStringDrawingUsesLineFragmentOrigin
+//                                                            context: NULL].size.height;
+  
+// [_nameCell.textLabel.text boundingRectWithSize:(CGSize) { 270, CGFLOAT_MAX } options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:_nameCell.textLabel.font } context:nil].size.height + 40;
+  
+//  if([[label text] respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
+//    NSLog(@"iOS 7 Selector: boundingRectWithSize:options:attributes:context:");
+//    size = [[label text]
+//            boundingRectWithSize:CGSizeMake(label.frame.size.width, CGFLOAT_MAX)
+//            options:NSStringDrawingUsesLineFragmentOrigin
+//            attributes:@{NSFontAttributeName:label.font} context:nil].size;
 }
 
 @end
-
-
