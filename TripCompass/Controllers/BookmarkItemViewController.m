@@ -1,28 +1,57 @@
 #import "BookmarkItemViewController.h"
 #import "PlaceDataManager.h"
-//#import "PlaceModel.h"
-//#import "Place.h"
-//#import "CompassViewController.h"
-//#import "AppDelegate.h"
 
 @implementation BookmarkItemViewController {
   NSMutableArray *places;
+
+  CLLocationManager *locationManager;
+  CLLocation *currentLocation;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   
   [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
-  
-  //TODO: get the initial size dynamically from the constraints
-  //self.tableView.estimatedRowHeight = 43;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+  [self startTrackingLocation];
+  
   self.navigationItem.rightBarButtonItem = self.editButtonItem;
   self.navigationItem.title = self.city;
+}
+
+#pragma mark Location Manager
+- (void)startTrackingLocation {
+  locationManager = [[CLLocationManager alloc] init];
+  locationManager.delegate = self;
+  locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+  locationManager.distanceFilter = 100;
+  if([CLLocationManager locationServicesEnabled]) [locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+  currentLocation = (CLLocation *)[locations lastObject];
   
+  [self findPlacesByCitySortedByDistance];
+  
+  [manager stopUpdatingLocation];
+  [manager setDelegate:nil];
+}
+
+- (void)findPlacesByCitySortedByDistance {
   places = [NSMutableArray arrayWithArray:[PlaceDataManager findPlacesByCity:self.city]];
+  
+  for (PlaceModel *place in places) {
+    CLLocationDegrees lat = [place.lat doubleValue];
+    CLLocationDegrees lng = [place.lng doubleValue];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+    CLLocationDistance distance = [location distanceFromLocation:currentLocation];
+    place.distance = [NSNumber numberWithDouble:distance];
+  }
+
+  NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES];
+  [places sortUsingDescriptors:@[sort]];
   
   [self.tableView reloadData];
 }
@@ -48,7 +77,7 @@
   
   cell.placeLabel.text = place.name;
 
-//  cell.detailLabel.text = [place formattedDistanceTo:[(AppDelegate*)delegate currentLocation]];
+  cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
 
   return cell;
 }
@@ -96,7 +125,7 @@
 }
 
 -(NSString *)googleAnalyticsScreenName {
-  return @"Bookmark Item";
+  return NSStringFromClass([self class]);
 }
 
 @end

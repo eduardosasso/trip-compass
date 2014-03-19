@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D06D78118D9DD8B00145A02 /* PlaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D06D78018D9DD8B00145A02 /* PlaceModel.m */; };
 		3D0F70831896C17F00CAA80A /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0F70821896C17F00CAA80A /* TestViewController.m */; };
 		3D0F70971898693800CAA80A /* 932-utensils@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0F70961898693800CAA80A /* 932-utensils@2x.png */; };
 		3D0F709D18986FE500CAA80A /* 722-location-pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0F709818986FE500CAA80A /* 722-location-pin@2x.png */; };
@@ -20,7 +21,6 @@
 		3D177EBE18A53BB100DB599A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D177EBB18A53BB100DB599A /* Default@2x.png */; };
 		3D177EC118A6889800DB599A /* UINavigationItem+BackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D177EC018A6889800DB599A /* UINavigationItem+BackButton.m */; };
 		3D24E08718C6384300127A6B /* 726-star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D24E08618C6384300127A6B /* 726-star-selected@2x.png */; };
-		3D24E08A18C77AA300127A6B /* PlaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D24E08918C77AA300127A6B /* PlaceModel.m */; };
 		3D24E08D18CA1F6700127A6B /* PlaceDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D24E08C18CA1F6700127A6B /* PlaceDataManager.m */; };
 		3D32397517A953B2005ACF01 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D32397417A953B2005ACF01 /* Place.m */; };
 		3D32397B17AAA3EF005ACF01 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D32397A17AAA3EF005ACF01 /* BookmarkViewController.m */; };
@@ -98,6 +98,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D06D77F18D9DD8B00145A02 /* PlaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceModel.h; sourceTree = "<group>"; };
+		3D06D78018D9DD8B00145A02 /* PlaceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceModel.m; sourceTree = "<group>"; };
 		3D0F70811896C17F00CAA80A /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		3D0F70821896C17F00CAA80A /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		3D0F70961898693800CAA80A /* 932-utensils@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "932-utensils@2x.png"; sourceTree = "<group>"; };
@@ -113,8 +115,6 @@
 		3D177EBF18A6889800DB599A /* UINavigationItem+BackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationItem+BackButton.h"; path = "TripCompass/Categories/UINavigationItem+BackButton.h"; sourceTree = SOURCE_ROOT; };
 		3D177EC018A6889800DB599A /* UINavigationItem+BackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationItem+BackButton.m"; path = "TripCompass/Categories/UINavigationItem+BackButton.m"; sourceTree = SOURCE_ROOT; };
 		3D24E08618C6384300127A6B /* 726-star-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "726-star-selected@2x.png"; sourceTree = "<group>"; };
-		3D24E08818C77AA300127A6B /* PlaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceModel.h; sourceTree = "<group>"; };
-		3D24E08918C77AA300127A6B /* PlaceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceModel.m; sourceTree = "<group>"; };
 		3D24E08B18CA1F6700127A6B /* PlaceDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceDataManager.h; sourceTree = "<group>"; };
 		3D24E08C18CA1F6700127A6B /* PlaceDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceDataManager.m; sourceTree = "<group>"; };
 		3D32397417A953B2005ACF01 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
@@ -355,10 +355,10 @@
 			isa = PBXGroup;
 			children = (
 				3D76BECB1853A0D8002FD16F /* TripCompass.xcdatamodeld */,
-				3D24E08818C77AA300127A6B /* PlaceModel.h */,
-				3D24E08918C77AA300127A6B /* PlaceModel.m */,
 				3D8E2CF0179049CC00AA0F0D /* Place.h */,
 				3D32397417A953B2005ACF01 /* Place.m */,
+				3D06D77F18D9DD8B00145A02 /* PlaceModel.h */,
+				3D06D78018D9DD8B00145A02 /* PlaceModel.m */,
 				3DF62A961858CAC00052D245 /* API.h */,
 				3DF62A971858CAC00052D245 /* API.m */,
 				3D24E08B18CA1F6700127A6B /* PlaceDataManager.h */,
@@ -641,11 +641,11 @@
 				3D8E2CEF178EF4AD00AA0F0D /* PlaceViewController.m in Sources */,
 				3DA654AA179D7B4A00424430 /* Util.m in Sources */,
 				3DAC8C3D18B12F1900E78C17 /* NoInternetView.m in Sources */,
-				3D24E08A18C77AA300127A6B /* PlaceModel.m in Sources */,
 				3D4E6B59187C551700454293 /* NSString+URLEncoding.m in Sources */,
 				3D4E6B56187C548600454293 /* NSDictionary+QueryString.m in Sources */,
 				3D32397517A953B2005ACF01 /* Place.m in Sources */,
 				3D177EC118A6889800DB599A /* UINavigationItem+BackButton.m in Sources */,
+				3D06D78118D9DD8B00145A02 /* PlaceModel.m in Sources */,
 				3D32397B17AAA3EF005ACF01 /* BookmarkViewController.m in Sources */,
 				3D0F70831896C17F00CAA80A /* TestViewController.m in Sources */,
 				3D4F871417C262500032B61C /* BookmarkItemViewController.m in Sources */,

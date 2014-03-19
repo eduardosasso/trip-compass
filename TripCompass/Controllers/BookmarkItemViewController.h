@@ -2,7 +2,7 @@
 #import "CustomCell.h"
 #import "GAUITableViewController.h"
 
-@interface BookmarkItemViewController : GAUITableViewController
+@interface BookmarkItemViewController : GAUITableViewController <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) NSString *city;
 

@@ -15,7 +15,4 @@
 @property (weak, nonatomic) IBOutlet UIImageView *favoriteImage;
 
 - (void)setPlaceWithLocation:(Place *)selectedPlace location:(CLLocation *)location;
-
-- (CGFloat)calculateHeight:(NSString *)text;
-
 @end

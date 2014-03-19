@@ -13,7 +13,7 @@
 #define METERS_TO_FEET  3.2808399
 #define METERS_TO_MILES 0.000621371192
 #define METERS_CUTOFF   500
-#define FEET_CUTOFF     500
+#define FEET_CUTOFF     2000
 #define FEET_IN_MILES   5280
 
 #define RadiansToDegrees(radians)(radians * 180.0/M_PI)
@@ -28,24 +28,27 @@
   
   if (isMetric) {
     if (distance < METERS_CUTOFF) {
+      [numberFormatter setNumberStyle:NSNumberFormatterNoStyle];
       format = @"%@ m";
     } else {
       format = @"%@ km";
       distance = distance / 1000;
+      [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
       [numberFormatter setMaximumFractionDigits:1];
     }
   } else { // assume Imperial / U.S.
     distance = distance * METERS_TO_FEET;
     if (distance < FEET_CUTOFF) {
+      [numberFormatter setNumberStyle:NSNumberFormatterNoStyle];
       format = @"%@ ft";
     } else {
       format = @"%@ mi";
       distance = distance / FEET_IN_MILES;
-      [numberFormatter setMaximumFractionDigits:1];
+      [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+      [numberFormatter setMaximumFractionDigits:2];
     }
   }
   
-  [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
   [numberFormatter setRoundingMode:NSNumberFormatterRoundHalfUp];
   NSString *roundDistance = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:distance]];
   

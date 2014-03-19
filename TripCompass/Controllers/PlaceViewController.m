@@ -1,19 +1,17 @@
 #import "PlaceViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "Place.h"
-#import "AppDelegate.h"
 #import "API.h"
 #import "CustomCell.h"
 #import "NoInternetView.h"
 #import "Reachability.h"
 
 @implementation PlaceViewController {
-  AppDelegate *appDelegate;
-  
   NSString *placeType;
   
   CLLocationManager *locationManager;
   CLLocation *currentLocation;
+  CLLocation *selectedLocation;
   
   NSMutableArray *results;
   NSMutableArray *searchResults;
@@ -27,6 +25,8 @@
   BOOL loading;
   Reachability *internetConnection;
   NoInternetView *noInternetView;
+  
+  CustomCell *prototypeCell;
 }
 
 #pragma mark Controller Lifecycle
@@ -40,21 +40,8 @@
   
   [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
 
-  //todo get the initial size dynamically from the constraints
-  //self.tableView.estimatedRowHeight = self.tabBarController.topLayoutGuide.length;
-  
   //hide search bar under the navigation bar
   self.tableView.contentOffset = CGPointMake(0, self.searchDisplayController.searchBar.frame.size.height);
-
-  //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(apiResultsNotificationReceived:) name:@"apiResultsNotification" object:nil];
-  
-  appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//  self.managedObjectContext = [appDelegate managedObjectContext];
-  
-//  self.tabBarController.delegate = self;
-//  defaultTableHeaderView = [self.tableView tableHeaderView];
-  
-//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
 }
 
 #pragma mark API
@@ -73,36 +60,22 @@
   }
 }
 
-//- (void)apiResultsNotificationReceived:(NSNotification *)notification {
-//  apiResults = [[notification userInfo] valueForKey:@"results"];
-//  
-//  [self.refreshControl endRefreshing];
-//  [self.tableView reloadData];
-//  
-//  loading = false;
-//  
-//  //hide the search bar when reloading
-//  if (page ==1) {
-//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-//  }
-//}
-
 - (void)resetTableView {
   page = 1;
   results = [[NSMutableArray alloc] initWithCapacity:0];
 }
 
-- (void)requestUpdateTableViewData {
+- (void)requestUpdateTableViewData:(CLLocation *)location {
   //TODO check if location services enabled...
   //it hangs here if no location on simulator
-  if (!currentLocation) return;
+  if (!location) return;
   
   loading = true;
-  api = [[API alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
+  api = [[API alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
   [api setDelegate:self];
   
   NSArray *placeTypes = @[@"Attractions", @"Hotels", @"Restaurants"];
-  int item = [placeTypes indexOfObject:placeType];
+  long item = [placeTypes indexOfObject:placeType];
   switch (item) {
     case 0:
       [api requestAttractionsNearby:page];
@@ -121,7 +94,7 @@
 
 - (void)requestUpdateTableViewDataWithPagination {
   results.count == 0 ? page=1 : page++;
-  [self requestUpdateTableViewData];
+  [self requestUpdateTableViewData:selectedLocation];
 }
 
 #pragma mark Delegates
@@ -129,7 +102,7 @@
 - (void)didSelectPlaceType:(NSString *)type {
   placeType = type;
   [self resetTableView];
-  [self requestUpdateTableViewData];
+  [self requestUpdateTableViewData:selectedLocation];
 }
 
 - (void)didSelectLocation:(CLLocation *)location city:(NSString *)city {
@@ -138,9 +111,11 @@
   
   [self.tableView reloadData];
   
-  currentLocation = location;
-  [self requestUpdateTableViewData];
-  self.navigationItem.title = city;
+  selectedLocation = location;
+  [self updateViewWithLocation:selectedLocation];
+//  [self requestUpdateTableViewData:selectedLocation];
+  
+//  self.navigationItem.title = city;
 }
 
 #pragma mark UITableView
@@ -163,14 +138,15 @@
   return results.count + 1;
 }
 
+- (void)configureCell:(CustomCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+  Place *place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withPlacemark:placemark];
+  [cell setPlaceWithLocation:place location:currentLocation];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row < results.count) {
     CustomCell *customCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
-    
-    Place *place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withPlacemark:placemark];
-    
-    [customCell setPlaceWithLocation:place location:currentLocation];
-    
+    [self configureCell:customCell forRowAtIndexPath:indexPath];
     return customCell;
   } else {
     //return the loading spinner cell
@@ -180,20 +156,27 @@
   }
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//  CustomCell *customCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
-//  Place *place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withPlacemark:placemark];
-//  return [customCell calculateHeight:place.name];
-//  if (indexPath.row < results.count) {
-//    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
-//    Place *place = [self getPlace:indexPath.row];
-//    
-//    return [cell calculateHeight:place.name];
-//  } else {
-//    //TODO find a better way to return the default size
-//    return self.tabBarController.topLayoutGuide.length;
-//  }
-//}
+- (CustomCell *)prototypeCell {
+  if (!prototypeCell) {
+    prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
+  }
+  return prototypeCell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.row < results.count) {
+    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
+    [self.prototypeCell layoutIfNeeded];
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height+1;
+  } else {
+    return self.tableView.rowHeight;
+  }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return UITableViewAutomaticDimension;
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
   //load more records if at the bottom of the page
@@ -219,7 +202,7 @@
 #pragma mark Search
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
   [self resetTableView];
-  [self requestUpdateTableViewData];
+  [self requestUpdateTableViewData:selectedLocation];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
@@ -241,7 +224,8 @@
   // The value is not older than 1 sec.
   if (!currentLocation || [manager.location.timestamp timeIntervalSinceNow] > -1.0) {
     currentLocation = (CLLocation *)[locations lastObject];
-    [self updateViewWithLocation:currentLocation];
+    selectedLocation = currentLocation;
+    [self updateViewWithLocation:selectedLocation];
     [manager stopUpdatingLocation];
     [manager setDelegate:nil];
   }
@@ -250,7 +234,7 @@
 - (void)updateViewWithLocation:(CLLocation *)location {
   CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
   [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-    [self requestUpdateTableViewData];
+    [self requestUpdateTableViewData:location];
     
     //change the title to match the city name
     placemark = [placemarks objectAtIndex:0];
@@ -259,6 +243,7 @@
 }
 
 #pragma mark Internet Connection
+
 - (void)checkInternetConnection {
   noInternetView = [[NoInternetView alloc] init];
   [self.view addSubview:noInternetView];
@@ -269,7 +254,9 @@
   
   [internetConnection startNotifier];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(internetConnectionDidChange:) name:kReachabilityChangedNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(internetConnectionDidChange:)
+                                               name:kReachabilityChangedNotification object:nil];
 }
 
 - (void)internetConnectionDidChange:(NSNotification *)notification {
