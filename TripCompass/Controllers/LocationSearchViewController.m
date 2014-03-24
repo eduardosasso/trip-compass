@@ -4,6 +4,7 @@
 @implementation LocationSearchViewController {
   API *api;
   NSArray *results;
+  NSTimer *searchTimer;
 }
 
 - (void)viewDidLoad {
@@ -38,19 +39,32 @@
 #pragma mark Search Delegate
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-  if ([searchString length] >=3) {
-    [api searchLocation:searchString];
-    [self.tableView reloadData];
-    return YES;
+  if (searchTimer) {
+    [searchTimer invalidate];
+    searchTimer = nil;
   }
-  return NO;
+  
+  if ([searchString length] < 3) return NO;
+  
+  searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self
+                                               selector:@selector(searchTimerPopped:)
+                                               userInfo:searchString
+                                                repeats:FALSE];
+  
+  return YES;
+}
+
+-(void) searchTimerPopped:(NSTimer *)timer {
+  NSString *searchString = (NSString*)[timer userInfo];
+
+  [api searchLocation:searchString];
+  [self.tableView reloadData];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
 //  [results removeAllObjects];
 //  [self.tableView reloadData];
 }
-
 
 #pragma mark Table View
 

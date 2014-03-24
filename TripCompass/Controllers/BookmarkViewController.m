@@ -12,11 +12,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-  self.navigationItem.rightBarButtonItem = self.editButtonItem;
-  
   cities = [NSMutableArray arrayWithArray:[PlaceDataManager findCities]];
-  
-  [self.tableView reloadData];
+  if ([cities count] > 0) {
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.tableView reloadData];
+  }
 }
 
 #pragma mark UITableView
@@ -39,13 +39,6 @@
   return cell;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//  CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BookmarkCell"];
-//  NSDictionary *place = [self.savedPlaces objectAtIndex:indexPath.row];
-//  
-//  return [cell calculateHeight:[place valueForKey:@"area"]];
-//}
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   NSDictionary *place = [cities objectAtIndex:indexPath.row];
   
@@ -53,6 +46,11 @@
   
   [cities removeObjectAtIndex:indexPath.row];
   [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+  
+  if ([cities count] == 0) {
+    //TODO show blank slate screen
+    self.navigationItem.rightBarButtonItem = nil;
+  }
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -72,8 +70,7 @@
 
 #pragma mark Undefined
 - (NSString *)googleAnalyticsScreenName {
-  return @"Bookmark";
+  return @"BookmarkViewController";
 }
-
 
 @end

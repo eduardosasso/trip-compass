@@ -6,6 +6,8 @@
 
   CLLocationManager *locationManager;
   CLLocation *currentLocation;
+  
+  UITableViewCell *prototypeCell;
 }
 
 - (void)viewDidLoad {
@@ -64,9 +66,7 @@
   return places.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell" forIndexPath:indexPath];
-  
+- (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
   PlaceModel *placeModel = [places objectAtIndex:indexPath.row];
   
   Place *place = [[Place alloc] init];
@@ -75,19 +75,37 @@
   place.lat = placeModel.lat;
   place.lng = placeModel.lng;
   
-  cell.placeLabel.text = place.name;
+  UILabel *placeLabel = (UILabel *)[cell.contentView viewWithTag:1];
+  UILabel *detailLabel = (UILabel *)[cell.contentView viewWithTag:2];
+  
+  placeLabel.text = place.name;
+  detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
+}
 
-  cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
-
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+  [self configureCell:cell forRowAtIndexPath:indexPath];
+  
   return cell;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//  CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
-//  PlaceModel *placeModel = [self.savedPlaces objectAtIndex:indexPath.row];
-//  
-//  return [cell calculateHeight:placeModel.name];
-//}
+- (UITableViewCell *)prototypeCell {
+  if (!prototypeCell) {
+    prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+  }
+  return prototypeCell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
+  [self.prototypeCell layoutIfNeeded];
+  CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+  return size.height+1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return UITableViewAutomaticDimension;
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   PlaceModel *place = [places objectAtIndex:indexPath.row];
@@ -97,7 +115,7 @@
   [places removeObjectAtIndex:indexPath.row];
   [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
   
-  if (places == 0) {
+  if ([places count] == 0) {
     //TODO check to see if return to previous view
     [self.navigationController popViewControllerAnimated:YES];
   }

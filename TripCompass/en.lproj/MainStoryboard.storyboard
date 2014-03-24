@@ -542,6 +542,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="UPV-1H-mDO">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UPV-1H-mDO" id="ZLS-pV-ZK7">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="left" text="300ft" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oe-qm-GGF">
+                                            <rect key="frame" x="15" y="23" width="103" height="20"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="103" id="qsn-pu-lQg"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Whole Foods Market" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="291" translatesAutoresizingMaskIntoConstraints="NO" id="Fkq-0r-CvH">
+                                            <rect key="frame" x="15" y="2" width="291" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="291" id="56x-GY-Xm9"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="Vei-BO-yFs"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="4oe-qm-GGF" firstAttribute="top" secondItem="Fkq-0r-CvH" secondAttribute="bottom" id="33a-MU-ikC"/>
+                                        <constraint firstItem="Fkq-0r-CvH" firstAttribute="top" secondItem="ZLS-pV-ZK7" secondAttribute="top" constant="2" id="6cc-Tv-ATC"/>
+                                        <constraint firstAttribute="trailing" secondItem="Fkq-0r-CvH" secondAttribute="trailing" constant="14" id="9n3-gq-9aM"/>
+                                        <constraint firstAttribute="bottom" secondItem="4oe-qm-GGF" secondAttribute="bottom" id="UtU-R7-fqz"/>
+                                        <constraint firstItem="4oe-qm-GGF" firstAttribute="leading" secondItem="Fkq-0r-CvH" secondAttribute="leading" id="ZfU-ih-1i1"/>
+                                        <constraint firstItem="Fkq-0r-CvH" firstAttribute="leading" secondItem="ZLS-pV-ZK7" secondAttribute="leading" constant="15" id="yNZ-8Y-UqG"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="U9B-2u-bCJ" id="AXE-om-9iu"/>
