@@ -2,6 +2,9 @@
 #import "API.h"
 
 @implementation LocationSearchViewController {
+  CLLocationManager *locationManager;
+  CLLocation *currentLocation;
+  
   API *api;
   NSArray *results;
   NSTimer *searchTimer;
@@ -9,6 +12,8 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  [self startTrackingLocation];
   
   self.navigationItem.rightBarButtonItem = self.closeButton;
   
@@ -26,15 +31,9 @@
   results = [dictionary valueForKey:@"results"];
   
   [self.refreshControl endRefreshing];
+  [self.searchDisplayController.searchResultsTableView reloadData];
   [self.tableView reloadData];
 }
-
-//- (void)apiResultsNotificationReceived:(NSNotification *)notification {
-//  results = [[notification userInfo] valueForKey:@"results"];
-//  
-//  [self.refreshControl endRefreshing];
-//  [self.tableView reloadData];
-//}
 
 #pragma mark Search Delegate
 
@@ -44,49 +43,44 @@
     searchTimer = nil;
   }
   
-  if ([searchString length] < 3) return NO;
+  if ([searchString length] <= 2) return NO;
   
-  searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self
+  searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self
                                                selector:@selector(searchTimerPopped:)
                                                userInfo:searchString
                                                 repeats:FALSE];
-  
-  return YES;
+  return NO;
 }
 
 -(void) searchTimerPopped:(NSTimer *)timer {
   NSString *searchString = (NSString*)[timer userInfo];
 
   [api searchLocation:searchString];
-  [self.tableView reloadData];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-//  [results removeAllObjects];
-//  [self.tableView reloadData];
+  [self.tableView reloadData];
 }
 
 #pragma mark Table View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  //return results.count + 1;
   return results.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell;
   
-//  if (indexPath.row == 0) {
-//    cell = [self.tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
-//  } else {
-    cell = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultCell"];
-    NSDictionary *region = [results objectAtIndex:indexPath.row];
-    cell.textLabel.text = [region objectForKey:@"long_name"];
-//  }
+  cell = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultCell"];
+  NSDictionary *dictionary = [results objectAtIndex:indexPath.row];
+  Place *place = [[Place alloc] init];
+  
+  place.name = [dictionary objectForKey:@"long_name"];
+  place.lat = [NSNumber numberWithDouble:[[dictionary objectForKey:@"lat"] doubleValue]];
+  place.lng = [NSNumber numberWithDouble:[[dictionary objectForKey:@"lng"] doubleValue]];
+
+  cell.textLabel.text = place.name;
+  cell.detailTextLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
   
   return cell;
 }
@@ -123,18 +117,28 @@
 //  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)resetTableView {
+  results = nil;
+}
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//  NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-//  
-//  if([[segue identifier] isEqualToString:@"NewLocation"]) {
-//    Place *place = [self.places objectAtIndex:(indexPath.row-1)];
-//    appDelegate.selectedLocation = place;
-//  } else {
-//    appDelegate.selectedLocation = NULL;
-//  }
-//  
-//}
+#pragma mark Location Manager
+- (void)startTrackingLocation {
+  locationManager = [[CLLocationManager alloc] init];
+  locationManager.delegate = self;
+  locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+  locationManager.distanceFilter = 100;
+  if([CLLocationManager locationServicesEnabled]) [locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+  // The value is not older than 1 sec.
+  if (!currentLocation || [manager.location.timestamp timeIntervalSinceNow] > -1.0) {
+    currentLocation = (CLLocation *)[locations lastObject];
+    [manager stopUpdatingLocation];
+    [manager setDelegate:nil];
+  }
+}
+
 
 - (NSString *)googleAnalyticsScreenName {
   return @"Location Search";

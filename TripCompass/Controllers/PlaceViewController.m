@@ -14,7 +14,7 @@
   CLLocation *selectedLocation;
   
   NSMutableArray *results;
-  NSMutableArray *searchResults;
+//  NSMutableArray *searchResults;
 
   API *api;
   NSArray *apiResults;

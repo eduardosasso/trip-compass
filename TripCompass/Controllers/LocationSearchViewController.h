@@ -8,7 +8,7 @@
 - (void)didSelectLocation:(CLLocation *)location city:(NSString *)city;
 @end
 
-@interface LocationSearchViewController : GAUITableViewController <APIDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+@interface LocationSearchViewController : GAUITableViewController <CLLocationManagerDelegate, APIDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *closeButton;
