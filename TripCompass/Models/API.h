@@ -29,6 +29,8 @@
 
 - (void)requestHotelsNearby:(NSInteger)page;
 
-- (void)searchLocation:(NSString *)query;
+- (void)requestCitiesNearby;
+
+- (void)searchCitiesNearby:(NSString *)query;
 
 @end

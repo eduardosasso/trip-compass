@@ -72,7 +72,6 @@
   
   if (response) {
     [self.delegate didReceiveAPIResults:response];
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"apiResultsNotification" object:self userInfo:response];
   } else {
     //TODO this error should go somewhere
     NSLog(@"Error, %@", jsonError);
@@ -121,7 +120,11 @@
   [self requestPlacesNearbyByType:page type:@"Hotel"];
 }
 
-- (void)searchLocation:(NSString *)query {
+- (void)requestCitiesNearby {
+  [self requestPlacesNearbyByType:1 type:@"City"];
+}
+
+- (void)searchCitiesNearby:(NSString *)query {
   NSDictionary *params = @{
                            @"lat"  : [[NSNumber numberWithDouble: lat] stringValue],
                            @"lng"  : [[NSNumber numberWithDouble: lng] stringValue],

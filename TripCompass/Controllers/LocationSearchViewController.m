@@ -6,8 +6,10 @@
   CLLocation *currentLocation;
   
   API *api;
-  NSArray *results;
+  NSMutableArray *results;
   NSTimer *searchTimer;
+  
+  BOOL isSearching;
 }
 
 - (void)viewDidLoad {
@@ -17,22 +19,25 @@
   
   self.navigationItem.rightBarButtonItem = self.closeButton;
   
+  isSearching = NO;
+  
   api = [[API alloc] initWithLatitude:0.0 longitude:0.0];
   [api setDelegate:self];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-  [self.searchBar becomeFirstResponder];
-}
-
-#pragma mark API
+#pragma mark API Delegate
 
 -(void)didReceiveAPIResults:(NSDictionary *)dictionary {
-  results = [dictionary valueForKey:@"results"];
+  results = [(NSArray*)[dictionary valueForKey:@"results"] mutableCopy];
   
   [self.refreshControl endRefreshing];
-  [self.searchDisplayController.searchResultsTableView reloadData];
-  [self.tableView reloadData];
+
+  if (isSearching) {
+    [self.searchDisplayController.searchResultsTableView reloadData];
+  } else {
+    [self.tableView reloadData];
+  }
+
 }
 
 #pragma mark Search Delegate
@@ -43,42 +48,64 @@
     searchTimer = nil;
   }
   
-  if ([searchString length] <= 2) return NO;
+  //reset table to clear regular results
+  [self resetTableView];
   
+  if ([searchString length] <= 2) return YES;
+
   searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self
                                                selector:@selector(searchTimerPopped:)
                                                userInfo:searchString
                                                 repeats:FALSE];
-  return NO;
+  return YES;
 }
 
 -(void) searchTimerPopped:(NSTimer *)timer {
   NSString *searchString = (NSString*)[timer userInfo];
 
-  [api searchLocation:searchString];
+  [api searchCitiesNearby:searchString];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-  [self.tableView reloadData];
+  isSearching = NO;
 }
 
 #pragma mark Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return results.count;
+  if (isSearching) return [results count];
+
+  //Add +1 for current location cell on regular results
+  return [results count] + 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell;
-  
-  cell = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultCell"];
+- (Place *)tableview:(UITableView *)tableView selectPlaceFromIndex:(NSIndexPath *)indexPath {
   NSDictionary *dictionary = [results objectAtIndex:indexPath.row];
   Place *place = [[Place alloc] init];
   
-  place.name = [dictionary objectForKey:@"long_name"];
-  place.lat = [NSNumber numberWithDouble:[[dictionary objectForKey:@"lat"] doubleValue]];
-  place.lng = [NSNumber numberWithDouble:[[dictionary objectForKey:@"lng"] doubleValue]];
+  if (tableView == self.searchDisplayController.searchResultsTableView) {
+    isSearching = YES;
+    place.name = [dictionary objectForKey:@"long_name"];
+    place.lat = [NSNumber numberWithDouble:[[dictionary objectForKey:@"lat"] doubleValue]];
+    place.lng = [NSNumber numberWithDouble:[[dictionary objectForKey:@"lng"] doubleValue]];
+  } else {
+    isSearching = NO;
+    if (indexPath.row == 0) {
+      place.name = @"Current Location";
+      place.lat = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
+      place.lng = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
+    } else {
+      place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withPlacemark:nil];
+    }
+  }
+  return place;
+}
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultCell"];
+  
+  Place *place = [self tableview:tableView selectPlaceFromIndex:indexPath];
+  
   cell.textLabel.text = place.name;
   cell.detailTextLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
   
@@ -86,39 +113,26 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-  //  NSIndexPath *indexPathx = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+  Place *city = [self tableview:tableView selectPlaceFromIndex:indexPath];
   
-  if ([cell.reuseIdentifier isEqual: @"DefaultCell"]) {
-//    Place *place = [places objectAtIndex:(indexPath.row-1)];
-    //    appDelegate.selectedLocation = place;
-  }
+  CLLocation *location = [[CLLocation alloc]initWithLatitude:[city.lat doubleValue]
+                                                   longitude:[city.lng doubleValue]];
 
-  NSDictionary *city = [results objectAtIndex:indexPath.row];
-  
-  NSString *name = [city valueForKeyPath:@"name"];
-  NSNumber *lat = [city valueForKeyPath:@"lat"];
-  NSNumber *lng = [city valueForKeyPath:@"lng"];
-  
-  CLLocation *location = [[CLLocation alloc]initWithLatitude:[lat doubleValue] longitude:[lng doubleValue]];
-
-  [self.delegate didSelectLocation:location city:name];
-  
-//  [[NSNotificationCenter defaultCenter] postNotificationName:@"newLocationSelected" object:self userInfo:location];
+  [self.delegate didSelectLocation:location city:city.name];
   
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)closeButtonClick:(id)sender {
   [self dismissViewControllerAnimated:YES completion:nil];
-//  self.closeButtonClicked = YES;
-//  [self performSegueWithIdentifier:@"unwindToSearchController" sender:self];
-
-//  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)resetTableView {
   results = nil;
+}
+
+- (IBAction)pullToRefresh:(id)sender {
+  [api requestCitiesNearby];
 }
 
 #pragma mark Location Manager
@@ -136,12 +150,15 @@
     currentLocation = (CLLocation *)[locations lastObject];
     [manager stopUpdatingLocation];
     [manager setDelegate:nil];
+    
+    api = [[API alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
+    [api requestCitiesNearby];
+    [api setDelegate:self];
   }
 }
 
-
 - (NSString *)googleAnalyticsScreenName {
-  return @"Location Search";
+  return NSStringFromClass([self class]);
 }
 
 @end

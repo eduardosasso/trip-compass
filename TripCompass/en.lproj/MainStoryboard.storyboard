@@ -108,6 +108,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="obP-gk-6OE">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="pullToRefresh:" destination="XuH-Xh-SDA" eventType="valueChanged" id="hn5-XL-gLT"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
                         <outlet property="closeButton" destination="sRt-Cz-kQj" id="wKQ-5a-iHc"/>
                         <outlet property="searchBar" destination="4Bj-n8-ygx" id="zdb-e2-6mL"/>
