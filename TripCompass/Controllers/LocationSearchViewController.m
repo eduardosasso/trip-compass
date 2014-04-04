@@ -35,6 +35,7 @@
   if (isSearching) {
     [self.searchDisplayController.searchResultsTableView reloadData];
   } else {
+    [results insertObject:[NSNull null] atIndex:0];
     [self.tableView reloadData];
   }
 
@@ -47,9 +48,6 @@
     [searchTimer invalidate];
     searchTimer = nil;
   }
-  
-  //reset table to clear regular results
-  [self resetTableView];
   
   if ([searchString length] <= 2) return YES;
 
@@ -66,6 +64,13 @@
   [api searchCitiesNearby:searchString];
 }
 
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+  //reset table to clear regular results
+  [self resetTableView];
+
+  isSearching = YES;
+}
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
   isSearching = NO;
 }
@@ -73,29 +78,27 @@
 #pragma mark Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  if (isSearching) return [results count];
-
-  //Add +1 for current location cell on regular results
-  return [results count] + 1;
+  return [results count];
 }
 
 - (Place *)tableview:(UITableView *)tableView selectPlaceFromIndex:(NSIndexPath *)indexPath {
   NSDictionary *dictionary = [results objectAtIndex:indexPath.row];
   Place *place = [[Place alloc] init];
   
-  if (tableView == self.searchDisplayController.searchResultsTableView) {
-    isSearching = YES;
+  if (isSearching) {
     place.name = [dictionary objectForKey:@"long_name"];
     place.lat = [NSNumber numberWithDouble:[[dictionary objectForKey:@"lat"] doubleValue]];
     place.lng = [NSNumber numberWithDouble:[[dictionary objectForKey:@"lng"] doubleValue]];
+    place.city = [dictionary objectForKey:@"name"];
   } else {
-    isSearching = NO;
     if (indexPath.row == 0) {
       place.name = @"Current Location";
       place.lat = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
       place.lng = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
+      place.city = nil;
     } else {
-      place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withPlacemark:nil];
+      place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withCity:nil];
+      place.city = place.name;
     }
   }
   return place;
@@ -103,7 +106,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultCell"];
-  
+
   Place *place = [self tableview:tableView selectPlaceFromIndex:indexPath];
   
   cell.textLabel.text = place.name;
@@ -113,12 +116,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  Place *city = [self tableview:tableView selectPlaceFromIndex:indexPath];
+  Place *place = [self tableview:tableView selectPlaceFromIndex:indexPath];
   
-  CLLocation *location = [[CLLocation alloc]initWithLatitude:[city.lat doubleValue]
-                                                   longitude:[city.lng doubleValue]];
+  CLLocation *location = [[CLLocation alloc]initWithLatitude:[place.lat doubleValue]
+                                                   longitude:[place.lng doubleValue]];
 
-  [self.delegate didSelectLocation:location city:city.name];
+  [self.delegate didSelectLocation:location city:place.city];
   
   [self dismissViewControllerAnimated:YES completion:nil];
 }

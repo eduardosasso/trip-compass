@@ -33,6 +33,6 @@
 
 - (CLLocationCoordinate2D)getCoordinate;
 
-+(Place *)convertFromDictionary:(NSDictionary *)dictionary withPlacemark:(CLPlacemark *)placemark;
++ (Place *)convertFromDictionary:(NSDictionary *)dictionary withCity:(NSString *)city;
 
 @end

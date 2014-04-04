@@ -39,7 +39,7 @@
   return CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
 }
 
-+ (Place *)convertFromDictionary:(NSDictionary *)dictionary withPlacemark:(CLPlacemark *)placemark {
++ (Place *)convertFromDictionary:(NSDictionary *)dictionary withCity:(NSString *)city {
   id place_lat = [dictionary valueForKeyPath:@"address.lat"];
   id place_lng = [dictionary valueForKeyPath:@"address.lng"];
   id key = [dictionary valueForKeyPath:@"id"];
@@ -47,12 +47,11 @@
   Place *place = [[Place alloc] init];
   place.key =  [[[NSNumberFormatter alloc] init] numberFromString:key];
   place.name = [dictionary objectForKey:@"name"];
-  place.address = [[dictionary valueForKeyPath:@"address.address"] isKindOfClass:[NSNull class]] ? nil :[dictionary valueForKeyPath:@"address.address"];
+  place.address = [[dictionary valueForKeyPath:@"address.address"]
+                   isKindOfClass:[NSNull class]] ? nil :[dictionary valueForKeyPath:@"address.address"];
   place.lat = [NSNumber numberWithDouble:[place_lat doubleValue]];
   place.lng = [NSNumber numberWithDouble:[place_lng doubleValue]];
-  place.country = placemark.ISOcountryCode;
-  place.state = placemark.administrativeArea;
-  place.city = placemark.locality;
+  place.city = city;
   
   return place;
 }

@@ -14,12 +14,12 @@
   CLLocation *selectedLocation;
   
   NSMutableArray *results;
-//  NSMutableArray *searchResults;
 
   API *api;
   NSArray *apiResults;
   
-  CLPlacemark *placemark;
+//  CLPlacemark *placemark;
+  NSString *city;
   
   NSInteger page;
   BOOL loading;
@@ -42,6 +42,8 @@
 
   //hide search bar under the navigation bar
   self.tableView.contentOffset = CGPointMake(0, self.searchDisplayController.searchBar.frame.size.height);
+  
+  self.navigationItem.title = @"Current Location";
 }
 
 #pragma mark API
@@ -105,17 +107,22 @@
   [self requestUpdateTableViewData:selectedLocation];
 }
 
-- (void)didSelectLocation:(CLLocation *)location city:(NSString *)city {
+- (void)didSelectLocation:(CLLocation *)location city:(NSString *)newCity {
+  selectedLocation = location;
+//  currentLocation = selectedLocation;
+  
+  //if nil assume it's on current location
+  city = newCity;
+  if (!city) [self findCity:selectedLocation];
+  
+  self.navigationItem.title = city;
+
   [self resetTableView];
   apiResults = [[NSArray alloc] init];
   
   [self.tableView reloadData];
   
-  selectedLocation = location;
-  [self updateViewWithLocation:selectedLocation];
-//  [self requestUpdateTableViewData:selectedLocation];
-  
-//  self.navigationItem.title = city;
+  [self requestUpdateTableViewData:selectedLocation];
 }
 
 #pragma mark UITableView
@@ -139,7 +146,7 @@
 }
 
 - (void)configureCell:(CustomCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-  Place *place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withPlacemark:placemark];
+  Place *place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withCity:city];
   [cell setPlaceWithLocation:place location:currentLocation];
 }
 
@@ -225,20 +232,21 @@
   if (!currentLocation || [manager.location.timestamp timeIntervalSinceNow] > -1.0) {
     currentLocation = (CLLocation *)[locations lastObject];
     selectedLocation = currentLocation;
-    [self updateViewWithLocation:selectedLocation];
+
+    [self requestUpdateTableViewData:currentLocation];
+
+    [self findCity:selectedLocation];
+    
     [manager stopUpdatingLocation];
     [manager setDelegate:nil];
   }
 }
 
-- (void)updateViewWithLocation:(CLLocation *)location {
+- (void)findCity:(CLLocation *)location {
   CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
   [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-    [self requestUpdateTableViewData:location];
-    
-    //change the title to match the city name
-    placemark = [placemarks objectAtIndex:0];
-    self.navigationItem.title = placemark.locality;
+    city = [[placemarks objectAtIndex:0] locality];
+    self.navigationItem.title = city;
   }];
 }
 
@@ -304,7 +312,7 @@
 
   if ([segue.destinationViewController respondsToSelector:@selector(setPlace:)]) {
     NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-    Place *selectedPlace = [Place convertFromDictionary:[results objectAtIndex:path.row] withPlacemark:placemark];
+    Place *selectedPlace = [Place convertFromDictionary:[results objectAtIndex:path.row] withCity:city];
     
     [segue.destinationViewController performSelector:@selector(setPlace:)
                                           withObject:selectedPlace];
