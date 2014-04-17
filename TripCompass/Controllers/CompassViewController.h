@@ -14,7 +14,7 @@
 @interface CompassViewController : GAITrackedViewController
 
 @property (nonatomic, retain) CLLocation *currentLocation;
-//@property (weak, nonatomic) IBOutlet UIImageView *needleImage;
+
 @property (strong, nonatomic) Place *place;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

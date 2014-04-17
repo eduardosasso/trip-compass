@@ -18,16 +18,7 @@
   [super setSelected:selected animated:animated];
 }
 
-- (void)setPlaceWithLocation:(Place *)selectedPlace location:(CLLocation *)location {
-  place = selectedPlace;
-  
-  [self setupImage];
-  
-  self.placeLabel.text = place.name;
-  self.detailLabel.text = [place formattedDistanceTo:location.coordinate];
-}
-
-- (void)setupImage {
+- (void)setup {
   defaultColor = [UIColor lightGrayColor];
   savedColor = nil;
   
@@ -38,23 +29,22 @@
   
   UIImage *img = [[self.favoriteImage image] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   self.favoriteImage.image = img;
-  self.favoriteImage.tintColor = [place saved] ? savedColor : defaultColor;
+  
+  BOOL highlight = [self.delegate shouldHighlightFavorite:self.tag];
+     
+  self.favoriteImage.tintColor = highlight ? savedColor : defaultColor;
+  self.favoriteImage.highlighted = highlight;
 }
 
 - (void)toggleFavoriteTap:(UITapGestureRecognizer *)recognizer {
   UIColor *color;
   
-  if ([place saved]) {
-    [place destroy];
-    color = defaultColor;
-  } else {
-    [place save];
-    color = savedColor;
-  }
+  BOOL saved = [self.delegate didTapAddToFavorite:self.tag];
   
-  [UIView animateWithDuration:0.2f animations:^{
-    self.favoriteImage.tintColor = color;
-  }];
+  color = saved ? savedColor : defaultColor;
+
+  self.favoriteImage.tintColor = color;
+  self.favoriteImage.highlighted = saved;
 }
 
 @end

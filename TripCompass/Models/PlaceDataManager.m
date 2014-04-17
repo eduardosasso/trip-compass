@@ -26,11 +26,12 @@
   placeModel.state = place.state;
   placeModel.city = place.city;
   
-  placeModel.checkpoint = false;
+  placeModel.checkpoint = place.checkpoint;
   
   if ([self.managedObjectContext save:&error]) {
     return YES;
   } else {
+    NSLog(error);
     //TODO do something with the error
     return NO;
   }

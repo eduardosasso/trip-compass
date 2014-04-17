@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "CompassViewController.h"
 #import "GAI.h"
 
 @implementation AppDelegate {
@@ -34,10 +33,14 @@
     [defaults setBool:isMetric forKey:@"isMetric"];
   }
   
+  [[UIView appearance] setTintColor:[UIColor lightGrayColor]]; // for unselected items that are gray
+  
+  [[UITabBar appearance] setTintColor:[UIColor grayColor]]; // for unselected items that are gray
+  [[UITabBar appearance] setSelectedImageTintColor:customMagentaColor]; // for selected items that are green
   
   //Gives a blur/frost effect to the bars
-//  [[UINavigationBar appearance] setBarTintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.0f]];
-//  [[UITabBar appearance] setBarTintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.0f]];
+//  [[UINavigationBar appearance] setBarTintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.1f]];
+//  [[UITabBar appearance] setBarTintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.1f]];
   
   return YES;
 }
@@ -45,7 +48,7 @@
 - (void)setupGoogleAnalytics {
   [[GAI sharedInstance] setTrackUncaughtExceptions:YES];
   //TODO should change the loglevel for final app
-  [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+  //[[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
   [[GAI sharedInstance] trackerWithTrackingId:@"UA-17707312-2"];
 }
 

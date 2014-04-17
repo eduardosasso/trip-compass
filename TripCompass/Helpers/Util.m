@@ -90,4 +90,39 @@
   return radiansBearing;
 }
 
++ (NSString *)getHeadingDirectionName:(CLHeading*)newHeading {
+  CGFloat currentHeading = newHeading.magneticHeading;
+  NSString *strDirection = [[NSString alloc] init];
+  
+	if ((currentHeading >= 315) || (currentHeading <= 45)) {
+    strDirection = @"North";
+	} else if ((currentHeading > 45) && (currentHeading <= 135)) {
+    strDirection = @"East";
+	} else if ((currentHeading > 135) && (currentHeading <= 225)) {
+    strDirection = @"South";
+	} else if ((currentHeading > 225) && (currentHeading <= 315)) {
+    strDirection = @"West";
+	}
+  
+//  if(currentHeading >23 && currentHeading <= 67){
+//    strDirection = @"North East";
+//  } else if(currentHeading >68 && currentHeading <= 112){
+//    strDirection = @"East";
+//  } else if(currentHeading >113 && currentHeading <= 167){
+//    strDirection = @"South East";
+//  } else if(currentHeading >168 && currentHeading <= 202){
+//    strDirection = @"South";
+//  } else if(currentHeading >203 && currentHeading <= 247){
+//    strDirection = @"South West";
+//  } else if(currentHeading >248 && currentHeading <= 293){
+//    strDirection = @"West";
+//  } else if(currentHeading >294 && currentHeading <= 337){
+//    strDirection = @"North West";
+//  } else if(currentHeading >=338 || currentHeading <= 22){
+//    strDirection = @"North";
+//  }
+  
+  return strDirection;
+}
+
 @end

@@ -11,6 +11,8 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+#define customMagentaColor [UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:126.0/255.0 alpha:1]
+
 @property (strong, nonatomic) UIWindow *window;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

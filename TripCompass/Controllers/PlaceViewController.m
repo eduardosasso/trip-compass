@@ -1,3 +1,4 @@
+#import "AppDelegate.h"
 #import "PlaceViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "Place.h"
@@ -39,9 +40,10 @@
   [self checkInternetConnection];
   
   [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
-
   //hide search bar under the navigation bar
-  self.tableView.contentOffset = CGPointMake(0, self.searchDisplayController.searchBar.frame.size.height);
+//  self.tableView.contentOffset = CGPointMake(0, self.searchDisplayController.searchBar.frame.size.height);
+  
+  self.tableView.rowHeight = 60;
   
   self.navigationItem.title = @"Current Location";
 }
@@ -57,9 +59,9 @@
   loading = false;
   
   //hide the search bar when reloading
-  if (page ==1) {
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-  }
+//  if (page ==1) {
+//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//  }
 }
 
 - (void)resetTableView {
@@ -147,13 +149,30 @@
 
 - (void)configureCell:(CustomCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
   Place *place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withCity:city];
-  [cell setPlaceWithLocation:place location:currentLocation];
+
+  cell.placeLabel.text = place.name;
+  cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
+  cell.tag = indexPath.row;
+  
+  if ([place saved]) {
+    cell.placeLabel.textColor = customMagentaColor;
+  } else {
+    cell.placeLabel.textColor = nil;
+  }
+
+//  cell.delegate = self;
+  
+//  [cell setPlaceWithLocation:place location:currentLocation];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row < results.count) {
     CustomCell *customCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
+
     [self configureCell:customCell forRowAtIndexPath:indexPath];
+    [customCell setDelegate:self];
+    [customCell setup];
+    
     return customCell;
   } else {
     //return the loading spinner cell
@@ -170,20 +189,20 @@
   return prototypeCell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (indexPath.row < results.count) {
-    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
-    [self.prototypeCell layoutIfNeeded];
-    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return size.height+1;
-  } else {
-    return self.tableView.rowHeight;
-  }
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//  if (indexPath.row < results.count) {
+//    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
+//    [self.prototypeCell layoutIfNeeded];
+//    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];
+//    return size.height+1;
+//  } else {
+//    return self.tableView.rowHeight;
+//  }
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return UITableViewAutomaticDimension;
-}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//  return UITableViewAutomaticDimension;
+//}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
   //load more records if at the bottom of the page
@@ -318,5 +337,46 @@
                                           withObject:selectedPlace];
   }
 }
+
+#pragma mark CustomCell Delegate
+
+- (BOOL)didTapAddToFavorite:(NSInteger)row {
+  BOOL status;
+  UIColor *color = nil;
+  
+  Place *place = [Place convertFromDictionary:[results objectAtIndex:row] withCity:city];
+
+  NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+  CustomCell *cell = (CustomCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+  
+  if ([place saved]) {
+    [place destroy];
+    status = FALSE;
+  } else {
+    [place save];
+    color = customMagentaColor;
+    [[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = @"1";
+    status = TRUE;
+  }
+  
+  cell.placeLabel.textColor = color;
+  return status;
+}
+
+- (BOOL)shouldHighlightFavorite:(NSInteger)row {
+  Place *place = [Place convertFromDictionary:[results objectAtIndex:row] withCity:city];
+  
+  NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+  CustomCell *cell = (CustomCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+  
+  if ([place saved]) {
+    cell.placeLabel.textColor = customMagentaColor;
+    return TRUE;
+  } else {
+    cell.placeLabel.textColor = nil;
+    return FALSE;
+  }
+}
+
 
 @end

@@ -11,7 +11,8 @@
 
 @interface Util : NSObject
 
-+(NSString *)stringWithDistance:(double)distance;
-+(float)getHeadingForDirectionFromCoordinate:(CLLocationCoordinate2D)fromLoc toCoordinate:(CLLocationCoordinate2D)toLoc;
-+(float)setLatLonForDistanceAndAngle:(CLLocationCoordinate2D)userlocation toCoordinate:(CLLocationCoordinate2D)toLoc;
++ (NSString *)stringWithDistance:(double)distance;
++ (float)getHeadingForDirectionFromCoordinate:(CLLocationCoordinate2D)fromLoc toCoordinate:(CLLocationCoordinate2D)toLoc;
++ (float)setLatLonForDistanceAndAngle:(CLLocationCoordinate2D)userlocation toCoordinate:(CLLocationCoordinate2D)toLoc;
++ (NSString *)getHeadingDirectionName:(CLHeading*)newHeading;
 @end

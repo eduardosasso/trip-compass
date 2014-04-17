@@ -12,6 +12,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+  [[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = nil;
+  
   cities = [NSMutableArray arrayWithArray:[PlaceDataManager findCities]];
   if ([cities count] > 0) {
     self.navigationItem.rightBarButtonItem = self.editButtonItem;

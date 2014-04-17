@@ -5,9 +5,10 @@
 #import "PlaceTypeViewController.h"
 #import "LocationSearchViewController.h"
 #import "GAUITableViewController.h"
+#import "CustomCell.h"
 #import "API.h"
 
-@interface PlaceViewController : GAUITableViewController <CLLocationManagerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, APIDelegate, PlaceTypeDelegate, LocationSearchDelegate>
+@interface PlaceViewController : GAUITableViewController <CLLocationManagerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, APIDelegate, PlaceTypeDelegate, LocationSearchDelegate, CustomCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *plainView;
 

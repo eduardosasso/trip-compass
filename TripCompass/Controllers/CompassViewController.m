@@ -36,6 +36,24 @@
   
   appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
   self.managedObjectContext = [appDelegate managedObjectContext];
+
+  //hide toolbar
+  [self.tabBarController.tabBar setTranslucent:YES];
+  [self.tabBarController.tabBar setHidden:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  //hide navigation bar bottom border
+  [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+  [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  //show navigation bar bottom border for other views when leaving
+  [self.navigationController.navigationBar setShadowImage:nil];
+  [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+  //show the tabbar back when changing screens
+  [self.tabBarController.tabBar setHidden:NO];
 }
 
 #pragma mark Location Manager
@@ -81,9 +99,13 @@
 //    self.compassImage.autoresizingMask = UIViewAutoresizingNone;
 //     self.compassImage.center = self.view.center;
     
+    NSString *directionName = [Util getHeadingDirectionName:newHeading];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@", directionName];
+    
     [self.compassImage layoutIfNeeded];
     
-      self.compassImage.transform = CGAffineTransformMakeRotation((direction* M_PI / 180)+ GeoAngle);
+    self.compassImage.transform = CGAffineTransformMakeRotation((direction* M_PI / 180)+ GeoAngle);
+    
   }
 }
 
@@ -97,40 +119,33 @@
 }
 
 - (IBAction)checkpointAction:(id)sender {
-  UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Add Checkpoint"
-                                                   message:@"Save your current location to make sure you never get lost."
+  UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Checkpoint"
+                                                   message:@"Where are you now?"
                                                   delegate:self
                                          cancelButtonTitle:@"Cancel"
-                                         otherButtonTitles:@"OK", nil];
+                                         otherButtonTitles:@"Save", nil];
   
   alert.alertViewStyle = UIAlertViewStylePlainTextInput;
   UITextField * alertTextField = [alert textFieldAtIndex:0];
-  alertTextField.placeholder = @"e.g: Ace Hotel New York";
+  alertTextField.placeholder = @"e.g: Hard to find state park";
   
   [alert show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-  if([title isEqualToString:@"OK"]) {
+  if([title isEqualToString:@"Save"]) {
     NSString *name = [alertView textFieldAtIndex:0].text;
     
-    NSManagedObjectContext *context = [self managedObjectContext];
-    PlaceModel *placeModel = [NSEntityDescription insertNewObjectForEntityForName:@"PlaceModel" inManagedObjectContext:context];
+    Place *place = [[Place alloc] init];
+    place.key = [NSNumber numberWithInt:1];
+    place.name = name;
+    place.checkpoint = YES;
+    place.lat = [NSNumber numberWithFloat:self.currentLocation.coordinate.latitude];
+    place.lng = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
+    place.city = @"Checkpoints";
     
-    placeModel.name = name;
-    placeModel.checkpoint = YES;
-//    placeModel.area = @"Checkpoints";
-    
-    
-    placeModel.lat = [NSNumber numberWithFloat:self.currentLocation.coordinate.latitude];
-    placeModel.lng = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
-    
-    NSError *error;
-    if (![context save:&error]) {
-      NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-
+    [place save];
   }
 }
 
