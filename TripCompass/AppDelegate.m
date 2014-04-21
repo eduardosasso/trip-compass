@@ -33,7 +33,9 @@
     [defaults setBool:isMetric forKey:@"isMetric"];
   }
   
-  [[UIView appearance] setTintColor:[UIColor lightGrayColor]]; // for unselected items that are gray
+  [[UINavigationBar appearance] setTintColor:[UIColor lightGrayColor]]; // for unselected items that are gray
+  
+  [[UITableView appearance] setTintColor:customMagentaColor];
   
   [[UITabBar appearance] setTintColor:[UIColor grayColor]]; // for unselected items that are gray
   [[UITabBar appearance] setSelectedImageTintColor:customMagentaColor]; // for selected items that are green
