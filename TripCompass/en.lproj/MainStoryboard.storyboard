@@ -246,28 +246,32 @@
             <objects>
                 <viewController id="VTE-dE-fwI" customClass="CompassViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="UqO-kT-37m"/>
-                        <viewControllerLayoutGuide type="bottom" id="x8Y-tf-1bp"/>
+                        <viewControllerLayoutGuide type="top" id="WUg-Cw-bht"/>
+                        <viewControllerLayoutGuide type="bottom" id="r1i-z1-JzG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZIg-OX-jpw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Whole Foods Market" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="DhE-mF-UP1">
-                                <rect key="frame" x="20" y="366" width="280" height="32"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Whole Foods Market Whole Foods Market" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="DhE-mF-UP1">
+                                <rect key="frame" x="20" y="366" width="280" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="VKC-Fq-eWa"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="pei-WC-gnf"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200 ft" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6a-qb-hAF">
-                                <rect key="frame" x="20" y="495" width="280" height="43"/>
+                                <rect key="frame" x="20" y="505" width="280" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <color key="textColor" red="0.21960785984992981" green="0.96862751245498657" blue="0.22745099663734436" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3061 La Selva Street apartment 211, San Mateo CA 94403 United States of America" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="tvI-dY-vX3">
-                                <rect key="frame" x="20" y="406" width="280" height="41"/>
+                                <rect key="frame" x="20" y="437" width="280" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -280,22 +284,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tvI-dY-vX3" firstAttribute="top" secondItem="DhE-mF-UP1" secondAttribute="bottom" constant="8" id="58T-6d-eM3"/>
-                            <constraint firstAttribute="trailing" secondItem="DhE-mF-UP1" secondAttribute="trailing" constant="20" id="7Tt-UT-opn"/>
-                            <constraint firstAttribute="bottom" secondItem="H6a-qb-hAF" secondAttribute="bottom" constant="30" id="7he-1j-UI0"/>
-                            <constraint firstItem="DhE-mF-UP1" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="20" id="B4k-gh-ULL"/>
-                            <constraint firstAttribute="trailing" secondItem="H6a-qb-hAF" secondAttribute="trailing" constant="20" id="Bwh-lu-eYO"/>
-                            <constraint firstAttribute="trailing" secondItem="tvI-dY-vX3" secondAttribute="trailing" constant="20" id="EtH-jQ-lJv"/>
-                            <constraint firstItem="p0W-62-roa" firstAttribute="top" secondItem="UqO-kT-37m" secondAttribute="bottom" constant="89" id="GMy-uK-8Jf"/>
-                            <constraint firstAttribute="trailing" secondItem="p0W-62-roa" secondAttribute="trailing" constant="74" id="Kd0-81-Wgj"/>
-                            <constraint firstItem="DhE-mF-UP1" firstAttribute="top" secondItem="UqO-kT-37m" secondAttribute="bottom" constant="302" id="VnZ-Hg-cyW"/>
-                            <constraint firstItem="H6a-qb-hAF" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="20" id="YkB-gf-VCh"/>
-                            <constraint firstAttribute="centerY" secondItem="p0W-62-roa" secondAttribute="centerY" constant="87" id="gLa-bm-oTx"/>
-                            <constraint firstItem="H6a-qb-hAF" firstAttribute="top" relation="lessThanOrEqual" secondItem="tvI-dY-vX3" secondAttribute="bottom" constant="55" id="iL6-e9-au7"/>
-                            <constraint firstItem="tvI-dY-vX3" firstAttribute="top" secondItem="DhE-mF-UP1" secondAttribute="bottom" constant="8" id="l96-1U-xHG"/>
-                            <constraint firstItem="p0W-62-roa" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="74" id="m8A-4P-Ako"/>
-                            <constraint firstAttribute="centerX" secondItem="p0W-62-roa" secondAttribute="centerX" id="r39-EH-D0R"/>
-                            <constraint firstItem="tvI-dY-vX3" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="20" id="yfe-wK-AlZ"/>
+                            <constraint firstItem="DhE-mF-UP1" firstAttribute="leading" secondItem="tvI-dY-vX3" secondAttribute="leading" id="DA3-fH-1hq"/>
+                            <constraint firstAttribute="centerY" secondItem="p0W-62-roa" secondAttribute="centerY" constant="87" id="IS6-r8-WRU"/>
+                            <constraint firstAttribute="bottom" secondItem="H6a-qb-hAF" secondAttribute="bottom" constant="20" id="JCN-VB-cSP"/>
+                            <constraint firstItem="H6a-qb-hAF" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="20" id="KuO-4F-sS2"/>
+                            <constraint firstItem="tvI-dY-vX3" firstAttribute="top" secondItem="DhE-mF-UP1" secondAttribute="bottom" constant="8" id="Kwg-OX-Uem"/>
+                            <constraint firstItem="H6a-qb-hAF" firstAttribute="top" secondItem="tvI-dY-vX3" secondAttribute="bottom" constant="27" id="M5n-S2-ftS"/>
+                            <constraint firstAttribute="trailing" secondItem="tvI-dY-vX3" secondAttribute="trailing" constant="20" id="XF1-5H-nnq"/>
+                            <constraint firstAttribute="trailing" secondItem="H6a-qb-hAF" secondAttribute="trailing" constant="20" id="p6P-7Z-8vw"/>
+                            <constraint firstAttribute="centerX" secondItem="p0W-62-roa" secondAttribute="centerX" id="z8o-5f-yrq"/>
+                            <constraint firstItem="tvI-dY-vX3" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="20" id="zIn-s2-bJe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Loading..." id="JuQ-K2-Aw9">
@@ -334,36 +332,21 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="left" text="300ft" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oe-qm-GGF">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="left" fixedFrame="YES" text="300ft" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oe-qm-GGF">
                                             <rect key="frame" x="15" y="23" width="103" height="20"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="103" id="qsn-pu-lQg"/>
-                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Whole Foods Market" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="291" translatesAutoresizingMaskIntoConstraints="NO" id="Fkq-0r-CvH">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Whole Foods Market" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="291" translatesAutoresizingMaskIntoConstraints="NO" id="Fkq-0r-CvH">
                                             <rect key="frame" x="15" y="2" width="291" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="291" id="56x-GY-Xm9"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="Vei-BO-yFs"/>
-                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstItem="4oe-qm-GGF" firstAttribute="top" secondItem="Fkq-0r-CvH" secondAttribute="bottom" id="33a-MU-ikC"/>
-                                        <constraint firstItem="Fkq-0r-CvH" firstAttribute="top" secondItem="ZLS-pV-ZK7" secondAttribute="top" constant="2" id="6cc-Tv-ATC"/>
-                                        <constraint firstAttribute="trailing" secondItem="Fkq-0r-CvH" secondAttribute="trailing" constant="14" id="9n3-gq-9aM"/>
-                                        <constraint firstAttribute="bottom" secondItem="4oe-qm-GGF" secondAttribute="bottom" id="UtU-R7-fqz"/>
-                                        <constraint firstItem="4oe-qm-GGF" firstAttribute="leading" secondItem="Fkq-0r-CvH" secondAttribute="leading" id="ZfU-ih-1i1"/>
-                                        <constraint firstItem="Fkq-0r-CvH" firstAttribute="leading" secondItem="ZLS-pV-ZK7" secondAttribute="leading" constant="15" id="yNZ-8Y-UqG"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -440,7 +423,7 @@
             </objects>
             <point key="canvasLocation" x="-3312" y="1832"/>
         </scene>
-        <!--Place View Controller - Loading...-->
+        <!--Place View Controller-->
         <scene sceneID="VO0-RA-O0D">
             <objects>
                 <tableViewController id="ub2-AU-ASg" customClass="PlaceViewController" sceneMemberID="viewController">
@@ -478,12 +461,37 @@
                             <outlet property="delegate" destination="ub2-AU-ASg" id="QuV-Pt-hiW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Loading..." id="vCB-Yu-l0L">
+                    <navigationItem key="navigationItem" id="vCB-Yu-l0L">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="icon_filter_default.png" id="Cbf-99-Gse">
                             <connections>
                                 <segue destination="Ya6-Ie-EEG" kind="modal" identifier="PlaceTypeViewController" id="VWG-FT-1nu"/>
                             </connections>
                         </barButtonItem>
+                        <view key="titleView" contentMode="scaleToFill" id="vhG-9D-ucT">
+                            <rect key="frame" x="55" y="6" width="210" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXw-y3-3Bd">
+                                    <rect key="frame" x="0.0" y="6" width="210" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pI-li-fhs">
+                                    <rect key="frame" x="0.0" y="15" width="210" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="RXw-y3-3Bd" secondAttribute="trailing" id="6IM-2g-8gt"/>
+                                <constraint firstItem="RXw-y3-3Bd" firstAttribute="top" secondItem="vhG-9D-ucT" secondAttribute="top" constant="6" id="aKU-yn-Hmn"/>
+                                <constraint firstItem="RXw-y3-3Bd" firstAttribute="leading" secondItem="vhG-9D-ucT" secondAttribute="leading" id="agV-J3-oIH"/>
+                            </constraints>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" tag="1" image="current_location.png" id="2JX-35-reB">
                             <connections>
                                 <segue destination="J3Y-0j-at1" kind="modal" identifier="LocationSearchViewController" id="DpQ-ZJ-Oew"/>
@@ -499,6 +507,9 @@
                     <connections>
                         <outlet property="plainView" destination="YIt-Pn-fB2" id="utv-7l-hN6"/>
                         <outlet property="searchDisplayController" destination="RRw-lt-moh" id="CAp-OQ-SZF"/>
+                        <outlet property="verticalSpaceConstraint" destination="aKU-yn-Hmn" id="2rg-up-8DX"/>
+                        <outlet property="windowSubtitle" destination="3pI-li-fhs" id="0FK-Dh-FLR"/>
+                        <outlet property="windowTitle" destination="RXw-y3-3Bd" id="wMU-1q-ZHC"/>
                         <segue destination="VTE-dE-fwI" kind="push" identifier="CompassViewController" id="yLR-kX-2CM"/>
                     </connections>
                 </tableViewController>

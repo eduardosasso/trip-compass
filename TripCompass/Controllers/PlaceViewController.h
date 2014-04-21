@@ -11,6 +11,10 @@
 @interface PlaceViewController : GAUITableViewController <CLLocationManagerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, APIDelegate, PlaceTypeDelegate, LocationSearchDelegate, CustomCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *plainView;
+@property (weak, nonatomic) IBOutlet UILabel *windowTitle;
+@property (weak, nonatomic) IBOutlet UILabel *windowSubtitle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *verticalSpaceConstraint;
+
 
 - (IBAction)pullToRefresh:(id)sender;
 

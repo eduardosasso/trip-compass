@@ -45,7 +45,8 @@
   
   self.tableView.rowHeight = 60;
   
-  self.navigationItem.title = @"Current Location";
+//  self.navigationItem.title = @"Current Location";
+  self.windowTitle.text = @"Current Location";
 }
 
 #pragma mark API
@@ -104,7 +105,23 @@
 #pragma mark Delegates
 
 - (void)didSelectPlaceType:(NSString *)type {
+  int centerPosition = 6;
+  int topPosition = 0;
+
   placeType = type;
+
+  if ([placeType isEqualToString:@"All"]) {
+    self.verticalSpaceConstraint.constant = centerPosition;
+    self.windowSubtitle.text = nil;
+  } else {
+    self.windowSubtitle.text = placeType;
+    self.verticalSpaceConstraint.constant = topPosition;
+  }
+
+  [UIView animateWithDuration:0.5 animations:^{
+    [self.navigationItem.titleView layoutIfNeeded];
+  }];
+  
   [self resetTableView];
   [self requestUpdateTableViewData:selectedLocation];
 }
@@ -117,7 +134,7 @@
   city = newCity;
   if (!city) [self findCity:selectedLocation];
   
-  self.navigationItem.title = city;
+  self.windowTitle.text = city;
 
   [self resetTableView];
   apiResults = [[NSArray alloc] init];
@@ -265,7 +282,7 @@
   CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
   [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
     city = [[placemarks objectAtIndex:0] locality];
-    self.navigationItem.title = city;
+    self.windowTitle.text = city;
   }];
 }
 
