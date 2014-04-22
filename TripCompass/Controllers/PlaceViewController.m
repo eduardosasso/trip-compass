@@ -13,17 +13,19 @@
   CLLocationManager *locationManager;
   CLLocation *currentLocation;
   CLLocation *selectedLocation;
-  
-  NSMutableArray *results;
 
   API *api;
-  NSArray *apiResults;
+  NSMutableArray *results;
   
-//  CLPlacemark *placemark;
   NSString *city;
   
+  NSTimer *searchTimer;
+  
   NSInteger page;
+  
   BOOL loading;
+  BOOL isSearching;
+  
   Reachability *internetConnection;
   NoInternetView *noInternetView;
   
@@ -40,34 +42,38 @@
   [self checkInternetConnection];
   
   [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
-  //hide search bar under the navigation bar
-//  self.tableView.contentOffset = CGPointMake(0, self.searchDisplayController.searchBar.frame.size.height);
   
   self.tableView.rowHeight = 60;
+  self.searchDisplayController.searchResultsTableView.rowHeight = 60;
   
-//  self.navigationItem.title = @"Current Location";
+  isSearching = NO;
+  
   self.windowTitle.text = @"Current Location";
 }
 
 #pragma mark API
 
 - (void)didReceiveAPIResults:(NSDictionary *)dictionary {
-  apiResults = [dictionary valueForKey:@"results"];
-  
+  if (results && !isSearching) {
+    [results addObjectsFromArray:[dictionary valueForKey:@"results"]];
+  } else {
+    results = [(NSArray*)[dictionary valueForKey:@"results"] mutableCopy];
+  }
+
   [self.refreshControl endRefreshing];
-  [self.tableView reloadData];
+  
+  if (isSearching) {
+    [self.searchDisplayController.searchResultsTableView reloadData];
+  } else {
+    [self.tableView reloadData];
+  }
   
   loading = false;
-  
-  //hide the search bar when reloading
-//  if (page ==1) {
-//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-//  }
 }
 
 - (void)resetTableView {
   page = 1;
-  results = [[NSMutableArray alloc] initWithCapacity:0];
+  results = nil;
 }
 
 - (void)requestUpdateTableViewData:(CLLocation *)location {
@@ -137,7 +143,6 @@
   self.windowTitle.text = city;
 
   [self resetTableView];
-  apiResults = [[NSArray alloc] init];
   
   [self.tableView reloadData];
   
@@ -153,12 +158,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  [results addObjectsFromArray:apiResults];
-  
-  BOOL noMoreResults = page > 1 && apiResults.count == 0;
-  BOOL noMoreSearchResults = tableView == self.searchDisplayController.searchResultsTableView && results.count > 0;
+  BOOL noMoreResults = page > 1 && results.count == 0;
 
-  if (noMoreResults || noMoreSearchResults) return results.count;
+  if (noMoreResults || isSearching) return results.count;
   
   //+1 for the loading cell
   return results.count + 1;
@@ -224,7 +226,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
   //load more records if at the bottom of the page
   if (scrollView.contentSize.height - scrollView.contentOffset.y < (self.view.bounds.size.height)) {
-    if (!loading) {
+    if (!loading && !isSearching) {
       [self requestUpdateTableViewDataWithPagination];
       //TODO this is calling the api if tries to scroll results
       //if ([cell.reuseIdentifier isEqualToString:@"loadingCell"] && tableView != self.searchDisplayController.searchResultsTableView) [self requestUpdateTableViewDataWithPagination];
@@ -238,20 +240,40 @@
   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return  UITableViewCellEditingStyleInsert;
-}
-
 #pragma mark Search
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+  isSearching = NO;
+  
   [self resetTableView];
   [self requestUpdateTableViewData:selectedLocation];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-  [api searchPlacesNearby:searchString];
-  [self resetTableView];
+  if (searchTimer) {
+    [searchTimer invalidate];
+    searchTimer = nil;
+  }
+  
+  if ([searchString length] <= 2) return NO;
+  
+  searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self
+                                               selector:@selector(searchTimerPopped:)
+                                               userInfo:searchString
+                                                repeats:FALSE];
   return YES;
+}
+
+-(void)searchTimerPopped:(NSTimer *)timer {
+  NSString *searchString = (NSString*)[timer userInfo];
+  
+  [api searchPlacesNearby:searchString];
+}
+
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
+  //reset table to clear regular results
+  [self resetTableView];
+  
+  isSearching = YES;
 }
 
 #pragma mark Location Manager
@@ -269,7 +291,7 @@
     currentLocation = (CLLocation *)[locations lastObject];
     selectedLocation = currentLocation;
 
-    [self requestUpdateTableViewData:currentLocation];
+    if (!isSearching) [self requestUpdateTableViewData:currentLocation];
 
     [self findCity:selectedLocation];
     
@@ -390,7 +412,7 @@
     cell.placeLabel.textColor = customMagentaColor;
     return TRUE;
   } else {
-    cell.placeLabel.textColor = nil;
+//    cell.placeLabel.textColor = nil;
     return FALSE;
   }
 }
