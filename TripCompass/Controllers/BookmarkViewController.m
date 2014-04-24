@@ -1,5 +1,7 @@
 #import "BookmarkViewController.h"
 #import "PlaceDataManager.h"
+#import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation BookmarkViewController {
   NSMutableArray *cities;
@@ -9,6 +11,7 @@
   [super viewDidLoad];
 
   [self.tableView registerNib:[UINib nibWithNibName:@"BookmarkCell" bundle:nil] forCellReuseIdentifier:@"BookmarkCell"];
+  self.tableView.rowHeight = 60;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -36,8 +39,26 @@
   NSDictionary *place = [cities objectAtIndex:indexPath.row];
   
   cell.placeLabel.text = [place valueForKey:@"city"];
-  cell.detailLabel.text = [[place objectForKey:@"count"] stringValue];
+  NSString *count = [[place objectForKey:@"count"] stringValue];
 
+  cell.detailLabel.text = ([count integerValue] > 99) ? @"99" : count;
+  cell.detailLabel.textColor = [UIColor whiteColor];
+  
+  UIFontDescriptor *fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
+  UIFontDescriptor *boldFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+  cell.detailLabel.font = [UIFont fontWithDescriptor:boldFontDescriptor size:0.f];
+
+//  cell.detailLabel.textColor = customMagentaColor;
+  
+//  CALayer *l = [ cell.detailLabel layer];
+//  [l setMasksToBounds:YES];
+//  [l setCornerRadius:10.0];
+//  [l setBorderWidth:1.0];
+//  [l setBorderColor:[customMagentaColor CGColor]];
+
+  cell.detailLabel.backgroundColor = customMagentaColor;
+  cell.detailLabel.layer.cornerRadius = 12;
+  cell.detailLabel.layer.masksToBounds = YES;
   return cell;
 }
 

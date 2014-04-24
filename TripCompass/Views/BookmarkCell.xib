@@ -1,47 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BookmarkCell" id="3Pz-gc-lfL" customClass="CustomCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BookmarkCell" rowHeight="60" id="3Pz-gc-lfL" customClass="CustomCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Pz-gc-lfL" id="mm7-nq-cLR">
-                <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="287" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Area" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="198" translatesAutoresizingMaskIntoConstraints="NO" id="aWe-l0-Lcm">
-                        <rect key="frame" x="15" y="12" width="198" height="20"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Area" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="238" translatesAutoresizingMaskIntoConstraints="NO" id="aWe-l0-Lcm">
+                        <rect key="frame" x="11" y="19" width="238" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="216" id="p1c-cY-wWy"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="count" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHP-3k-ASO">
-                        <rect key="frame" x="217" y="12" width="70" height="20"/>
+                    <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="99" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHP-3k-ASO">
+                        <rect key="frame" x="257" y="17" width="30" height="28"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="70" id="Cz3-4r-QCm"/>
+                            <constraint firstAttribute="width" constant="30" id="a3M-oq-oMV"/>
                         </constraints>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                        <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="iHP-3k-ASO" firstAttribute="leading" secondItem="aWe-l0-Lcm" secondAttribute="trailing" constant="4" id="2WF-6g-sfo"/>
-                    <constraint firstItem="iHP-3k-ASO" firstAttribute="height" secondItem="aWe-l0-Lcm" secondAttribute="height" id="2kE-H4-dNk"/>
-                    <constraint firstItem="aWe-l0-Lcm" firstAttribute="top" secondItem="mm7-nq-cLR" secondAttribute="top" constant="12" id="Huc-Hw-hyR"/>
-                    <constraint firstAttribute="trailing" secondItem="iHP-3k-ASO" secondAttribute="trailing" id="lSU-sy-KTe"/>
-                    <constraint firstItem="iHP-3k-ASO" firstAttribute="top" secondItem="aWe-l0-Lcm" secondAttribute="top" id="lvT-fb-kip"/>
-                    <constraint firstItem="aWe-l0-Lcm" firstAttribute="leading" secondItem="mm7-nq-cLR" secondAttribute="leading" constant="15" id="rGJ-wZ-KZP"/>
-                    <constraint firstAttribute="bottom" secondItem="aWe-l0-Lcm" secondAttribute="bottom" constant="11" id="t8z-Ne-qpW"/>
+                    <constraint firstItem="iHP-3k-ASO" firstAttribute="height" secondItem="aWe-l0-Lcm" secondAttribute="height" constant="8" id="2kE-H4-dNk"/>
+                    <constraint firstItem="iHP-3k-ASO" firstAttribute="leading" secondItem="aWe-l0-Lcm" secondAttribute="trailing" constant="8" id="FaO-o2-9eJ"/>
+                    <constraint firstItem="aWe-l0-Lcm" firstAttribute="top" secondItem="mm7-nq-cLR" secondAttribute="top" constant="19" id="Huc-Hw-hyR"/>
+                    <constraint firstItem="iHP-3k-ASO" firstAttribute="centerY" secondItem="aWe-l0-Lcm" secondAttribute="centerY" constant="2" id="ISQ-iE-vr6"/>
+                    <constraint firstAttribute="trailing" secondItem="iHP-3k-ASO" secondAttribute="trailing" id="NYG-h0-x3z"/>
+                    <constraint firstItem="aWe-l0-Lcm" firstAttribute="leading" secondItem="mm7-nq-cLR" secondAttribute="leading" constant="11" id="rGJ-wZ-KZP"/>
+                    <constraint firstAttribute="bottom" secondItem="aWe-l0-Lcm" secondAttribute="bottom" constant="20" id="t8z-Ne-qpW"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

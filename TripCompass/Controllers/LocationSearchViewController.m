@@ -1,5 +1,6 @@
 #import "LocationSearchViewController.h"
 #import "API.h"
+#import "CustomCell.h"
 
 @implementation LocationSearchViewController {
   CLLocationManager *locationManager;
@@ -23,6 +24,10 @@
   
   api = [[API alloc] initWithLatitude:0.0 longitude:0.0];
   [api setDelegate:self];
+  
+  [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
+  self.searchDisplayController.searchResultsTableView.rowHeight = 60;
+  self.tableView.rowHeight = 60;
 }
 
 #pragma mark API Delegate
@@ -72,6 +77,7 @@
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+  [api requestCitiesNearby];
   isSearching = NO;
 }
 
@@ -105,12 +111,19 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultCell"];
+  CustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
 
   Place *place = [self tableview:tableView selectPlaceFromIndex:indexPath];
   
-  cell.textLabel.text = place.name;
-  cell.detailTextLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
+  cell.placeLabel.text = place.name;
+  cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
+  [cell.favoriteImage setHidden:YES];
+  
+  if (!isSearching && indexPath.row == 0) {
+    UIFontDescriptor *fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    UIFontDescriptor *boldFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+    cell.placeLabel.font = [UIFont fontWithDescriptor:boldFontDescriptor size:0.f];
+  }
   
   return cell;
 }
