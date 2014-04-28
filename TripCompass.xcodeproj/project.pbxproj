@@ -64,6 +64,8 @@
 		3DB193201908409D0075D01E /* icon_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB1931D1908409D0075D01E /* icon_edit@2x.png */; };
 		3DB193211908409D0075D01E /* icon_no_connection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB1931E1908409D0075D01E /* icon_no_connection@2x.png */; };
 		3DB193221908409D0075D01E /* icon_no_favs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB1931F1908409D0075D01E /* icon_no_favs@2x.png */; };
+		3DB19325190E99220075D01E /* NoFavoritesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB19324190E99220075D01E /* NoFavoritesView.m */; };
+		3DB19327190E99A30075D01E /* NoFavoritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DB19326190E99A30075D01E /* NoFavoritesView.xib */; };
 		3DB281C81827F7AE008C7B82 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DB281C71827F7AE008C7B82 /* CustomCell.xib */; };
 		3DB8FAF0184F950A005853D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB8FAEF184F950A005853D6 /* SystemConfiguration.framework */; };
 		3DB8FAFA1850E524005853D6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB8FAF91850E524005853D6 /* CoreTelephony.framework */; };
@@ -188,6 +190,9 @@
 		3DB1931D1908409D0075D01E /* icon_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_edit@2x.png"; sourceTree = "<group>"; };
 		3DB1931E1908409D0075D01E /* icon_no_connection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_no_connection@2x.png"; sourceTree = "<group>"; };
 		3DB1931F1908409D0075D01E /* icon_no_favs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_no_favs@2x.png"; sourceTree = "<group>"; };
+		3DB19323190E99220075D01E /* NoFavoritesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoFavoritesView.h; sourceTree = "<group>"; };
+		3DB19324190E99220075D01E /* NoFavoritesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoFavoritesView.m; sourceTree = "<group>"; };
+		3DB19326190E99A30075D01E /* NoFavoritesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoFavoritesView.xib; sourceTree = "<group>"; };
 		3DB281C71827F7AE008C7B82 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		3DB8FAED184F94C0005853D6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3DB8FAEF184F950A005853D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -408,6 +413,9 @@
 				3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */,
 				3DAC8C3B18B12F1900E78C17 /* NoInternetView.h */,
 				3DAC8C3C18B12F1900E78C17 /* NoInternetView.m */,
+				3DB19323190E99220075D01E /* NoFavoritesView.h */,
+				3DB19324190E99220075D01E /* NoFavoritesView.m */,
+				3DB19326190E99A30075D01E /* NoFavoritesView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -602,6 +610,7 @@
 				3D7B199518F834B700CCDE21 /* compass_arrow_yellow@2x.png in Resources */,
 				3D49860017A16A5500CB2CF2 /* numbers.png in Resources */,
 				3D24E08718C6384300127A6B /* 726-star-selected@2x.png in Resources */,
+				3DB19327190E99A30075D01E /* NoFavoritesView.xib in Resources */,
 				3D7B198F18F43DC500CCDE21 /* icon_tabbar_navbar_list_starred_default@2x.png in Resources */,
 				3DCFBB1A18995B7700D5E64D /* 752-credit-card@2x.png in Resources */,
 				3DD30D9218C2434C00CA941E /* compass@2x.png in Resources */,
@@ -696,6 +705,7 @@
 				3DF62A981858CAC00052D245 /* API.m in Sources */,
 				3DDBDFE2184CEA5F00C48C08 /* MainUITabBarController.m in Sources */,
 				3D8E2CEF178EF4AD00AA0F0D /* PlaceViewController.m in Sources */,
+				3DB19325190E99220075D01E /* NoFavoritesView.m in Sources */,
 				3DA654AA179D7B4A00424430 /* Util.m in Sources */,
 				3DAC8C3D18B12F1900E78C17 /* NoInternetView.m in Sources */,
 				3D4E6B59187C551700454293 /* NSString+URLEncoding.m in Sources */,

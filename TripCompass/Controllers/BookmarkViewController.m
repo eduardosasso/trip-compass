@@ -2,9 +2,11 @@
 #import "PlaceDataManager.h"
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
+#import "NoFavoritesView.h"
 
 @implementation BookmarkViewController {
   NSMutableArray *cities;
+  NoFavoritesView *noFavoritesView;
 }
 
 - (void)viewDidLoad {
@@ -12,15 +14,30 @@
 
   [self.tableView registerNib:[UINib nibWithNibName:@"BookmarkCell" bundle:nil] forCellReuseIdentifier:@"BookmarkCell"];
   self.tableView.rowHeight = 60;
+
+  noFavoritesView = [[NoFavoritesView alloc] init];
+  [self.view addSubview:noFavoritesView];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
   [[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = nil;
   
   cities = [NSMutableArray arrayWithArray:[PlaceDataManager findCities]];
-  if ([cities count] > 0) {
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.tableView reloadData];
+  if ([cities count] > 0) self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+  [self toggleNoFavoritesView:([cities count] == 0)];
+  [self.tableView reloadData];
+}
+
+-(void)toggleNoFavoritesView:(BOOL)show {
+  if (show) {
+    [noFavoritesView setHidden:false];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [noFavoritesView setFrame: self.view.bounds];
+  } else {
+    [self.view bringSubviewToFront:self.tableView];
+    [noFavoritesView setHidden:true];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
   }
 }
 
@@ -71,8 +88,9 @@
   [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
   
   if ([cities count] == 0) {
-    //TODO show blank slate screen
     self.navigationItem.rightBarButtonItem = nil;
+    [self.tableView reloadData];
+    [self toggleNoFavoritesView:YES];
   }
 }
 

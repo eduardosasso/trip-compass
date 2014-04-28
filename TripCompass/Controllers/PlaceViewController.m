@@ -332,14 +332,18 @@
 
 - (void)toggleInternetView:(BOOL)connected {
   [noInternetView setHidden:connected];
-  [noInternetView setFrame: self.tableView.bounds];
+  [noInternetView setFrame: self.view.bounds];
   self.tableView.scrollEnabled = connected;
 
   if (connected) {
     if (results.count == 0) [locationManager startUpdatingLocation];
-    [self.view sendSubviewToBack:noInternetView];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    self.navigationItem.leftBarButtonItem.enabled = YES;
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
   } else {
-    [self.view bringSubviewToFront:noInternetView];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.navigationItem.leftBarButtonItem.enabled = NO;
   }
   
 }
