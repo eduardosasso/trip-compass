@@ -16,7 +16,8 @@
   self.tableView.rowHeight = 60;
 
   noFavoritesView = [[NoFavoritesView alloc] init];
-  [self.view addSubview:noFavoritesView];
+//  [self.view addSubview:noFavoritesView];
+  [self.navigationController.view addSubview:noFavoritesView];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -30,15 +31,10 @@
 }
 
 -(void)toggleNoFavoritesView:(BOOL)show {
-  if (show) {
-    [noFavoritesView setHidden:false];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [noFavoritesView setFrame: self.view.bounds];
-  } else {
-    [self.view bringSubviewToFront:self.tableView];
-    [noFavoritesView setHidden:true];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-  }
+  [noFavoritesView setHidden:!show];
+  [self.tableView setHidden:show];
+  
+  if (show) [self.navigationController.view bringSubviewToFront:noFavoritesView];
 }
 
 #pragma mark UITableView

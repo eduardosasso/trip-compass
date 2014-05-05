@@ -282,7 +282,18 @@
   locationManager.delegate = self;
   locationManager.desiredAccuracy = kCLLocationAccuracyBest;
   locationManager.distanceFilter = 100;
-  if([CLLocationManager locationServicesEnabled]) [locationManager startUpdatingLocation];
+
+   if([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+   [locationManager startUpdatingLocation];
+  } else {
+    UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"Location services disabled"
+                                                  message:@"Trip Compass needs access to your location. Please turn on Location Services in your device settings."
+                                                 delegate:nil
+                                        cancelButtonTitle:@"Ok"
+                                        otherButtonTitles:nil];
+    [alert show];
+  }
+  [self.refreshControl endRefreshing];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -312,7 +323,7 @@
 
 - (void)checkInternetConnection {
   noInternetView = [[NoInternetView alloc] init];
-  [self.view addSubview:noInternetView];
+  [self.navigationController.view addSubview:noInternetView];
   
   internetConnection = [Reachability reachabilityForInternetConnection];
   
@@ -332,20 +343,9 @@
 
 - (void)toggleInternetView:(BOOL)connected {
   [noInternetView setHidden:connected];
-  [noInternetView setFrame: self.view.bounds];
-  self.tableView.scrollEnabled = connected;
+  [self.tableView setHidden:!connected];
 
-  if (connected) {
-    if (results.count == 0) [locationManager startUpdatingLocation];
-    self.navigationItem.rightBarButtonItem.enabled = YES;
-    self.navigationItem.leftBarButtonItem.enabled = YES;
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-  } else {
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
-    self.navigationItem.leftBarButtonItem.enabled = NO;
-  }
-  
+  if (!connected) [self.navigationController.view bringSubviewToFront:noInternetView];
 }
 
 #pragma mark Undefined
