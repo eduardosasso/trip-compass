@@ -16,6 +16,7 @@
 
   API *api;
   NSMutableArray *results;
+  NSArray *apiResults;
   
   NSString *city;
   
@@ -47,32 +48,32 @@
   self.searchDisplayController.searchResultsTableView.rowHeight = 60;
   
   isSearching = NO;
-  
-  self.windowTitle.text = @"Current Location";
 }
 
 #pragma mark API
 
 - (void)didReceiveAPIResults:(NSDictionary *)dictionary {
-  if (results && !isSearching) {
-    [results addObjectsFromArray:[dictionary valueForKey:@"results"]];
-  } else {
-    results = [(NSArray*)[dictionary valueForKey:@"results"] mutableCopy];
-  }
-
   [self.refreshControl endRefreshing];
   
-  if (isSearching) {
-    [self.searchDisplayController.searchResultsTableView reloadData];
+  apiResults = [dictionary valueForKey:@"results"];
+  
+  if (results && !isSearching) {
+    [results addObjectsFromArray:apiResults];
   } else {
-    [self.tableView reloadData];
+    results = [(NSArray*)apiResults mutableCopy];
   }
+
+  UITableView *tableView = self.tableView;
+  if (isSearching) tableView = self.searchDisplayController.searchResultsTableView;
+
+  [tableView reloadData];
   
   loading = false;
 }
 
 - (void)resetTableView {
   page = 1;
+  apiResults = nil;
   results = nil;
 }
 
@@ -158,12 +159,15 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  BOOL noMoreResults = page > 1 && results.count == 0;
-
-  if (noMoreResults || isSearching) return results.count;
+//  BOOL noMoreResults = (page > 1 && results.count == 0) || (apiResults && [apiResults count] == 0);
+  BOOL noMoreResults = apiResults && [apiResults count] == 0;
   
-  //+1 for the loading cell
-  return results.count + 1;
+  if (noMoreResults || (isSearching && [apiResults count] > 0)) {
+    return results.count;
+  } else {
+    //+1 for the loading cell
+    return results.count + 1;
+  }
 }
 
 - (void)configureCell:(CustomCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -195,9 +199,9 @@
     return customCell;
   } else {
     //return the loading spinner cell
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"loadingCell"];
-    [(UIActivityIndicatorView *)cell.contentView.subviews.lastObject startAnimating];
-    return cell;
+    UITableViewCell *loadingCell = [self.tableView dequeueReusableCellWithIdentifier:@"loadingCell"];
+    [(UIActivityIndicatorView *)loadingCell.contentView.subviews.lastObject startAnimating];
+    return loadingCell;
   }
 }
 
@@ -249,17 +253,20 @@
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+  [self resetTableView];
+  
   if (searchTimer) {
     [searchTimer invalidate];
     searchTimer = nil;
   }
-  
+
   if ([searchString length] <= 2) return NO;
   
   searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self
                                                selector:@selector(searchTimerPopped:)
                                                userInfo:searchString
                                                 repeats:FALSE];
+
   return YES;
 }
 
@@ -346,6 +353,7 @@
   [self.tableView setHidden:!connected];
 
   if (!connected) [self.navigationController.view bringSubviewToFront:noInternetView];
+  if (results.count == 0) [self startTrackingLocation];
 }
 
 #pragma mark Undefined
@@ -386,11 +394,18 @@
 - (BOOL)didTapAddToFavorite:(NSInteger)row {
   BOOL status;
   UIColor *color = nil;
+  CustomCell *cell;
+  UITableView *currentTableView;
   
   Place *place = [Place convertFromDictionary:[results objectAtIndex:row] withCity:city];
 
   NSIndexPath* indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-  CustomCell *cell = (CustomCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+  
+  currentTableView = self.tableView;
+  
+  if (isSearching) currentTableView = self.searchDisplayController.searchResultsTableView;
+  
+  cell = (CustomCell *)[currentTableView cellForRowAtIndexPath:indexPath];
   
   if ([place saved]) {
     [place destroy];
