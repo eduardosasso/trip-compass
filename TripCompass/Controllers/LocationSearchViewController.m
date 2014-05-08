@@ -8,6 +8,8 @@
   
   API *api;
   NSMutableArray *results;
+  NSArray *apiResults;
+
   NSTimer *searchTimer;
   
   BOOL isSearching;
@@ -33,28 +35,34 @@
 #pragma mark API Delegate
 
 -(void)didReceiveAPIResults:(NSDictionary *)dictionary {
-  results = [(NSArray*)[dictionary valueForKey:@"results"] mutableCopy];
-  
   [self.refreshControl endRefreshing];
 
-  if (isSearching) {
-    [self.searchDisplayController.searchResultsTableView reloadData];
-  } else {
-    [results insertObject:[NSNull null] atIndex:0];
-    [self.tableView reloadData];
-  }
+  apiResults = [dictionary valueForKey:@"results"];
 
+  if (isSearching) {
+    results = [(NSArray*)apiResults mutableCopy];
+  } else {
+    results = [(NSArray*)apiResults mutableCopy];
+    [results insertObject:[NSNull null] atIndex:0];
+  }
+  
+  UITableView *tableView = self.tableView;
+  if (isSearching) tableView = self.searchDisplayController.searchResultsTableView;
+  
+  [tableView reloadData];
 }
 
 #pragma mark Search Delegate
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+  [self resetTableView];
+  
   if (searchTimer) {
     [searchTimer invalidate];
     searchTimer = nil;
   }
   
-  if ([searchString length] <= 2) return YES;
+  if ([searchString length] <= 2) return NO;
 
   searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self
                                                selector:@selector(searchTimerPopped:)
@@ -84,7 +92,14 @@
 #pragma mark Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [results count];
+  BOOL noMoreResults = apiResults && [apiResults count] == 0;
+  
+  if (noMoreResults || (isSearching && [apiResults count] > 0)) {
+    return results.count;
+  } else {
+    //+1 for the loading cell
+    return results.count + 1;
+  }
 }
 
 - (Place *)tableview:(UITableView *)tableView selectPlaceFromIndex:(NSIndexPath *)indexPath {
@@ -111,21 +126,28 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  CustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
+  if (indexPath.row < results.count) {
+    CustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
 
-  Place *place = [self tableview:tableView selectPlaceFromIndex:indexPath];
-  
-  cell.placeLabel.text = place.name;
-  cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
-  [cell.favoriteImage setHidden:YES];
-  
-  if (!isSearching && indexPath.row == 0) {
-    UIFontDescriptor *fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
-    UIFontDescriptor *boldFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
-    cell.placeLabel.font = [UIFont fontWithDescriptor:boldFontDescriptor size:0.f];
+    Place *place = [self tableview:tableView selectPlaceFromIndex:indexPath];
+    
+    cell.placeLabel.text = place.name;
+    cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
+    [cell.favoriteImage setHidden:YES];
+    
+    if (!isSearching && indexPath.row == 0) {
+      UIFontDescriptor *fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+      UIFontDescriptor *boldFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+      cell.placeLabel.font = [UIFont fontWithDescriptor:boldFontDescriptor size:0.f];
+    }
+    
+    return cell;
+  } else {
+    //return the loading spinner cell
+    UITableViewCell *loadingCell = [self.tableView dequeueReusableCellWithIdentifier:@"loadingCell"];
+    [(UIActivityIndicatorView *)loadingCell.contentView.subviews.firstObject startAnimating];
+    return loadingCell;
   }
-  
-  return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,6 +166,7 @@
 }
 
 - (void)resetTableView {
+  apiResults = nil;
   results = nil;
 }
 
