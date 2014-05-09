@@ -191,6 +191,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row < results.count) {
     CustomCell *customCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
+    customCell.selectionStyle = UITableViewCellSelectionStyleBlue;
 
     [self configureCell:customCell forRowAtIndexPath:indexPath];
     [customCell setDelegate:self];
@@ -200,7 +201,7 @@
   } else {
     //return the loading spinner cell
     UITableViewCell *loadingCell = [self.tableView dequeueReusableCellWithIdentifier:@"loadingCell"];
-    [(UIActivityIndicatorView *)loadingCell.contentView.subviews.lastObject startAnimating];
+    [(UIActivityIndicatorView *)loadingCell.contentView.subviews.firstObject startAnimating];
     return loadingCell;
   }
 }
@@ -238,10 +239,11 @@
   }
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+//  [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
   [self performSegueWithIdentifier:@"CompassViewController" sender:self];
-  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+//  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark Search

@@ -53,7 +53,6 @@
 }
 
 #pragma mark Search Delegate
-
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
   [self resetTableView];
   
@@ -139,6 +138,8 @@
       UIFontDescriptor *fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
       UIFontDescriptor *boldFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
       cell.placeLabel.font = [UIFont fontWithDescriptor:boldFontDescriptor size:0.f];
+      
+      cell.detailLabel.text = @"You are here";
     }
     
     return cell;
