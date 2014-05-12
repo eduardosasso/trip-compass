@@ -191,7 +191,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row < results.count) {
     CustomCell *customCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
-    customCell.selectionStyle = UITableViewCellSelectionStyleBlue;
 
     [self configureCell:customCell forRowAtIndexPath:indexPath];
     [customCell setDelegate:self];
@@ -409,14 +408,23 @@
   
   cell = (CustomCell *)[currentTableView cellForRowAtIndexPath:indexPath];
   
+  int badgeValue = [[[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue intValue];
+  
   if ([place saved]) {
     [place destroy];
     status = FALSE;
+    if (badgeValue > 0) --badgeValue;
   } else {
     [place save];
     color = customMagentaColor;
-    [[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = @"1";
+    ++badgeValue;
     status = TRUE;
+  }
+  
+  if (badgeValue == 0) {
+    [[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = nil;
+  } else {
+   [[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = [NSString stringWithFormat: @"%d", badgeValue];
   }
   
   cell.placeLabel.textColor = color;

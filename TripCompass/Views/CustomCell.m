@@ -16,12 +16,12 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
   [super setHighlighted:highlighted animated:animated];
-  self.favoriteImage.highlighted = NO;
+  if (highlighted && !self.favoriteImage.highlighted) self.favoriteImage.highlighted = NO;
 }
 
 - (void)setSelected:(BOOL)highlighted animated:(BOOL)animated {
   [super setSelected:highlighted animated:animated];
-  self.favoriteImage.highlighted = NO;
+  if (highlighted && !self.favoriteImage.highlighted) self.favoriteImage.highlighted = NO;
 }
 
 - (void)setup {
