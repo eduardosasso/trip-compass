@@ -152,14 +152,20 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  Place *place = [self tableview:tableView selectPlaceFromIndex:indexPath];
+  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   
-  CLLocation *location = [[CLLocation alloc]initWithLatitude:[place.lat doubleValue]
-                                                   longitude:[place.lng doubleValue]];
-
-  [self.delegate didSelectLocation:location city:place.city];
-  
-  [self dismissViewControllerAnimated:YES completion:nil];
+  if ([cell isKindOfClass:CustomCell.class]) {
+    Place *place = [self tableview:tableView selectPlaceFromIndex:indexPath];
+    
+    CLLocation *location = [[CLLocation alloc]initWithLatitude:[place.lat doubleValue]
+                                                     longitude:[place.lng doubleValue]];
+    
+    [self.delegate didSelectLocation:location city:place.city];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+  } else {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  }
 }
 
 - (IBAction)closeButtonClick:(id)sender {

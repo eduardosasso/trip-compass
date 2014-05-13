@@ -16,17 +16,23 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
   [super setHighlighted:highlighted animated:animated];
-  if (highlighted && !self.favoriteImage.highlighted) self.favoriteImage.highlighted = NO;
+  if (highlighted && self.favoriteImage.tintColor == defaultColor) {
+    self.favoriteImage.highlighted = NO;
+  }
 }
 
 - (void)setSelected:(BOOL)highlighted animated:(BOOL)animated {
   [super setSelected:highlighted animated:animated];
-  if (highlighted && !self.favoriteImage.highlighted) self.favoriteImage.highlighted = NO;
+  if (highlighted && self.favoriteImage.tintColor == defaultColor) {
+   self.favoriteImage.highlighted = NO; 
+  }
 }
 
 - (void)setup {
   defaultColor = [UIColor lightGrayColor];
   savedColor = nil;
+  
+  self.selectionStyle = UITableViewCellSelectionStyleDefault;
   
   //setup tap events like a button
   UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleFavoriteTap:)];

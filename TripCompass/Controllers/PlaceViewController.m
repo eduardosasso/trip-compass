@@ -240,9 +240,13 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//  [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-  [self performSegueWithIdentifier:@"CompassViewController" sender:self];
-//  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+  
+  if ([cell isKindOfClass:CustomCell.class]) {
+    [self performSegueWithIdentifier:@"CompassViewController" sender:self];
+  } else {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  }
 }
 
 #pragma mark Search
