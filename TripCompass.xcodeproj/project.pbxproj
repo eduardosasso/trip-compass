@@ -25,6 +25,10 @@
 		3D32397517A953B2005ACF01 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D32397417A953B2005ACF01 /* Place.m */; };
 		3D32397B17AAA3EF005ACF01 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D32397A17AAA3EF005ACF01 /* BookmarkViewController.m */; };
 		3D36D2A8192268A300B7AD8B /* compass_arrow_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D36D2A7192268A300B7AD8B /* compass_arrow_gray@2x.png */; };
+		3D36D2AD1922690A00B7AD8B /* icon_east@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D36D2A91922690A00B7AD8B /* icon_east@2x.png */; };
+		3D36D2AE1922690A00B7AD8B /* icon_north@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D36D2AA1922690A00B7AD8B /* icon_north@2x.png */; };
+		3D36D2AF1922690A00B7AD8B /* icon_south@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D36D2AB1922690A00B7AD8B /* icon_south@2x.png */; };
+		3D36D2B01922690A00B7AD8B /* icon_west@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D36D2AC1922690A00B7AD8B /* icon_west@2x.png */; };
 		3D49860017A16A5500CB2CF2 /* numbers.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4985FD17A16A5500CB2CF2 /* numbers.png */; };
 		3D49860117A16A5500CB2CF2 /* pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D4985FE17A16A5500CB2CF2 /* pointer.png */; };
 		3D4E6B56187C548600454293 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4E6B55187C548600454293 /* NSDictionary+QueryString.m */; };
@@ -139,6 +143,10 @@
 		3D32397917AAA3EF005ACF01 /* BookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkViewController.h; sourceTree = "<group>"; };
 		3D32397A17AAA3EF005ACF01 /* BookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkViewController.m; sourceTree = "<group>"; };
 		3D36D2A7192268A300B7AD8B /* compass_arrow_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compass_arrow_gray@2x.png"; sourceTree = "<group>"; };
+		3D36D2A91922690A00B7AD8B /* icon_east@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_east@2x.png"; sourceTree = "<group>"; };
+		3D36D2AA1922690A00B7AD8B /* icon_north@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_north@2x.png"; sourceTree = "<group>"; };
+		3D36D2AB1922690A00B7AD8B /* icon_south@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_south@2x.png"; sourceTree = "<group>"; };
+		3D36D2AC1922690A00B7AD8B /* icon_west@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_west@2x.png"; sourceTree = "<group>"; };
 		3D4985FD17A16A5500CB2CF2 /* numbers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = numbers.png; sourceTree = "<group>"; };
 		3D4985FE17A16A5500CB2CF2 /* pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointer.png; sourceTree = "<group>"; };
 		3D4E6B54187C548600454293 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+QueryString.h"; path = "TripCompass/Categories/NSDictionary+QueryString.h"; sourceTree = SOURCE_ROOT; };
@@ -456,6 +464,10 @@
 		3D76BED21853B14B002FD16F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3D36D2A91922690A00B7AD8B /* icon_east@2x.png */,
+				3D36D2AA1922690A00B7AD8B /* icon_north@2x.png */,
+				3D36D2AB1922690A00B7AD8B /* icon_south@2x.png */,
+				3D36D2AC1922690A00B7AD8B /* icon_west@2x.png */,
 				3D36D2A7192268A300B7AD8B /* compass_arrow_gray@2x.png */,
 				3DB19328191038D80075D01E /* icon_4@2x.png */,
 				3DB1931D1908409D0075D01E /* icon_edit@2x.png */,
@@ -608,9 +620,12 @@
 				3D6276191781C65B00A4B675 /* MainStoryboard.storyboard in Resources */,
 				3D7B198C18F43DC500CCDE21 /* icon_navbar_current_location_active@2x.png in Resources */,
 				3DB1931C1908408C0075D01E /* icon@2x.png in Resources */,
+				3D36D2B01922690A00B7AD8B /* icon_west@2x.png in Resources */,
 				3D177EBC18A53BB100DB599A /* Default-568h@2x.png in Resources */,
+				3D36D2AF1922690A00B7AD8B /* icon_south@2x.png in Resources */,
 				3DCFBB1718995B7700D5E64D /* 744-locked@2x.png in Resources */,
 				3D7B199318F834B700CCDE21 /* compass_arrow_green@2x.png in Resources */,
+				3D36D2AE1922690A00B7AD8B /* icon_north@2x.png in Resources */,
 				3D0F70971898693800CAA80A /* 932-utensils@2x.png in Resources */,
 				3DCFBB1F18995B7700D5E64D /* 845-location-target.png in Resources */,
 				3DB193221908409D0075D01E /* icon_no_favs@2x.png in Resources */,
@@ -632,6 +647,7 @@
 				3DCFBB1918995B7700D5E64D /* 746-plus-circle@2x.png in Resources */,
 				3DCFBB2018995B7700D5E64D /* 849-radar@2x.png in Resources */,
 				3DB193201908409D0075D01E /* icon_edit@2x.png in Resources */,
+				3D36D2AD1922690A00B7AD8B /* icon_east@2x.png in Resources */,
 				3D49860117A16A5500CB2CF2 /* pointer.png in Resources */,
 				3D8DB35918575DD800DA2E6E /* README.md in Resources */,
 				3DB193211908409D0075D01E /* icon_no_connection@2x.png in Resources */,

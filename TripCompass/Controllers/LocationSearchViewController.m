@@ -1,6 +1,7 @@
 #import "LocationSearchViewController.h"
 #import "API.h"
 #import "CustomCell.h"
+#import "AppDelegate.h"
 
 @implementation LocationSearchViewController {
   CLLocationManager *locationManager;
@@ -19,8 +20,6 @@
   [super viewDidLoad];
   
   [self startTrackingLocation];
-  
-  self.navigationItem.rightBarButtonItem = self.closeButton;
   
   isSearching = NO;
   
@@ -138,6 +137,7 @@
       UIFontDescriptor *fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
       UIFontDescriptor *boldFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
       cell.placeLabel.font = [UIFont fontWithDescriptor:boldFontDescriptor size:0.f];
+      cell.placeLabel.textColor = customMagentaColor;
       
       cell.detailLabel.text = @"You are here";
     }

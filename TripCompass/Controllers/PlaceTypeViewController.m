@@ -33,8 +33,12 @@
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     if (([cell.textLabel.text isEqualToString:self.placeType])) {
-      cell.accessoryType = UITableViewCellAccessoryCheckmark;
+      UIFontDescriptor *fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+      UIFontDescriptor *boldFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+      
+      cell.textLabel.font = [UIFont fontWithDescriptor:boldFontDescriptor size:0.f];
       cell.textLabel.textColor = customMagentaColor;
+      cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
       cell.accessoryType = UITableViewCellAccessoryNone;
     }

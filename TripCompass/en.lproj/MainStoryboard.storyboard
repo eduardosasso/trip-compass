@@ -75,7 +75,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Location" id="zFa-2F-jgF">
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="sRt-Cz-kQj">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="stop" id="sRt-Cz-kQj">
                             <connections>
                                 <action selector="closeButtonClick:" destination="XuH-Xh-SDA" id="TAI-lT-8Tf"/>
                             </connections>
@@ -148,15 +148,15 @@
                         <sections>
                             <tableViewSection id="S1X-jP-keg">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="viY-Fw-xDx" style="IBUITableViewCellStyleDefault" id="5QO-kg-BGu">
-                                        <rect key="frame" x="0.0" y="99" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="viY-Fw-xDx" rowHeight="60" style="IBUITableViewCellStyleDefault" id="5QO-kg-BGu">
+                                        <rect key="frame" x="0.0" y="99" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5QO-kg-BGu" id="nFE-eR-vqG">
-                                            <rect key="frame" x="0.0" y="0.0" width="281" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="281" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="All" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="viY-Fw-xDx">
-                                                    <rect key="frame" x="15" y="0.0" width="266" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="266" height="59"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -165,15 +165,15 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="C6e-bl-rlj" style="IBUITableViewCellStyleDefault" id="Imz-oZ-6rZ">
-                                        <rect key="frame" x="0.0" y="143" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="C6e-bl-rlj" rowHeight="60" style="IBUITableViewCellStyleDefault" id="Imz-oZ-6rZ">
+                                        <rect key="frame" x="0.0" y="159" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Imz-oZ-6rZ" id="5zR-ws-lae">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Attractions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C6e-bl-rlj">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="59"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -182,15 +182,15 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3SG-BR-b9B" style="IBUITableViewCellStyleDefault" id="5Fk-yX-VX6">
-                                        <rect key="frame" x="0.0" y="187" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3SG-BR-b9B" rowHeight="60" style="IBUITableViewCellStyleDefault" id="5Fk-yX-VX6">
+                                        <rect key="frame" x="0.0" y="219" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Fk-yX-VX6" id="sGr-pc-jsf">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Hotels" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3SG-BR-b9B">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="59"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -199,15 +199,15 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Lz3-EY-rJR" style="IBUITableViewCellStyleDefault" id="iAi-gr-YJd">
-                                        <rect key="frame" x="0.0" y="231" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Lz3-EY-rJR" rowHeight="60" style="IBUITableViewCellStyleDefault" id="iAi-gr-YJd">
+                                        <rect key="frame" x="0.0" y="279" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iAi-gr-YJd" id="sS7-Yw-8b6">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Restaurants" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lz3-EY-rJR">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="59"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -225,7 +225,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Filter" id="ho9-s8-9YK">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="stop" id="QFQ-d4-Z8W">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="stop" id="QFQ-d4-Z8W">
                             <connections>
                                 <action selector="closeButtonClicked:" destination="ZPe-eU-Rnb" id="Cav-I8-0AI"/>
                             </connections>
