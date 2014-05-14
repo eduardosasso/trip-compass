@@ -18,7 +18,7 @@
 @implementation CompassViewController {
   CLLocationManager *locationManager;
   NSString *selectedLocation;
-  float GeoAngle;
+  float geoAngle;
   AppDelegate *appDelegate;
 }
 
@@ -36,6 +36,10 @@
   
   appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
   self.managedObjectContext = [appDelegate managedObjectContext];
+  
+  UIImage *img = [[self.compassImage image] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  self.compassImage.image = img;
+  self.compassImage.tintColor = [UIColor redColor];
 
   //hide toolbar
   [self.tabBarController.tabBar setTranslucent:YES];
@@ -75,7 +79,7 @@
   
   self.distanceLabel.text = [self.place formattedDistanceTo:self.currentLocation.coordinate];
   
-  GeoAngle = [Util setLatLonForDistanceAndAngle:self.currentLocation.coordinate toCoordinate:[self.place getCoordinate]];
+  geoAngle = [Util setLatLonForDistanceAndAngle:self.currentLocation.coordinate toCoordinate:[self.place getCoordinate]];
 }
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateHeading:(CLHeading*)newHeading {
@@ -104,7 +108,25 @@
     
     [self.compassImage layoutIfNeeded];
     
-    self.compassImage.transform = CGAffineTransformMakeRotation((direction* M_PI / 180)+ GeoAngle);
+//    NSLog(@"DIRECTION mpi : %f", direction);
+    
+//    DIRECTION mpi : -4.433422
+//    ANGLE : 4.397930
+    
+    float orientationDirection = fabsf(geoAngle - fabsf((direction* M_PI / 180)));
+    
+    if (orientationDirection > 0 && orientationDirection < 0.30) {
+      self.compassImage.tintColor = [UIColor greenColor];
+      self.distanceLabel.textColor = [UIColor greenColor];
+    } else {
+      self.compassImage.tintColor = [UIColor redColor];
+      self.distanceLabel.textColor = [UIColor redColor];
+    }
+    
+    NSLog(@"DIRECTION mpi : %f", fabsf((direction* M_PI / 180)));
+    NSLog(@"ANGLE : %f", geoAngle);
+    
+    self.compassImage.transform = CGAffineTransformMakeRotation((direction* M_PI / 180) + geoAngle);
     
   }
 }
