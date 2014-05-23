@@ -92,7 +92,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   BOOL noMoreResults = apiResults && [apiResults count] == 0;
   
-  if (noMoreResults || (isSearching && [apiResults count] > 0)) {
+  if (noMoreResults || [apiResults count] > 0) {
     return results.count;
   } else {
     //+1 for the loading cell
@@ -133,13 +133,16 @@
     cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
     [cell.favoriteImage setHidden:YES];
     
-    if (!isSearching && indexPath.row == 0) {
+    if ([place.name isEqual:@"Current Location"]) {
       UIFontDescriptor *fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
       UIFontDescriptor *boldFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
       cell.placeLabel.font = [UIFont fontWithDescriptor:boldFontDescriptor size:0.f];
       cell.placeLabel.textColor = customMagentaColor;
       
       cell.detailLabel.text = @"You are here";
+    } else {
+      cell.placeLabel.font = nil;
+      cell.placeLabel.textColor = nil;
     }
     
     return cell;

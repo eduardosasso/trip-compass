@@ -12,6 +12,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 #define customMagentaColor [UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:126.0/255.0 alpha:1]
+#define customGreenColor [UIColor colorWithRed:0 green:1 blue:0 alpha:1]
+#define customRedColor [UIColor colorWithRed:1 green:0.231 blue:0.188 alpha:1]
 
 @property (strong, nonatomic) UIWindow *window;
 

@@ -16,7 +16,6 @@
   self.tableView.rowHeight = 60;
 
   noFavoritesView = [[NoFavoritesView alloc] init];
-//  [self.view addSubview:noFavoritesView];
   [self.navigationController.view addSubview:noFavoritesView];
 }
 

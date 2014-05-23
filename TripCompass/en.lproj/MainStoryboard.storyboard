@@ -259,10 +259,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200 ft" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6a-qb-hAF">
-                                <rect key="frame" x="20" y="505" width="280" height="43"/>
+                                <rect key="frame" x="99" y="505" width="123" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <color key="textColor" red="0.21960785984992981" green="0.96862751245498657" blue="0.22745099663734436" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3061 La Selva Street apartment 211, San Mateo CA 94403 United States of America" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="tvI-dY-vX3">
@@ -273,7 +273,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compass_arrow_gray.png" translatesAutoresizingMaskIntoConstraints="NO" id="p0W-62-roa">
-                                <rect key="frame" x="74" y="162" width="172" height="88"/>
+                                <rect key="frame" x="74" y="162" width="172" height="89"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -282,11 +282,11 @@
                             <constraint firstItem="DhE-mF-UP1" firstAttribute="leading" secondItem="tvI-dY-vX3" secondAttribute="leading" id="DA3-fH-1hq"/>
                             <constraint firstAttribute="centerY" secondItem="p0W-62-roa" secondAttribute="centerY" constant="78" id="IS6-r8-WRU"/>
                             <constraint firstAttribute="bottom" secondItem="H6a-qb-hAF" secondAttribute="bottom" constant="20" id="JCN-VB-cSP"/>
-                            <constraint firstItem="H6a-qb-hAF" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="20" id="KuO-4F-sS2"/>
+                            <constraint firstItem="H6a-qb-hAF" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="99" id="KuO-4F-sS2"/>
                             <constraint firstItem="tvI-dY-vX3" firstAttribute="top" secondItem="DhE-mF-UP1" secondAttribute="bottom" constant="8" id="Kwg-OX-Uem"/>
                             <constraint firstItem="H6a-qb-hAF" firstAttribute="top" secondItem="tvI-dY-vX3" secondAttribute="bottom" constant="27" id="M5n-S2-ftS"/>
                             <constraint firstAttribute="trailing" secondItem="tvI-dY-vX3" secondAttribute="trailing" constant="20" id="XF1-5H-nnq"/>
-                            <constraint firstAttribute="trailing" secondItem="H6a-qb-hAF" secondAttribute="trailing" constant="20" id="p6P-7Z-8vw"/>
+                            <constraint firstAttribute="trailing" secondItem="H6a-qb-hAF" secondAttribute="trailing" constant="98" id="p6P-7Z-8vw"/>
                             <constraint firstAttribute="centerX" secondItem="p0W-62-roa" secondAttribute="centerX" id="z8o-5f-yrq"/>
                             <constraint firstItem="tvI-dY-vX3" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="20" id="zIn-s2-bJe"/>
                         </constraints>

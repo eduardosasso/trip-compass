@@ -1,4 +1,4 @@
-//
+
 //  MainViewController.m
 //  TripCompass
 //
@@ -10,6 +10,7 @@
 #import "PlaceModel.h"
 #import "Util.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface CompassViewController () <CLLocationManagerDelegate, UIAlertViewDelegate>
   
@@ -20,6 +21,8 @@
   NSString *selectedLocation;
   float geoAngle;
   AppDelegate *appDelegate;
+  NSTimer *searchTimer;
+  bool animationRunning;
 }
 
 - (void)viewDidLoad {
@@ -44,12 +47,15 @@
   //hide toolbar
   [self.tabBarController.tabBar setTranslucent:YES];
   [self.tabBarController.tabBar setHidden:YES];
+  
+  animationRunning = FALSE;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   //hide navigation bar bottom border
   [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
   [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
+  self.distanceLabel.textColor = customRedColor;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -84,56 +90,100 @@
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateHeading:(CLHeading*)newHeading {
   if (newHeading.headingAccuracy > 0) {
-//    float magneticHeading = newHeading.magneticHeading;
-    //float trueHeading = newHeading.trueHeading;
-    
-//    float heading = -1.0f * M_PI * magneticHeading / 180.0f;
-    //image.transform = CGAffineTransformMakeRotation(heading);
-//    self.compassImage.transform = CGAffineTransformScale(self.compassImage.transform, 0.5, 0.5);
-//    self.compassImage.transform = CGAffineTransformMakeRotation(heading);
-    
-
-//      float bearing = [Util getHeadingForDirectionFromCoordinate:self.currentLocation.coordinate toCoordinate:[self.place getCoordinate]];
-//      float bearing = [Util setLatLonForDistanceAndAngle:self.currentLocation.coordinate toCoordinate:[self.place getCoordinate]];
-//      float destinationHeading =  heading - bearing;
-//      self.compassImage.transform = CGAffineTransformScale(self.compassImage.transform, 0.5, 0.5);
-//    self.needleImage.transform = CGAffineTransformMakeRotation(destinationHeading);
-      float direction = -newHeading.trueHeading;
-    
-//    self.compassImage.autoresizingMask = UIViewAutoresizingNone;
-//     self.compassImage.center = self.view.center;
-    
+    float direction = -newHeading.trueHeading;
     NSString *directionName = [Util getHeadingDirectionName:newHeading];
     self.navigationItem.title = [NSString stringWithFormat:@"%@", directionName];
     
     [self.compassImage layoutIfNeeded];
     
-//    NSLog(@"DIRECTION mpi : %f", direction);
-    
-//    DIRECTION mpi : -4.433422
-//    ANGLE : 4.397930
-    
     float orientationDirection = fabsf(geoAngle - fabsf((direction* M_PI / 180)));
     
+    UIColor *previousTintColor = self.compassImage.tintColor;
+    
     if (orientationDirection > 0 && orientationDirection < 0.30) {
-      self.compassImage.tintColor = [UIColor greenColor];
-      self.distanceLabel.textColor = [UIColor greenColor];
+      self.compassImage.tintColor = customGreenColor;
+      self.distanceLabel.textColor = customGreenColor;
     } else {
-      self.compassImage.tintColor = [UIColor redColor];
-      self.distanceLabel.textColor = [UIColor redColor];
+      self.compassImage.tintColor = customRedColor;
+      self.distanceLabel.textColor = customRedColor;
     }
     
-    NSLog(@"DIRECTION mpi : %f", fabsf((direction* M_PI / 180)));
-    NSLog(@"ANGLE : %f", geoAngle);
+    if (![previousTintColor isEqual:self.compassImage.tintColor]) {
+      CATransition *transitionAnimation = [CATransition animation];
+      [transitionAnimation setType:kCATransitionFade];
+      [transitionAnimation setDuration:0.2f];
+      [self.compassImage.layer addAnimation:transitionAnimation forKey:@"fadeAnimation"];
+//      [self.distanceLabel.layer addAnimation:transitionAnimation forKey:@"fadeAnimation"];
+      
+//      UIColor *color = self.distanceLabel.textColor;
+//      self.distanceLabel.layer.shadowColor = [color CGColor];
+//      self.distanceLabel.layer.shadowRadius = 4.0f;
+//      self.distanceLabel.layer.shadowOpacity = .9;
+//      self.distanceLabel.layer.shadowOffset = CGSizeZero;
+//      self.distanceLabel.layer.masksToBounds = NO;
+    }
     
+
+    self.distanceLabel.layer.backgroundColor = [UIColor whiteColor].CGColor;
+//    UILabel *originalDistanceLabel = self.distanceLabel;
+    // distance is returned in meters by default
+//    if ([self.place distanceTo:self.currentLocation.coordinate] <= 150) {
+    
+//      [UIView animateWithDuration:2.0 animations:^{
+//        self.distanceLabel.layer.backgroundColor = [UIColor greenColor].CGColor;
+//      } completion:NULL];
+//    self.distanceLabel.layer.backgroundColor = customGreenColor.CGColor;
+//    self.distanceLabel.textColor = [UIColor colorWithWhite:1 alpha:1];
+//    self.distanceLabel.layer.cornerRadius = 3;
+//    self.distanceLabel.layer.masksToBounds = YES;
+//    self.distanceLabel.textColor = [UIColor colorWithWhite:1 alpha:0];
+    if (!animationRunning) {
+      animationRunning = TRUE;
+      [NSTimer scheduledTimerWithTimeInterval:2 target:self
+                                     selector:@selector(searchTimerPopped:)
+                                     userInfo:nil
+                                      repeats:TRUE];
+    }
+
     self.compassImage.transform = CGAffineTransformMakeRotation((direction* M_PI / 180) + geoAngle);
-    
   }
 }
-
-- (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager {
-  return YES;
+      
+-(void) searchTimerPopped:(NSTimer *)timer {
+  [UIView transitionWithView:self.distanceLabel duration:1 options:UIViewAnimationOptionCurveLinear animations:^{
+    self.distanceLabel.layer.backgroundColor = customGreenColor.CGColor;
+    self.distanceLabel.layer.cornerRadius = 3;
+    self.distanceLabel.layer.masksToBounds = YES;
+    self.distanceLabel.textColor = [UIColor whiteColor];
+  } completion:^(BOOL finished){
+    self.distanceLabel.layer.backgroundColor = [UIColor whiteColor].CGColor;
+      self.distanceLabel.textColor = customGreenColor;
+  }];
+  
+//  [UIView animateWithDuration:0.6
+//                        delay:0.2
+//                      options:(UIViewAnimationOptionCurveEaseIn)
+//                   animations:^{
+//  self.distanceLabel.textColor = [UIColor colorWithWhite:1 alpha:1];
+//                   } completion:^(BOOL finished) {
+//                     if (finished) {
+//                       [UIView animateWithDuration:1
+////                                             delay:0
+////                                           options:(UIViewAnimationOptionCurveEaseOut)
+//                                        animations:^{
+////                                          self.distanceLabel.layer.backgroundColor = [UIColor whiteColor].CGColor;
+////                                          self.distanceLabel.textColor = customGreenColor;
+//                                          self.distanceLabel.textColor = [UIColor colorWithWhite:1 alpha:0.3];
+//                                        } completion:^(BOOL finished) {
+//                                          
+//                                        }];
+//                     }
+//                   }];
 }
+
+//- (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager {
+//  return YES;
+//}
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
 //  TODO show message to detect gps is off
