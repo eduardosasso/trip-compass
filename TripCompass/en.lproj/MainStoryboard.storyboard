@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="HJl-0M-0Et">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="HJl-0M-0Et">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <development version="5000" identifier="xcode"/>
@@ -282,11 +282,11 @@
                             <constraint firstItem="DhE-mF-UP1" firstAttribute="leading" secondItem="tvI-dY-vX3" secondAttribute="leading" id="DA3-fH-1hq"/>
                             <constraint firstAttribute="centerY" secondItem="p0W-62-roa" secondAttribute="centerY" constant="78" id="IS6-r8-WRU"/>
                             <constraint firstAttribute="bottom" secondItem="H6a-qb-hAF" secondAttribute="bottom" constant="20" id="JCN-VB-cSP"/>
-                            <constraint firstItem="H6a-qb-hAF" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="99" id="KuO-4F-sS2"/>
                             <constraint firstItem="tvI-dY-vX3" firstAttribute="top" secondItem="DhE-mF-UP1" secondAttribute="bottom" constant="8" id="Kwg-OX-Uem"/>
                             <constraint firstItem="H6a-qb-hAF" firstAttribute="top" secondItem="tvI-dY-vX3" secondAttribute="bottom" constant="27" id="M5n-S2-ftS"/>
+                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="H6a-qb-hAF" secondAttribute="trailing" constant="98" id="PrJ-tK-55K"/>
                             <constraint firstAttribute="trailing" secondItem="tvI-dY-vX3" secondAttribute="trailing" constant="20" id="XF1-5H-nnq"/>
-                            <constraint firstAttribute="trailing" secondItem="H6a-qb-hAF" secondAttribute="trailing" constant="98" id="p6P-7Z-8vw"/>
+                            <constraint firstItem="H6a-qb-hAF" firstAttribute="leading" relation="lessThanOrEqual" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="99" id="j4G-zf-laJ"/>
                             <constraint firstAttribute="centerX" secondItem="p0W-62-roa" secondAttribute="centerX" id="z8o-5f-yrq"/>
                             <constraint firstItem="tvI-dY-vX3" firstAttribute="leading" secondItem="ZIg-OX-jpw" secondAttribute="leading" constant="20" id="zIn-s2-bJe"/>
                         </constraints>
