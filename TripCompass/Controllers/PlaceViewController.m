@@ -174,7 +174,13 @@
   Place *place = [Place convertFromDictionary:[results objectAtIndex:indexPath.row] withCity:city];
 
   cell.placeLabel.text = place.name;
-  cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
+
+  if (!placeType || [placeType isEqualToString:@"All"]) {
+    cell.detailLabel.text = [NSString stringWithFormat:@"%@ %@ %@", [place formattedDistanceTo:currentLocation.coordinate], @"‑", place.type];
+  } else {
+    cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
+  }
+  
   cell.tag = indexPath.row;
   
   if ([place saved]) {
@@ -183,9 +189,6 @@
     cell.placeLabel.textColor = nil;
   }
 
-//  cell.delegate = self;
-  
-//  [cell setPlaceWithLocation:place location:currentLocation];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -212,20 +215,20 @@
   return prototypeCell;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//  if (indexPath.row < results.count) {
-//    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
-//    [self.prototypeCell layoutIfNeeded];
-//    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];
-//    return size.height+1;
-//  } else {
-//    return self.tableView.rowHeight;
-//  }
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.row < results.count) {
+    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
+    [self.prototypeCell layoutIfNeeded];
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];
+    return size.height+1;
+  } else {
+    return tableView.rowHeight;
+  }
+}
 
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//  return UITableViewAutomaticDimension;
-//}
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return tableView.rowHeight;
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
   //load more records if at the bottom of the page
@@ -254,6 +257,7 @@
   isSearching = NO;
   
   [self resetTableView];
+  [self.tableView reloadData];
   [self requestUpdateTableViewData:selectedLocation];
 }
 
@@ -386,12 +390,16 @@
   }
 
   if ([segue.destinationViewController respondsToSelector:@selector(setPlace:)]) {
-    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    NSIndexPath *path = [[self currentTableView] indexPathForSelectedRow];
     Place *selectedPlace = [Place convertFromDictionary:[results objectAtIndex:path.row] withCity:city];
     
     [segue.destinationViewController performSelector:@selector(setPlace:)
                                           withObject:selectedPlace];
   }
+}
+
+- (UITableView *)currentTableView {
+  return isSearching ? self.searchDisplayController.searchResultsTableView : self.tableView;
 }
 
 #pragma mark CustomCell Delegate

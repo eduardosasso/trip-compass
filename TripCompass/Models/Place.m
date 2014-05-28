@@ -52,6 +52,7 @@
   place.lat = [NSNumber numberWithDouble:[place_lat doubleValue]];
   place.lng = [NSNumber numberWithDouble:[place_lng doubleValue]];
   place.city = city;
+  place.type = [dictionary objectForKey:@"type"];
   
   return place;
 }

@@ -40,6 +40,7 @@
   
   NSURL *url = [NSURL URLWithString:api];
   
+  //TODO remove NSLog for production
   NSLog(@"API: %@", url);
   
   NSURLRequest *request = [GogobotSignature requestWithSignature:[NSURLRequest requestWithURL:url]];

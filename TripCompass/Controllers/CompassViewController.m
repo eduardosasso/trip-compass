@@ -24,6 +24,15 @@
   
   bool nearbyAnimationRunning;
   bool nearbyAnimationToggle;
+  
+  UIColor *currentColor;
+  
+  float direction;
+  float orientationDirection;
+  
+  bool isGoingRightWay;
+  bool isNearDestination;
+  NSTimer* nearbyTimer;
 }
 
 - (void)viewDidLoad {
@@ -51,6 +60,8 @@
   
   nearbyAnimationRunning = FALSE;
   nearbyAnimationToggle = FALSE;
+  
+//  [locationManager setHeadingFilter:2];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -92,25 +103,26 @@
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateHeading:(CLHeading*)newHeading {
   if (newHeading.headingAccuracy > 0) {
-    float direction = -newHeading.trueHeading;
-    float orientationDirection = fabsf(geoAngle - fabsf((direction* M_PI / 180)));
+    direction = -newHeading.trueHeading;
+    orientationDirection = fabsf(geoAngle - fabsf((direction* M_PI / 180)));
+
+    isGoingRightWay = orientationDirection > 0 && orientationDirection < 0.30;
     
-    bool isGoingRightWay = orientationDirection > 0 && orientationDirection < 0.30;
+    //TODO move this to updatelocations and increase the distance on notifications
     // distance is returned in meters by default
-    bool isNearDestination = [self.place distanceTo:self.currentLocation.coordinate] <= 400;
-    
+    isNearDestination = [self.place distanceTo:self.currentLocation.coordinate] <= 150;
+
     self.navigationItem.title = [NSString stringWithFormat:@"%@", [Util getHeadingDirectionName:newHeading]];
-    
-    UIColor *currentColor = (isGoingRightWay || isNearDestination) ? customGreenColor : customRedColor;
+
+    currentColor = (isGoingRightWay || isNearDestination) ? customGreenColor : customRedColor;
     self.compassImage.tintColor = currentColor;
     self.distanceLabel.textColor = currentColor;
-    
+  
     [self.compassImage layoutIfNeeded];
     
     //Move the compass to where you should go
-    self.compassImage.transform = CGAffineTransformMakeRotation((direction* M_PI / 180) + geoAngle);
-    
-    NSTimer* nearbyTimer;
+    self.compassImage.transform = CGAffineTransformMakeRotation((direction * M_PI / 180) + geoAngle);
+
     if (isNearDestination) {
       nearbyTimer = [self nearbyTimerAnimation];
     } else {
@@ -122,15 +134,15 @@
 }
 
 - (NSTimer *)nearbyTimerAnimation {
-  NSTimer* nearbyTimer;
+  NSTimer* timer;
   if (!nearbyAnimationRunning) {
     nearbyAnimationRunning = TRUE;
-    nearbyTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(30.0 / 60.0) target:self
+    timer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(30.0 / 60.0) target:self
                                                  selector:@selector(nearbyTimerAnimation:)
                                                  userInfo:nil
                                                   repeats:TRUE];
   }
-  return nearbyTimer;
+  return timer;
 }
 
 - (void)nearbyTimerAnimation:(NSTimer *)timer {
@@ -145,10 +157,6 @@
     nearbyAnimationToggle = true;
   }
   
-//  [UIView transitionWithView:self.distanceLabel duration:1 options:UIViewAnimationOptionCurveLinear animations:^{
-//    
-//  } completion:^(BOOL finished){
-//  }];
 }
 
 - (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager {
@@ -156,7 +164,7 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-//  TODO show message to detect gps is off
+  // TODO show message to detect gps is off
   NSLog(@"Can't report heading");
 }
 
