@@ -1,4 +1,5 @@
 #import "BookmarkItemViewController.h"
+#import "BookmarkItemCell.h"
 #import "PlaceDataManager.h"
 
 @implementation BookmarkItemViewController {
@@ -7,13 +8,13 @@
   CLLocationManager *locationManager;
   CLLocation *currentLocation;
   
-  CustomCell *prototypeCell;
+  BookmarkItemCell *prototypeCell;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
+  [self.tableView registerNib:[UINib nibWithNibName:@"BookmarkItemCell" bundle:nil] forCellReuseIdentifier:@"bookmarkItemCell"];
   self.tableView.rowHeight = 60;
 }
 
@@ -67,7 +68,7 @@
   return places.count;
 }
 
-- (void)configureCell:(CustomCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(BookmarkItemCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
   PlaceModel *placeModel = [places objectAtIndex:indexPath.row];
   
   Place *place = [[Place alloc] init];
@@ -78,19 +79,18 @@
   
   cell.placeLabel.text = place.name;
   cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
-  [cell.favoriteImage setHidden:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  CustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
+  BookmarkItemCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"bookmarkItemCell"];
   [self configureCell:cell forRowAtIndexPath:indexPath];
   
   return cell;
 }
 
-- (CustomCell *)prototypeCell {
+- (BookmarkItemCell *)prototypeCell {
   if (!prototypeCell) {
-    prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"customCell"];
+    prototypeCell = [self.tableView dequeueReusableCellWithIdentifier:@"bookmarkItemCell"];
   }
   return prototypeCell;
 }

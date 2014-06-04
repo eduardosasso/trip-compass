@@ -32,7 +32,6 @@
   
   bool isGoingRightWay;
   bool isNearDestination;
-  NSTimer* nearbyTimer;
 }
 
 - (void)viewDidLoad {
@@ -84,12 +83,20 @@
   locationManager = [[CLLocationManager alloc] init];
   locationManager.delegate = self;
   locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+  locationManager.distanceFilter = 50;
   
-  if( [CLLocationManager locationServicesEnabled] &&  [CLLocationManager headingAvailable]) {
+  if([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
     [locationManager startUpdatingLocation];
     [locationManager startUpdatingHeading];
   } else {
-    //TODO test this scenario. Upsell to enable location
+    UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"Location services disabled"
+                                                  message:@"Trip Compass needs access to your location. Please turn on Location Services in your device settings."
+                                                 delegate:self
+                                        cancelButtonTitle:@"Ok"
+                                        otherButtonTitles:nil];
+    [alert show];
+    
+    
   }
 }
 
@@ -99,6 +106,17 @@
   self.distanceLabel.text = [self.place formattedDistanceTo:self.currentLocation.coordinate];
   
   geoAngle = [Util setLatLonForDistanceAndAngle:self.currentLocation.coordinate toCoordinate:[self.place getCoordinate]];
+  
+  // distance is returned in meters by default
+  isNearDestination = [self.place distanceTo:self.currentLocation.coordinate] <= 150;
+  NSTimer* nearbyTimer;
+  if (isNearDestination) {
+    nearbyTimer = [self nearbyTimerAnimation];
+  } else {
+    [nearbyTimer invalidate];
+    self.distanceLabel.backgroundColor = [UIColor whiteColor];
+    self.distanceLabel.textColor = currentColor;
+  }
 }
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateHeading:(CLHeading*)newHeading {
@@ -108,10 +126,6 @@
 
     isGoingRightWay = orientationDirection > 0 && orientationDirection < 0.30;
     
-    //TODO move this to updatelocations and increase the distance on notifications
-    // distance is returned in meters by default
-    isNearDestination = [self.place distanceTo:self.currentLocation.coordinate] <= 150;
-
     self.navigationItem.title = [NSString stringWithFormat:@"%@", [Util getHeadingDirectionName:newHeading]];
 
     currentColor = (isGoingRightWay || isNearDestination) ? customGreenColor : customRedColor;
@@ -122,14 +136,6 @@
     
     //Move the compass to where you should go
     self.compassImage.transform = CGAffineTransformMakeRotation((direction * M_PI / 180) + geoAngle);
-
-    if (isNearDestination) {
-      nearbyTimer = [self nearbyTimerAnimation];
-    } else {
-      [nearbyTimer invalidate];
-      self.distanceLabel.backgroundColor = [UIColor whiteColor];
-      self.distanceLabel.textColor = currentColor;
-    }
   }
 }
 
@@ -184,6 +190,10 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+  if([title isEqualToString:@"Ok"]) {
+    [self.navigationController popViewControllerAnimated:YES];
+  }
+  
   if([title isEqualToString:@"Save"]) {
     NSString *name = [alertView textFieldAtIndex:0].text;
     

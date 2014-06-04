@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *placeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *favoriteImage;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameWidthConstraint;
 - (void)setup;
 
 //- (void)setPlaceWithLocation:(Place *)selectedPlace location:(CLLocation *)location;

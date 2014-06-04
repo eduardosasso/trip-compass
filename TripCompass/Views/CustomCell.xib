@@ -16,6 +16,9 @@
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Whole Foods Market" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1tt-4d-l3U">
                         <rect key="frame" x="15" y="10" width="250" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="4Su-DX-M5I"/>
+                        </constraints>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -45,6 +48,7 @@
                     <constraint firstItem="8Gg-yk-b3z" firstAttribute="top" secondItem="1tt-4d-l3U" secondAttribute="bottom" id="EIM-uc-Vtb"/>
                     <constraint firstItem="pha-57-zog" firstAttribute="leading" secondItem="1tt-4d-l3U" secondAttribute="trailing" constant="8" id="FLs-Ti-0Of"/>
                     <constraint firstItem="pha-57-zog" firstAttribute="top" secondItem="WHQ-fP-eT1" secondAttribute="top" constant="11" id="Ff9-xQ-jBB"/>
+                    <constraint firstAttribute="bottom" secondItem="8Gg-yk-b3z" secondAttribute="bottom" constant="10" id="Qbc-bq-ZVF"/>
                     <constraint firstItem="8Gg-yk-b3z" firstAttribute="leading" secondItem="1tt-4d-l3U" secondAttribute="leading" id="Viw-wV-uF2"/>
                     <constraint firstAttribute="trailing" secondItem="pha-57-zog" secondAttribute="trailing" id="ZXZ-i8-oHS"/>
                     <constraint firstAttribute="bottom" secondItem="pha-57-zog" secondAttribute="bottom" constant="10" id="kWf-rl-DeF"/>
@@ -55,6 +59,7 @@
             <connections>
                 <outlet property="detailLabel" destination="8Gg-yk-b3z" id="AIH-QD-E8t"/>
                 <outlet property="favoriteImage" destination="pha-57-zog" id="rbZ-6f-tW1"/>
+                <outlet property="nameWidthConstraint" destination="4Su-DX-M5I" id="f0c-ac-gMH"/>
                 <outlet property="placeLabel" destination="1tt-4d-l3U" id="Rkc-BY-0zh"/>
             </connections>
         </tableViewCell>

@@ -106,6 +106,8 @@
 		3DF62A9418576D970052D245 /* GAUITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF62A9318576D970052D245 /* GAUITableViewController.m */; };
 		3DF62A981858CAC00052D245 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF62A971858CAC00052D245 /* API.m */; };
 		3DF62A9B1860AAFE0052D245 /* NSString+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF62A9A1860AAFE0052D245 /* NSString+QueryString.m */; };
+		3DFB9028193F692800FE5DD8 /* BookmarkItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB9027193F692800FE5DD8 /* BookmarkItemCell.m */; };
+		3DFB902A193F693500FE5DD8 /* BookmarkItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB9029193F693500FE5DD8 /* BookmarkItemCell.xib */; };
 		A01548ADA0B341BEB2D8F853 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8ADDE2DB8744F0B935F7809 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -249,6 +251,9 @@
 		3DF62A971858CAC00052D245 /* API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
 		3DF62A991860AAFE0052D245 /* NSString+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+QueryString.h"; path = "TripCompass/Categories/NSString+QueryString.h"; sourceTree = SOURCE_ROOT; };
 		3DF62A9A1860AAFE0052D245 /* NSString+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+QueryString.m"; path = "TripCompass/Categories/NSString+QueryString.m"; sourceTree = SOURCE_ROOT; };
+		3DFB9026193F692800FE5DD8 /* BookmarkItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkItemCell.h; sourceTree = "<group>"; };
+		3DFB9027193F692800FE5DD8 /* BookmarkItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkItemCell.m; sourceTree = "<group>"; };
+		3DFB9029193F693500FE5DD8 /* BookmarkItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkItemCell.xib; sourceTree = "<group>"; };
 		71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E8ADDE2DB8744F0B935F7809 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -419,9 +424,12 @@
 			isa = PBXGroup;
 			children = (
 				3DE62CD11827FE7300FD7522 /* CustomCell.h */,
+				3DFB9026193F692800FE5DD8 /* BookmarkItemCell.h */,
+				3DFB9027193F692800FE5DD8 /* BookmarkItemCell.m */,
 				3DE62CD21827FE7300FD7522 /* CustomCell.m */,
 				3DB281C71827F7AE008C7B82 /* CustomCell.xib */,
 				3D76BECF1853A2FC002FD16F /* BookmarkCell.xib */,
+				3DFB9029193F693500FE5DD8 /* BookmarkItemCell.xib */,
 				3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */,
 				3DAC8C3B18B12F1900E78C17 /* NoInternetView.h */,
 				3DAC8C3C18B12F1900E78C17 /* NoInternetView.m */,
@@ -632,6 +640,7 @@
 				3D7B199518F834B700CCDE21 /* compass_arrow_yellow@2x.png in Resources */,
 				3D49860017A16A5500CB2CF2 /* numbers.png in Resources */,
 				3D24E08718C6384300127A6B /* 726-star-selected@2x.png in Resources */,
+				3DFB902A193F693500FE5DD8 /* BookmarkItemCell.xib in Resources */,
 				3DB19327190E99A30075D01E /* NoFavoritesView.xib in Resources */,
 				3D7B198F18F43DC500CCDE21 /* icon_tabbar_navbar_list_starred_default@2x.png in Resources */,
 				3DB19329191038D80075D01E /* icon_4@2x.png in Resources */,
@@ -731,6 +740,7 @@
 				3D8E2CEF178EF4AD00AA0F0D /* PlaceViewController.m in Sources */,
 				3DB19325190E99220075D01E /* NoFavoritesView.m in Sources */,
 				3DA654AA179D7B4A00424430 /* Util.m in Sources */,
+				3DFB9028193F692800FE5DD8 /* BookmarkItemCell.m in Sources */,
 				3DAC8C3D18B12F1900E78C17 /* NoInternetView.m in Sources */,
 				3D4E6B59187C551700454293 /* NSString+URLEncoding.m in Sources */,
 				3D4E6B56187C548600454293 /* NSDictionary+QueryString.m in Sources */,

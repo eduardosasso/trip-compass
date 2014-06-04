@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+extern const int RESULTS_PER_PAGE;
+
 @protocol APIDelegate <NSObject>
 - (void)didReceiveAPIResults:(NSDictionary *)dictionary;
 @end

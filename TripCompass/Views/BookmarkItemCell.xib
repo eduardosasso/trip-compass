@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="bookmarkItemCell" id="zev-dn-1sJ" customClass="BookmarkItemCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zev-dn-1sJ" id="Yam-c8-Uhd">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Whole Foods Market" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="285" translatesAutoresizingMaskIntoConstraints="NO" id="C2h-YU-SFC">
+                        <rect key="frame" x="15" y="10" width="285" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="300ft" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kC-Ox-ftI">
+                        <rect key="frame" x="15" y="30" width="250" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="250" id="U9c-3J-OsM"/>
+                            <constraint firstAttribute="height" constant="18" id="Z2v-Yy-G5F"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="C2h-YU-SFC" firstAttribute="leading" secondItem="Yam-c8-Uhd" secondAttribute="leading" constant="15" id="MFB-EO-Oo8"/>
+                    <constraint firstItem="C2h-YU-SFC" firstAttribute="top" secondItem="Yam-c8-Uhd" secondAttribute="top" constant="10" id="QBu-jV-Ny9"/>
+                    <constraint firstAttribute="bottom" secondItem="1kC-Ox-ftI" secondAttribute="bottom" constant="11" id="bek-7x-2bN"/>
+                    <constraint firstItem="1kC-Ox-ftI" firstAttribute="top" secondItem="C2h-YU-SFC" secondAttribute="bottom" id="h6z-Yp-UpB"/>
+                    <constraint firstItem="C2h-YU-SFC" firstAttribute="leading" secondItem="1kC-Ox-ftI" secondAttribute="leading" id="rf4-rU-LlF"/>
+                    <constraint firstAttribute="trailing" secondItem="C2h-YU-SFC" secondAttribute="trailing" constant="20" symbolic="YES" id="saE-Mj-jrP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="detailLabel" destination="1kC-Ox-ftI" id="MUx-Y7-bcb"/>
+                <outlet property="placeLabel" destination="C2h-YU-SFC" id="k6k-Wk-dJo"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

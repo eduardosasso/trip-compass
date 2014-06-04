@@ -15,6 +15,8 @@
 #define NEARBY_ENDPOINT @"/search/nearby_search.json"
 #define REGIONS_ENDPOINT @"/search/regions.json"
 
+const int RESULTS_PER_PAGE = 20;
+
 @implementation API {
   double lat;
   double lng;
@@ -36,7 +38,11 @@
   
   NSString *api = BASE_URL;
   api = [api stringByAppendingString:endpoint];
-  api = [api stringByAppendingFormat:@"?%@", [params queryStringValue]];
+  
+  NSMutableDictionary *allParams = [NSMutableDictionary dictionaryWithDictionary:params];
+  [allParams setObject:[NSString stringWithFormat:@"%d", RESULTS_PER_PAGE] forKey:@"per_page"];
+  
+  api = [api stringByAppendingFormat:@"?%@", [allParams queryStringValue]];
   
   NSURL *url = [NSURL URLWithString:api];
   

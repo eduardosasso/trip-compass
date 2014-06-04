@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-#import "CustomCell.h"
+#import <CoreLocation/CoreLocation.h>
 #import "GAUITableViewController.h"
 
 @interface BookmarkItemViewController : GAUITableViewController <CLLocationManagerDelegate>

@@ -130,6 +130,7 @@
   }];
   
   [self resetTableView];
+  [self.tableView reloadData];
   [self requestUpdateTableViewData:selectedLocation];
 }
 
@@ -159,8 +160,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//  BOOL noMoreResults = (page > 1 && results.count == 0) || (apiResults && [apiResults count] == 0);
-  BOOL noMoreResults = apiResults && [apiResults count] == 0;
+  BOOL noMoreResults = apiResults && [apiResults count] < RESULTS_PER_PAGE;
   
   if (noMoreResults || (isSearching && [apiResults count] > 0)) {
     return results.count;
@@ -219,7 +219,7 @@
   if (indexPath.row < results.count) {
     [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
     [self.prototypeCell layoutIfNeeded];
-    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return size.height+1;
   } else {
     return tableView.rowHeight;
@@ -299,7 +299,7 @@
   locationManager.desiredAccuracy = kCLLocationAccuracyBest;
   locationManager.distanceFilter = 100;
 
-   if([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+  if([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
    [locationManager startUpdatingLocation];
   } else {
     UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"Location services disabled"
@@ -307,6 +307,8 @@
                                                  delegate:nil
                                         cancelButtonTitle:@"Ok"
                                         otherButtonTitles:nil];
+    [self resetTableView];
+    [self.tableView reloadData];
     [alert show];
   }
   [self.refreshControl endRefreshing];
