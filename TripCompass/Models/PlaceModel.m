@@ -23,6 +23,7 @@
 @dynamic name;
 @dynamic state;
 @dynamic distance;
+@dynamic type;
 
 - (void)awakeFromInsert {
   [super awakeFromInsert];

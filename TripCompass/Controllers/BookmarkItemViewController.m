@@ -76,9 +76,10 @@
   place.address = placeModel.address;
   place.lat = placeModel.lat;
   place.lng = placeModel.lng;
+  place.type = placeModel.type;
   
   cell.placeLabel.text = place.name;
-  cell.detailLabel.text = [place formattedDistanceTo:currentLocation.coordinate];
+  cell.detailLabel.text = [NSString stringWithFormat:@"%@ %@ %@", [place formattedDistanceTo:currentLocation.coordinate], @"‑", place.type];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

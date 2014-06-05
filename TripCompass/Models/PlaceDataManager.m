@@ -12,8 +12,6 @@
 @implementation PlaceDataManager
 
 + (BOOL)create:(Place *)place {
-  NSError *error;
-  
   PlaceModel *placeModel = [NSEntityDescription insertNewObjectForEntityForName:@"PlaceModel" inManagedObjectContext:self.managedObjectContext];
   placeModel.key = place.key;
   
@@ -21,20 +19,14 @@
   placeModel.address = [place.address isKindOfClass:[NSNull class]] ? nil :place.address;
   placeModel.lat = place.lat;
   placeModel.lng = place.lng;
-  //TODO see if this will be available when saving a checkpoint offline
   placeModel.country = place.country;
   placeModel.state = place.state;
   placeModel.city = place.city;
+  placeModel.type = place.type;
   
   placeModel.checkpoint = place.checkpoint;
   
-  if ([self.managedObjectContext save:&error]) {
-    return YES;
-  } else {
-    NSLog(error);
-    //TODO do something with the error
-    return NO;
-  }
+  return [self.managedObjectContext save:nil];
 }
 
 //TODO change to destroyById
