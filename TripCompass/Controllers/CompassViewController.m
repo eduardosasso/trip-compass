@@ -51,7 +51,7 @@
   
   UIImage *img = [[self.compassImage image] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   self.compassImage.image = img;
-  self.compassImage.tintColor = [UIColor redColor];
+  self.compassImage.tintColor = customMagentaColor;
 
   //hide toolbar
   [self.tabBarController.tabBar setTranslucent:YES];
@@ -61,13 +61,14 @@
   nearbyAnimationToggle = FALSE;
   
 //  [locationManager setHeadingFilter:2];
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   //hide navigation bar bottom border
   [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
   [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
-  self.distanceLabel.textColor = customRedColor;
+  self.distanceLabel.textColor = customMagentaColor;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -126,9 +127,11 @@
 
     isGoingRightWay = orientationDirection > 0 && orientationDirection < 0.30;
     
-    self.navigationItem.title = [NSString stringWithFormat:@"%@", [Util getHeadingDirectionName:newHeading]];
+    NSString *headingName = [NSString stringWithFormat:@"icon_%@.png", [Util getHeadingDirectionName:newHeading]];
+    UIImage* logoImage = [UIImage imageNamed:[headingName lowercaseString]];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:logoImage];
 
-    currentColor = (isGoingRightWay || isNearDestination) ? customGreenColor : customRedColor;
+    currentColor = (isGoingRightWay || isNearDestination) ? customGreenColor : customMagentaColor;
     self.compassImage.tintColor = currentColor;
     self.distanceLabel.textColor = currentColor;
   
