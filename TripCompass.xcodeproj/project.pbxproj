@@ -76,6 +76,7 @@
 		3DB8FAF0184F950A005853D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB8FAEF184F950A005853D6 /* SystemConfiguration.framework */; };
 		3DB8FAFA1850E524005853D6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB8FAF91850E524005853D6 /* CoreTelephony.framework */; };
 		3DB8FAFB1850E537005853D6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB8FAED184F94C0005853D6 /* libz.dylib */; };
+		3DCF5305194B9BD6008B52B9 /* icon_navbar_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCF5304194B9BD6008B52B9 /* icon_navbar_back@2x.png */; };
 		3DCFBB1318995B7700D5E64D /* 715-globe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCFBB0318995B7700D5E64D /* 715-globe@2x.png */; };
 		3DCFBB1418995B7700D5E64D /* 721-bookmarks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCFBB0418995B7700D5E64D /* 721-bookmarks@2x.png */; };
 		3DCFBB1518995B7700D5E64D /* 724-info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCFBB0518995B7700D5E64D /* 724-info@2x.png */; };
@@ -94,6 +95,8 @@
 		3DCFBB2218995B7700D5E64D /* 881-globe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCFBB1218995B7700D5E64D /* 881-globe@2x.png */; };
 		3DD30D9218C2434C00CA941E /* compass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DD30D9118C2434C00CA941E /* compass@2x.png */; };
 		3DD30D9418C4E2EE00CA941E /* 726-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DD30D9318C4E2EE00CA941E /* 726-star@2x.png */; };
+		3DD316D71942082D00CAB768 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DD316D61942082D00CAB768 /* LoadingView.xib */; };
+		3DD316DA1946018F00CAB768 /* CompassCustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD316D91946018F00CAB768 /* CompassCustomSegue.m */; };
 		3DD371AF18FD8D120077AA4D /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD371AE18FD8D120077AA4D /* MainNavigationController.m */; };
 		3DD93F2E1787A6F1003908A7 /* CompassHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD93F2D1787A6F1003908A7 /* CompassHelper.m */; };
 		3DDBDFE2184CEA5F00C48C08 /* MainUITabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDBDFE1184CEA5F00C48C08 /* MainUITabBarController.m */; };
@@ -107,9 +110,10 @@
 		3DF62A981858CAC00052D245 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF62A971858CAC00052D245 /* API.m */; };
 		3DF62A9B1860AAFE0052D245 /* NSString+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF62A9A1860AAFE0052D245 /* NSString+QueryString.m */; };
 		3DFB9028193F692800FE5DD8 /* BookmarkItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB9027193F692800FE5DD8 /* BookmarkItemCell.m */; };
-		3DFB902A193F693500FE5DD8 /* BookmarkItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB9029193F693500FE5DD8 /* BookmarkItemCell.xib */; };
 		3DFB902D1940AFDB00FE5DD8 /* compass_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB902B1940AFDB00FE5DD8 /* compass_arrow@2x.png */; };
 		3DFB902E1940AFDB00FE5DD8 /* powered_by_ggb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB902C1940AFDB00FE5DD8 /* powered_by_ggb@2x.png */; };
+		3DFB90331942069900FE5DD8 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB90321942069900FE5DD8 /* LoadingView.m */; };
+		3DFB9035194206B800FE5DD8 /* BookmarkItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB9034194206B800FE5DD8 /* BookmarkItemCell.xib */; };
 		A01548ADA0B341BEB2D8F853 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8ADDE2DB8744F0B935F7809 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -214,6 +218,7 @@
 		3DB8FAEF184F950A005853D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3DB8FAF3184F964F005853D6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		3DB8FAF91850E524005853D6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3DCF5304194B9BD6008B52B9 /* icon_navbar_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_navbar_back@2x.png"; sourceTree = "<group>"; };
 		3DCFBB0318995B7700D5E64D /* 715-globe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "715-globe@2x.png"; sourceTree = "<group>"; };
 		3DCFBB0418995B7700D5E64D /* 721-bookmarks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "721-bookmarks@2x.png"; sourceTree = "<group>"; };
 		3DCFBB0518995B7700D5E64D /* 724-info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "724-info@2x.png"; sourceTree = "<group>"; };
@@ -232,6 +237,9 @@
 		3DCFBB1218995B7700D5E64D /* 881-globe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "881-globe@2x.png"; sourceTree = "<group>"; };
 		3DD30D9118C2434C00CA941E /* compass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compass@2x.png"; sourceTree = "<group>"; };
 		3DD30D9318C4E2EE00CA941E /* 726-star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "726-star@2x.png"; sourceTree = "<group>"; };
+		3DD316D61942082D00CAB768 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		3DD316D81946018F00CAB768 /* CompassCustomSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompassCustomSegue.h; sourceTree = "<group>"; };
+		3DD316D91946018F00CAB768 /* CompassCustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompassCustomSegue.m; sourceTree = "<group>"; };
 		3DD371AD18FD8D120077AA4D /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainNavigationController.h; path = TripCompass/Controllers/MainNavigationController.h; sourceTree = SOURCE_ROOT; };
 		3DD371AE18FD8D120077AA4D /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainNavigationController.m; path = TripCompass/Controllers/MainNavigationController.m; sourceTree = SOURCE_ROOT; };
 		3DD93F2C1787A6F1003908A7 /* CompassHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompassHelper.h; sourceTree = "<group>"; };
@@ -255,9 +263,11 @@
 		3DF62A9A1860AAFE0052D245 /* NSString+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+QueryString.m"; path = "TripCompass/Categories/NSString+QueryString.m"; sourceTree = SOURCE_ROOT; };
 		3DFB9026193F692800FE5DD8 /* BookmarkItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkItemCell.h; sourceTree = "<group>"; };
 		3DFB9027193F692800FE5DD8 /* BookmarkItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkItemCell.m; sourceTree = "<group>"; };
-		3DFB9029193F693500FE5DD8 /* BookmarkItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkItemCell.xib; sourceTree = "<group>"; };
 		3DFB902B1940AFDB00FE5DD8 /* compass_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compass_arrow@2x.png"; sourceTree = "<group>"; };
 		3DFB902C1940AFDB00FE5DD8 /* powered_by_ggb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "powered_by_ggb@2x.png"; sourceTree = "<group>"; };
+		3DFB90311942069900FE5DD8 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		3DFB90321942069900FE5DD8 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		3DFB9034194206B800FE5DD8 /* BookmarkItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkItemCell.xib; sourceTree = "<group>"; };
 		71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E8ADDE2DB8744F0B935F7809 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -427,19 +437,24 @@
 		3D76BEC818539902002FD16F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3DE62CD11827FE7300FD7522 /* CustomCell.h */,
+				3D76BECF1853A2FC002FD16F /* BookmarkCell.xib */,
 				3DFB9026193F692800FE5DD8 /* BookmarkItemCell.h */,
 				3DFB9027193F692800FE5DD8 /* BookmarkItemCell.m */,
+				3DFB9034194206B800FE5DD8 /* BookmarkItemCell.xib */,
+				3DE62CD11827FE7300FD7522 /* CustomCell.h */,
 				3DE62CD21827FE7300FD7522 /* CustomCell.m */,
 				3DB281C71827F7AE008C7B82 /* CustomCell.xib */,
-				3D76BECF1853A2FC002FD16F /* BookmarkCell.xib */,
-				3DFB9029193F693500FE5DD8 /* BookmarkItemCell.xib */,
-				3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */,
 				3DAC8C3B18B12F1900E78C17 /* NoInternetView.h */,
 				3DAC8C3C18B12F1900E78C17 /* NoInternetView.m */,
+				3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */,
 				3DB19323190E99220075D01E /* NoFavoritesView.h */,
 				3DB19324190E99220075D01E /* NoFavoritesView.m */,
 				3DB19326190E99A30075D01E /* NoFavoritesView.xib */,
+				3DFB90311942069900FE5DD8 /* LoadingView.h */,
+				3DFB90321942069900FE5DD8 /* LoadingView.m */,
+				3DD316D61942082D00CAB768 /* LoadingView.xib */,
+				3DD316D81946018F00CAB768 /* CompassCustomSegue.h */,
+				3DD316D91946018F00CAB768 /* CompassCustomSegue.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -500,6 +515,7 @@
 				3D24E08618C6384300127A6B /* 726-star-selected@2x.png */,
 				3DD30D9318C4E2EE00CA941E /* 726-star@2x.png */,
 				3DD30D9118C2434C00CA941E /* compass@2x.png */,
+				3DCF5304194B9BD6008B52B9 /* icon_navbar_back@2x.png */,
 				3D177EB918A53BB100DB599A /* Default-568h@2x.png */,
 				3D177EBA18A53BB100DB599A /* Default.png */,
 				3D177EBB18A53BB100DB599A /* Default@2x.png */,
@@ -618,6 +634,7 @@
 				3DCFBB1818995B7700D5E64D /* 745-unlocked@2x.png in Resources */,
 				3D0F70A118986FE500CAA80A /* 937-wifi-signal@2x.png in Resources */,
 				3DCFBB1C18995B7700D5E64D /* 784-target@2x.png in Resources */,
+				3DFB9035194206B800FE5DD8 /* BookmarkItemCell.xib in Resources */,
 				3DCFBB1E18995B7700D5E64D /* 791-warning@2x.png in Resources */,
 				3D7B198E18F43DC500CCDE21 /* icon_tabbar_navbar_list_starred_active@2x.png in Resources */,
 				3DCFBB1518995B7700D5E64D /* 724-info@2x.png in Resources */,
@@ -647,11 +664,12 @@
 				3D7B199518F834B700CCDE21 /* compass_arrow_yellow@2x.png in Resources */,
 				3D49860017A16A5500CB2CF2 /* numbers.png in Resources */,
 				3D24E08718C6384300127A6B /* 726-star-selected@2x.png in Resources */,
-				3DFB902A193F693500FE5DD8 /* BookmarkItemCell.xib in Resources */,
 				3DB19327190E99A30075D01E /* NoFavoritesView.xib in Resources */,
 				3D7B198F18F43DC500CCDE21 /* icon_tabbar_navbar_list_starred_default@2x.png in Resources */,
+				3DCF5305194B9BD6008B52B9 /* icon_navbar_back@2x.png in Resources */,
 				3DB19329191038D80075D01E /* icon_4@2x.png in Resources */,
 				3DCFBB1A18995B7700D5E64D /* 752-credit-card@2x.png in Resources */,
+				3DD316D71942082D00CAB768 /* LoadingView.xib in Resources */,
 				3DD30D9218C2434C00CA941E /* compass@2x.png in Resources */,
 				3DAC8C3A18AE75E400E78C17 /* NoInternetView.xib in Resources */,
 				3DD30D9418C4E2EE00CA941E /* 726-star@2x.png in Resources */,
@@ -739,6 +757,7 @@
 				3DF62A9418576D970052D245 /* GAUITableViewController.m in Sources */,
 				3D6276101781C65B00A4B675 /* AppDelegate.m in Sources */,
 				3D62761F1781C65B00A4B675 /* CompassViewController.m in Sources */,
+				3DFB90331942069900FE5DD8 /* LoadingView.m in Sources */,
 				3D5CBCE018634A2B009BFDAD /* GogobotSignature.m in Sources */,
 				3DD93F2E1787A6F1003908A7 /* CompassHelper.m in Sources */,
 				3DF62A9B1860AAFE0052D245 /* NSString+QueryString.m in Sources */,
@@ -750,6 +769,7 @@
 				3DA654AA179D7B4A00424430 /* Util.m in Sources */,
 				3DFB9028193F692800FE5DD8 /* BookmarkItemCell.m in Sources */,
 				3DAC8C3D18B12F1900E78C17 /* NoInternetView.m in Sources */,
+				3DD316DA1946018F00CAB768 /* CompassCustomSegue.m in Sources */,
 				3D4E6B59187C551700454293 /* NSString+URLEncoding.m in Sources */,
 				3D4E6B56187C548600454293 /* NSDictionary+QueryString.m in Sources */,
 				3DD371AF18FD8D120077AA4D /* MainNavigationController.m in Sources */,

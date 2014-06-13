@@ -10,6 +10,7 @@
 #import "PlaceModel.h"
 #import "Util.h"
 #import "AppDelegate.h"
+#import "LoadingView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface CompassViewController () <CLLocationManagerDelegate, UIAlertViewDelegate>
@@ -28,10 +29,13 @@
   UIColor *currentColor;
   
   float direction;
-  float orientationDirection;
+  float directionPointing;
+  float directionToGo;
   
   bool isGoingRightWay;
   bool isNearDestination;
+  
+  LoadingView *loadingView;
 }
 
 - (void)viewDidLoad {
@@ -53,22 +57,40 @@
   self.compassImage.image = img;
   self.compassImage.tintColor = customMagentaColor;
 
+  nearbyAnimationRunning = FALSE;
+  nearbyAnimationToggle = FALSE;
+  
+  [locationManager setHeadingFilter:.5];
+  
+  loadingView = [[LoadingView alloc] init];
+  [self.navigationController.view addSubview:loadingView];
+  
   //hide toolbar
   [self.tabBarController.tabBar setTranslucent:YES];
   [self.tabBarController.tabBar setHidden:YES];
   
-  nearbyAnimationRunning = FALSE;
-  nearbyAnimationToggle = FALSE;
-  
-//  [locationManager setHeadingFilter:2];
-  
+  [self.navigationController.navigationBar setBackIndicatorImage:
+   [UIImage imageNamed:@"icon_navbar_back"]];
+  [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:
+   [UIImage imageNamed:@"icon_navbar_back"]];
+}
+
+- (void)toggleLoadingView:(BOOL)visible showTip:(BOOL)tip {
+    [loadingView setHidden:!visible];
+    [self.view setHidden:visible];
+    [loadingView.tipLabel setHidden:!tip];
+    
+    if (visible) [self.navigationController.view bringSubviewToFront:loadingView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   //hide navigation bar bottom border
   [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
   [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
+
   self.distanceLabel.textColor = customMagentaColor;
+  
+  [self toggleLoadingView:YES showTip:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -77,6 +99,7 @@
   [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
   //show the tabbar back when changing screens
   [self.tabBarController.tabBar setHidden:NO];
+  [self toggleLoadingView:NO showTip:NO];
 }
 
 #pragma mark Location Manager
@@ -109,7 +132,7 @@
   geoAngle = [Util setLatLonForDistanceAndAngle:self.currentLocation.coordinate toCoordinate:[self.place getCoordinate]];
   
   // distance is returned in meters by default
-  isNearDestination = [self.place distanceTo:self.currentLocation.coordinate] <= 150;
+  isNearDestination = [self.place distanceTo:self.currentLocation.coordinate] <= 180;
   NSTimer* nearbyTimer;
   if (isNearDestination) {
     nearbyTimer = [self nearbyTimerAnimation];
@@ -118,14 +141,17 @@
     self.distanceLabel.backgroundColor = [UIColor whiteColor];
     self.distanceLabel.textColor = currentColor;
   }
+  
 }
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateHeading:(CLHeading*)newHeading {
   if (newHeading.headingAccuracy > 0) {
     direction = -newHeading.trueHeading;
-    orientationDirection = fabsf(geoAngle - fabsf((direction* M_PI / 180)));
+    directionToGo = (direction * M_PI / 180) + geoAngle;
+    
+    directionPointing = fabsf(geoAngle - fabsf((direction* M_PI / 180)));
 
-    isGoingRightWay = orientationDirection > 0 && orientationDirection < 0.30;
+    isGoingRightWay = directionPointing >= 0 && directionPointing <= 0.5;
     
     NSString *headingName = [NSString stringWithFormat:@"icon_%@.png", [Util getHeadingDirectionName:newHeading]];
     UIImage* logoImage = [UIImage imageNamed:[headingName lowercaseString]];
@@ -135,10 +161,14 @@
     self.compassImage.tintColor = currentColor;
     self.distanceLabel.textColor = currentColor;
   
-    [self.compassImage layoutIfNeeded];
+//    [self.compassImage layoutIfNeeded];
     
     //Move the compass to where you should go
-    self.compassImage.transform = CGAffineTransformMakeRotation((direction * M_PI / 180) + geoAngle);
+    [UIView animateWithDuration:1 animations:^{
+      self.compassImage.transform = CGAffineTransformMakeRotation(directionToGo);
+    }];
+    
+    [self toggleLoadingView:NO showTip:NO];
   }
 }
 
@@ -173,8 +203,7 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-  // TODO show message to detect gps is off
-  NSLog(@"Can't report heading");
+  [self toggleLoadingView:YES showTip:YES];
 }
 
 - (IBAction)checkpointAction:(id)sender {
@@ -209,6 +238,10 @@
     place.city = @"Checkpoints";
     
     [place save];
+    
+    int badgeValue = [[[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue intValue];
+    ++badgeValue;
+    [[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = [NSString stringWithFormat: @"%d", badgeValue];
   }
 }
 

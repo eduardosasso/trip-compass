@@ -8,7 +8,10 @@
 #import "CustomCell.h"
 #import "API.h"
 
-@interface PlaceViewController : GAUITableViewController <CLLocationManagerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, APIDelegate, PlaceTypeDelegate, LocationSearchDelegate, CustomCellDelegate>
+@interface PlaceViewController : GAUITableViewController <CLLocationManagerDelegate,
+                                                          UISearchDisplayDelegate,
+                                                          UISearchBarDelegate,
+                                                          APIDelegate, PlaceTypeDelegate, LocationSearchDelegate, CustomCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *plainView;
 @property (weak, nonatomic) IBOutlet UILabel *windowTitle;

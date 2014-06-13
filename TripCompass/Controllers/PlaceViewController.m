@@ -247,9 +247,9 @@
   
   if ([cell isKindOfClass:CustomCell.class]) {
     [self performSegueWithIdentifier:@"CompassViewController" sender:self];
-  } else {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
   }
+  
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark Search
@@ -355,8 +355,11 @@
 }
 
 - (void)internetConnectionDidChange:(NSNotification *)notification {
-  internetConnection = (Reachability *)[notification object];
-  [self toggleInternetView:[internetConnection isReachable]];
+  NSString *currentView = NSStringFromClass([[self.navigationController topViewController] class]);
+  if ([currentView isEqual:@"PlaceViewController"]) {
+    internetConnection = (Reachability *)[notification object];
+    [self toggleInternetView:[internetConnection isReachable]];
+  }
 }
 
 - (void)toggleInternetView:(BOOL)connected {
@@ -370,7 +373,7 @@
 #pragma mark Undefined
 
 - (NSString *)googleAnalyticsScreenName {
-  return @"PlaceViewController";
+  return NSStringFromClass([self class]);
 }
 
 #pragma mark Segue

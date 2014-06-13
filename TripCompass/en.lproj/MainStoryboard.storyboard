@@ -327,7 +327,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="RNm-zP-7nb"/>
                     <connections>
-                        <segue destination="VTE-dE-fwI" kind="push" identifier="CompassViewController" id="gaT-rY-Plr"/>
+                        <segue destination="VTE-dE-fwI" kind="custom" identifier="CompassViewController" customClass="CompassCustomSegue" id="gaT-rY-Plr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wq-Qv-vju" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -483,7 +483,7 @@
                         <outlet property="verticalSpaceConstraint" destination="aKU-yn-Hmn" id="2rg-up-8DX"/>
                         <outlet property="windowSubtitle" destination="3pI-li-fhs" id="0FK-Dh-FLR"/>
                         <outlet property="windowTitle" destination="RXw-y3-3Bd" id="wMU-1q-ZHC"/>
-                        <segue destination="VTE-dE-fwI" kind="push" identifier="CompassViewController" id="yLR-kX-2CM"/>
+                        <segue destination="VTE-dE-fwI" kind="custom" identifier="CompassViewController" customClass="CompassCustomSegue" id="yLR-kX-2CM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amD-0q-1El" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -555,6 +555,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="yLR-kX-2CM"/>
+        <segue reference="gaT-rY-Plr"/>
     </inferredMetricsTieBreakers>
 </document>
