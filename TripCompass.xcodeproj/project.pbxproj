@@ -893,10 +893,7 @@
 			baseConfigurationReference = 71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/eduardosasso/Dropbox/TripCompass,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripCompass/TripCompass-Prefix.pch";
 				INFOPLIST_FILE = "TripCompass/TripCompass-Info.plist";
@@ -914,10 +911,7 @@
 			baseConfigurationReference = 71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/eduardosasso/Dropbox/TripCompass,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripCompass/TripCompass-Prefix.pch";
 				INFOPLIST_FILE = "TripCompass/TripCompass-Info.plist";

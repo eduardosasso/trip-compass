@@ -72,7 +72,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Location" id="zFa-2F-jgF">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="stop" id="sRt-Cz-kQj">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="stop" id="sRt-Cz-kQj">
                             <connections>
                                 <action selector="closeButtonClick:" destination="XuH-Xh-SDA" id="TAI-lT-8Tf"/>
                             </connections>
@@ -222,7 +222,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Filter" id="ho9-s8-9YK">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="stop" id="QFQ-d4-Z8W">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="stop" id="QFQ-d4-Z8W">
                             <connections>
                                 <action selector="closeButtonClicked:" destination="ZPe-eU-Rnb" id="Cav-I8-0AI"/>
                             </connections>
@@ -555,6 +555,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gaT-rY-Plr"/>
+        <segue reference="yLR-kX-2CM"/>
     </inferredMetricsTieBreakers>
 </document>
