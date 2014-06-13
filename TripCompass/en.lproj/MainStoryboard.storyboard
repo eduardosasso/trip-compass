@@ -292,7 +292,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Loading..." id="JuQ-K2-Aw9">
-                        <barButtonItem key="rightBarButtonItem" image="726-star.png" style="plain" id="Upl-Cp-eyq">
+                        <barButtonItem key="rightBarButtonItem" image="726-star.png" style="done" id="Upl-Cp-eyq">
                             <connections>
                                 <action selector="checkpointAction:" destination="VTE-dE-fwI" id="slN-id-GVQ"/>
                             </connections>
