@@ -25,4 +25,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *compassImage;
 - (IBAction)checkpointAction:(id)sender;
 
+
 @end

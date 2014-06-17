@@ -40,7 +40,7 @@
   
   [self resetTableView];
   [self startTrackingLocation];
-  [self checkInternetConnection];
+//  [self checkInternetConnection];
   
   [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
   
@@ -48,6 +48,10 @@
   self.searchDisplayController.searchResultsTableView.rowHeight = 60;
   
   isSearching = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [self checkInternetConnection];
 }
 
 #pragma mark API
@@ -247,6 +251,8 @@
   
   if ([cell isKindOfClass:CustomCell.class]) {
     [self performSegueWithIdentifier:@"CompassViewController" sender:self];
+  } else {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/app/gogobot/id459590827?mt=8&ls=1"]];
   }
   
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -355,11 +361,8 @@
 }
 
 - (void)internetConnectionDidChange:(NSNotification *)notification {
-  NSString *currentView = NSStringFromClass([[self.navigationController topViewController] class]);
-  if ([currentView isEqual:@"PlaceViewController"]) {
-    internetConnection = (Reachability *)[notification object];
-    [self toggleInternetView:[internetConnection isReachable]];
-  }
+  internetConnection = (Reachability *)[notification object];
+  [self toggleInternetView:[internetConnection isReachable]];
 }
 
 - (void)toggleInternetView:(BOOL)connected {
@@ -379,8 +382,17 @@
 #pragma mark Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  UIViewController *destination = segue.destinationViewController;
+  
+  if([[segue identifier] isEqualToString:@"CompassViewController"]) {
+    UINavigationController *dest = (UINavigationController *)segue.destinationViewController;
+    
+    CompassViewController *compassViewController = (CompassViewController *)dest.topViewController;
+    destination = compassViewController;
+  }
+  
   if([[segue identifier] isEqualToString:@"PlaceTypeViewController"]) {
-    PlaceTypeViewController * placeTypeViewController = (PlaceTypeViewController *)[segue.destinationViewController topViewController];
+    PlaceTypeViewController *placeTypeViewController = (PlaceTypeViewController *)[segue.destinationViewController topViewController];
     //register this class as a delegate so it will receive events defined in the delegate class
     [placeTypeViewController setDelegate:self];
     
@@ -389,16 +401,16 @@
   }
   
   if([[segue identifier] isEqualToString:@"LocationSearchViewController"]) {
-    LocationSearchViewController * locationSearchViewController = (LocationSearchViewController *)[segue.destinationViewController topViewController];
+    LocationSearchViewController *locationSearchViewController = (LocationSearchViewController *)[segue.destinationViewController topViewController];
     //register this class as a delegate so it will receive events defined in the delegate class
     [locationSearchViewController setDelegate:self];
   }
 
-  if ([segue.destinationViewController respondsToSelector:@selector(setPlace:)]) {
+  if ([destination respondsToSelector:@selector(setPlace:)]) {
     NSIndexPath *path = [[self currentTableView] indexPathForSelectedRow];
     Place *selectedPlace = [Place convertFromDictionary:[results objectAtIndex:path.row] withCity:city];
     
-    [segue.destinationViewController performSelector:@selector(setPlace:)
+    [destination performSelector:@selector(setPlace:)
                                           withObject:selectedPlace];
   }
 }

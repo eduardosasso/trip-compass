@@ -4,6 +4,7 @@
 #import "Place.h"
 #import "PlaceTypeViewController.h"
 #import "LocationSearchViewController.h"
+#import "CompassViewController.h"
 #import "GAUITableViewController.h"
 #import "CustomCell.h"
 #import "API.h"

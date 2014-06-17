@@ -167,8 +167,10 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
   } else {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/app/gogobot/id459590827?mt=8&ls=1"]];
   }
+  
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (IBAction)closeButtonClick:(id)sender {

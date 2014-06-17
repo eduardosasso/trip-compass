@@ -16,6 +16,11 @@
   
   [self.tableView registerNib:[UINib nibWithNibName:@"BookmarkItemCell" bundle:nil] forCellReuseIdentifier:@"bookmarkItemCell"];
   self.tableView.rowHeight = 60;
+  
+  [self.navigationController.navigationBar setBackIndicatorImage:
+   [UIImage imageNamed:@"icon_navbar_back"]];
+  [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:
+   [UIImage imageNamed:@"icon_navbar_back"]];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -126,9 +131,8 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
   [self performSegueWithIdentifier:@"CompassViewController" sender:self];
-  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -141,8 +145,10 @@
   place.lat = placeModel.lat;
   place.lng = placeModel.lng;
   
-  [segue.destinationViewController performSelector:@selector(setPlace:)
-                                        withObject:place];
+  UINavigationController *navigation = (UINavigationController *)segue.destinationViewController;
+  
+  [navigation.topViewController performSelector:@selector(setPlace:)
+                                     withObject:place];
 }
 
 -(NSString *)googleAnalyticsScreenName {

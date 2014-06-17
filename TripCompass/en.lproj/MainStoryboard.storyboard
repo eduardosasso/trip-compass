@@ -292,7 +292,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Loading..." id="JuQ-K2-Aw9">
-                        <barButtonItem key="rightBarButtonItem" image="726-star.png" style="done" id="Upl-Cp-eyq">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="stop" id="c6p-3X-yjf">
+                            <connections>
+                                <action selector="closeButtonClick:" destination="VTE-dE-fwI" id="Dky-5g-Ncc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="icon_tabbar_navbar_list_starred_default.png" style="done" id="Upl-Cp-eyq">
                             <connections>
                                 <action selector="checkpointAction:" destination="VTE-dE-fwI" id="slN-id-GVQ"/>
                             </connections>
@@ -301,15 +306,15 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
-                        <outlet property="addressLabel" destination="tvI-dY-vX3" id="Ho1-Sg-ViS"/>
+                        <outlet property="addressLabel" destination="tvI-dY-vX3" id="cfR-mV-X1b"/>
                         <outlet property="compassImage" destination="p0W-62-roa" id="yxo-nk-04E"/>
-                        <outlet property="distanceLabel" destination="H6a-qb-hAF" id="Qj2-5u-VeV"/>
-                        <outlet property="placeNameLabel" destination="DhE-mF-UP1" id="VNM-gI-DAl"/>
+                        <outlet property="distanceLabel" destination="H6a-qb-hAF" id="OTc-cf-uYQ"/>
+                        <outlet property="placeNameLabel" destination="DhE-mF-UP1" id="2hB-gG-A7b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fFX-dk-sZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1684" y="1000"/>
+            <point key="canvasLocation" x="-1158" y="1000"/>
         </scene>
         <!--Bookmark Item View Controller-->
         <scene sceneID="5Dg-rN-ASW">
@@ -327,7 +332,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="RNm-zP-7nb"/>
                     <connections>
-                        <segue destination="VTE-dE-fwI" kind="custom" identifier="CompassViewController" customClass="CompassCustomSegue" id="gaT-rY-Plr"/>
+                        <segue destination="y5u-kd-gYv" kind="modal" identifier="CompassViewController" customClass="CompassCustomSegue" modalTransitionStyle="coverVertical" id="gaT-rY-Plr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wq-Qv-vju" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -358,7 +363,7 @@
         <scene sceneID="TpH-rR-fnK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sGY-t2-daj" customClass="MainNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Places" image="729-top-list.png" id="EGk-eK-pTR"/>
+                    <tabBarItem key="tabBarItem" title="Places" image="places.png" id="EGk-eK-pTR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gb6-zL-bgX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -373,11 +378,11 @@
             </objects>
             <point key="canvasLocation" x="-3312" y="110"/>
         </scene>
-        <!--Navigation Controller - Favorites-->
+        <!--Navigation Controller-->
         <scene sceneID="WBU-OX-ptg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Lm-lS-Kqj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" image="726-star.png" id="Inc-Vb-0yx"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="Inc-Vb-0yx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zi3-Gf-rug">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -483,7 +488,7 @@
                         <outlet property="verticalSpaceConstraint" destination="aKU-yn-Hmn" id="2rg-up-8DX"/>
                         <outlet property="windowSubtitle" destination="3pI-li-fhs" id="0FK-Dh-FLR"/>
                         <outlet property="windowTitle" destination="RXw-y3-3Bd" id="wMU-1q-ZHC"/>
-                        <segue destination="VTE-dE-fwI" kind="custom" identifier="CompassViewController" customClass="CompassCustomSegue" id="yLR-kX-2CM"/>
+                        <segue destination="y5u-kd-gYv" kind="modal" identifier="CompassViewController" customClass="CompassCustomSegue" modalTransitionStyle="coverVertical" id="yLR-kX-2CM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amD-0q-1El" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -540,13 +545,31 @@
             </objects>
             <point key="canvasLocation" x="-2064" y="110"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JUr-R2-4d3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="y5u-kd-gYv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kmV-dO-N6y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VTE-dE-fwI" kind="relationship" relationship="rootViewController" id="hnM-3C-HLJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jt0-8Q-JRE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1684" y="1000"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="726-star.png" width="28" height="26"/>
-        <image name="729-top-list.png" width="28" height="22"/>
         <image name="compass_arrow.png" width="207" height="109"/>
         <image name="current_location.png" width="22" height="21"/>
         <image name="icon_filter_default.png" width="22" height="21"/>
+        <image name="icon_tabbar_navbar_list_starred_default.png" width="22" height="21"/>
+        <image name="places.png" width="28" height="22"/>
         <image name="powered_by_ggb.png" width="119" height="18"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -555,6 +578,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="yLR-kX-2CM"/>
+        <segue reference="gaT-rY-Plr"/>
     </inferredMetricsTieBreakers>
 </document>

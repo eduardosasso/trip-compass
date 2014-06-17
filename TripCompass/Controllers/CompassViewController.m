@@ -62,25 +62,25 @@
   
   [locationManager setHeadingFilter:.5];
   
-  loadingView = [[LoadingView alloc] init];
-  [self.navigationController.view addSubview:loadingView];
-  
-  //hide toolbar
-  [self.tabBarController.tabBar setTranslucent:YES];
-  [self.tabBarController.tabBar setHidden:YES];
-  
-  [self.navigationController.navigationBar setBackIndicatorImage:
-   [UIImage imageNamed:@"icon_navbar_back"]];
-  [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:
-   [UIImage imageNamed:@"icon_navbar_back"]];
+  loadingView = [[LoadingView alloc] initWithFrame:self.view.frame];
+  [self.view addSubview:loadingView];
+}
+
+- (IBAction)closeButtonClick:(id)sender {
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)toggleLoadingView:(BOOL)visible showTip:(BOOL)tip {
-    [loadingView setHidden:!visible];
-    [self.view setHidden:visible];
-    [loadingView.tipLabel setHidden:!tip];
-    
-    if (visible) [self.navigationController.view bringSubviewToFront:loadingView];
+  [loadingView setHidden:!visible];
+  [loadingView.tipLabel setHidden:!tip];
+  
+  [self.navigationItem.rightBarButtonItem setEnabled:!visible];
+  
+  if (visible) {
+    [self.view bringSubviewToFront:loadingView];
+  } else {
+    [self.view sendSubviewToBack:loadingView];
+  }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -91,15 +91,6 @@
   self.distanceLabel.textColor = customMagentaColor;
   
   [self toggleLoadingView:YES showTip:NO];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-  //show navigation bar bottom border for other views when leaving
-  [self.navigationController.navigationBar setShadowImage:nil];
-  [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-  //show the tabbar back when changing screens
-  [self.tabBarController.tabBar setHidden:NO];
-  [self toggleLoadingView:NO showTip:NO];
 }
 
 #pragma mark Location Manager
@@ -142,6 +133,7 @@
     self.distanceLabel.textColor = currentColor;
   }
   
+  [self toggleLoadingView:NO showTip:NO];
 }
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateHeading:(CLHeading*)newHeading {
@@ -167,8 +159,6 @@
     [UIView animateWithDuration:1 animations:^{
       self.compassImage.transform = CGAffineTransformMakeRotation(directionToGo);
     }];
-    
-    [self toggleLoadingView:NO showTip:NO];
   }
 }
 
@@ -238,10 +228,6 @@
     place.city = @"Checkpoints";
     
     [place save];
-    
-    int badgeValue = [[[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue intValue];
-    ++badgeValue;
-    [[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = [NSString stringWithFormat: @"%d", badgeValue];
   }
 }
 
