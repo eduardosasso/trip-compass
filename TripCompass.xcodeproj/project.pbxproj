@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D06D78118D9DD8B00145A02 /* PlaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D06D78018D9DD8B00145A02 /* PlaceModel.m */; };
-		3D0F70831896C17F00CAA80A /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0F70821896C17F00CAA80A /* TestViewController.m */; };
+		3D116DE019539AB800331B49 /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 3D116DDF19539AB800331B49 /* LICENSE.md */; };
 		3D177EBC18A53BB100DB599A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D177EB918A53BB100DB599A /* Default-568h@2x.png */; };
 		3D177EBD18A53BB100DB599A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D177EBA18A53BB100DB599A /* Default.png */; };
 		3D177EBE18A53BB100DB599A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D177EBB18A53BB100DB599A /* Default@2x.png */; };
@@ -38,12 +38,10 @@
 		3D62762C1781C65B00A4B675 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6275FF1781C65B00A4B675 /* Foundation.framework */; };
 		3D62762D1781C65B00A4B675 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6276031781C65B00A4B675 /* CoreData.framework */; };
 		3D6276351781C65B00A4B675 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D6276331781C65B00A4B675 /* InfoPlist.strings */; };
-		3D6276381781C65B00A4B675 /* TripCompassTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6276371781C65B00A4B675 /* TripCompassTests.m */; };
 		3D6276421781C7A000A4B675 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6276411781C7A000A4B675 /* CoreLocation.framework */; };
 		3D76BECD1853A0D8002FD16F /* TripCompass.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D76BECB1853A0D8002FD16F /* TripCompass.xcdatamodeld */; };
 		3D76BED01853A2FC002FD16F /* BookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D76BECF1853A2FC002FD16F /* BookmarkCell.xib */; };
 		3D8DB35918575DD800DA2E6E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3D8DB35818575DD800DA2E6E /* README.md */; };
-		3D8E2CE61787B44900AA0F0D /* CompassHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8E2CE51787B44900AA0F0D /* CompassHelperTests.m */; };
 		3D8E2CEF178EF4AD00AA0F0D /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8E2CEE178EF4AD00AA0F0D /* PlaceViewController.m */; };
 		3DA654AA179D7B4A00424430 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA654A9179D7B4A00424430 /* Util.m */; };
 		3DAC8C3A18AE75E400E78C17 /* NoInternetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DAC8C3918AE75E400E78C17 /* NoInternetView.xib */; };
@@ -64,10 +62,6 @@
 		3DCF5312194F2D52008B52B9 /* icon_tabbar_navbar_list_starred_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCF5310194F2D52008B52B9 /* icon_tabbar_navbar_list_starred_active@2x.png */; };
 		3DCF5313194F2D52008B52B9 /* icon_tabbar_navbar_list_starred_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DCF5311194F2D52008B52B9 /* icon_tabbar_navbar_list_starred_default@2x.png */; };
 		3DD316D71942082D00CAB768 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DD316D61942082D00CAB768 /* LoadingView.xib */; };
-		3DD316DA1946018F00CAB768 /* CompassCustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD316D91946018F00CAB768 /* CompassCustomSegue.m */; };
-		3DD371AF18FD8D120077AA4D /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD371AE18FD8D120077AA4D /* MainNavigationController.m */; };
-		3DD93F2E1787A6F1003908A7 /* CompassHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD93F2D1787A6F1003908A7 /* CompassHelper.m */; };
-		3DDBDFE2184CEA5F00C48C08 /* MainUITabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDBDFE1184CEA5F00C48C08 /* MainUITabBarController.m */; };
 		3DDDDE5A17D8CD22006FD52D /* LocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDDDE5917D8CD22006FD52D /* LocationSearchViewController.m */; };
 		3DE1E10918A3EA6400773328 /* PlaceTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE1E10818A3EA6400773328 /* PlaceTypeViewController.m */; };
 		3DE62CD31827FE7300FD7522 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE62CD21827FE7300FD7522 /* CustomCell.m */; };
@@ -98,8 +92,7 @@
 /* Begin PBXFileReference section */
 		3D06D77F18D9DD8B00145A02 /* PlaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceModel.h; sourceTree = "<group>"; };
 		3D06D78018D9DD8B00145A02 /* PlaceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceModel.m; sourceTree = "<group>"; };
-		3D0F70811896C17F00CAA80A /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		3D0F70821896C17F00CAA80A /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		3D116DDF19539AB800331B49 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.md; path = TripCompass/LICENSE.md; sourceTree = "<group>"; };
 		3D177EB918A53BB100DB599A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3D177EBA18A53BB100DB599A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3D177EBB18A53BB100DB599A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -140,14 +133,10 @@
 		3D6276291781C65B00A4B675 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3D6276321781C65B00A4B675 /* TripCompassTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TripCompassTests-Info.plist"; sourceTree = "<group>"; };
 		3D6276341781C65B00A4B675 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3D6276361781C65B00A4B675 /* TripCompassTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripCompassTests.h; sourceTree = "<group>"; };
-		3D6276371781C65B00A4B675 /* TripCompassTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripCompassTests.m; sourceTree = "<group>"; };
 		3D6276411781C7A000A4B675 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3D76BECC1853A0D8002FD16F /* TripCompass.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TripCompass.xcdatamodel; sourceTree = "<group>"; };
 		3D76BECF1853A2FC002FD16F /* BookmarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkCell.xib; sourceTree = "<group>"; };
 		3D8DB35818575DD800DA2E6E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		3D8E2CE41787B44900AA0F0D /* CompassHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompassHelperTests.h; sourceTree = "<group>"; };
-		3D8E2CE51787B44900AA0F0D /* CompassHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompassHelperTests.m; sourceTree = "<group>"; };
 		3D8E2CED178EF4AD00AA0F0D /* PlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceViewController.h; sourceTree = "<group>"; };
 		3D8E2CEE178EF4AD00AA0F0D /* PlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceViewController.m; sourceTree = "<group>"; };
 		3D8E2CF0179049CC00AA0F0D /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
@@ -174,14 +163,6 @@
 		3DCF5310194F2D52008B52B9 /* icon_tabbar_navbar_list_starred_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_navbar_list_starred_active@2x.png"; sourceTree = "<group>"; };
 		3DCF5311194F2D52008B52B9 /* icon_tabbar_navbar_list_starred_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_navbar_list_starred_default@2x.png"; sourceTree = "<group>"; };
 		3DD316D61942082D00CAB768 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
-		3DD316D81946018F00CAB768 /* CompassCustomSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompassCustomSegue.h; sourceTree = "<group>"; };
-		3DD316D91946018F00CAB768 /* CompassCustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompassCustomSegue.m; sourceTree = "<group>"; };
-		3DD371AD18FD8D120077AA4D /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainNavigationController.h; path = TripCompass/Controllers/MainNavigationController.h; sourceTree = SOURCE_ROOT; };
-		3DD371AE18FD8D120077AA4D /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainNavigationController.m; path = TripCompass/Controllers/MainNavigationController.m; sourceTree = SOURCE_ROOT; };
-		3DD93F2C1787A6F1003908A7 /* CompassHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompassHelper.h; sourceTree = "<group>"; };
-		3DD93F2D1787A6F1003908A7 /* CompassHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompassHelper.m; sourceTree = "<group>"; };
-		3DDBDFE0184CEA5F00C48C08 /* MainUITabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainUITabBarController.h; sourceTree = "<group>"; };
-		3DDBDFE1184CEA5F00C48C08 /* MainUITabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainUITabBarController.m; sourceTree = "<group>"; };
 		3DDDDE5817D8CD22006FD52D /* LocationSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchViewController.h; sourceTree = "<group>"; };
 		3DDDDE5917D8CD22006FD52D /* LocationSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchViewController.m; sourceTree = "<group>"; };
 		3DE1E10718A3EA6400773328 /* PlaceTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceTypeViewController.h; sourceTree = "<group>"; };
@@ -243,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				3D8DB35818575DD800DA2E6E /* README.md */,
+				3D116DDF19539AB800331B49 /* LICENSE.md */,
 				3D6276051781C65B00A4B675 /* TripCompass */,
 				3D6276301781C65B00A4B675 /* TripCompassTests */,
 				3D6275FC1781C65B00A4B675 /* Frameworks */,
@@ -310,10 +292,6 @@
 			isa = PBXGroup;
 			children = (
 				3D6276311781C65B00A4B675 /* Supporting Files */,
-				3D6276361781C65B00A4B675 /* TripCompassTests.h */,
-				3D6276371781C65B00A4B675 /* TripCompassTests.m */,
-				3D8E2CE41787B44900AA0F0D /* CompassHelperTests.h */,
-				3D8E2CE51787B44900AA0F0D /* CompassHelperTests.m */,
 			);
 			path = TripCompassTests;
 			sourceTree = "<group>";
@@ -332,8 +310,6 @@
 			children = (
 				3D62761D1781C65B00A4B675 /* CompassViewController.h */,
 				3D62761E1781C65B00A4B675 /* CompassViewController.m */,
-				3DDBDFE0184CEA5F00C48C08 /* MainUITabBarController.h */,
-				3DDBDFE1184CEA5F00C48C08 /* MainUITabBarController.m */,
 				3D8E2CED178EF4AD00AA0F0D /* PlaceViewController.h */,
 				3D8E2CEE178EF4AD00AA0F0D /* PlaceViewController.m */,
 				3DDDDE5817D8CD22006FD52D /* LocationSearchViewController.h */,
@@ -344,8 +320,6 @@
 				3D4F871317C262500032B61C /* BookmarkItemViewController.m */,
 				3DF62A9218576D970052D245 /* GAUITableViewController.h */,
 				3DF62A9318576D970052D245 /* GAUITableViewController.m */,
-				3D0F70811896C17F00CAA80A /* TestViewController.h */,
-				3D0F70821896C17F00CAA80A /* TestViewController.m */,
 				3DE1E10718A3EA6400773328 /* PlaceTypeViewController.h */,
 				3DE1E10818A3EA6400773328 /* PlaceTypeViewController.m */,
 			);
@@ -360,8 +334,6 @@
 				3D32397417A953B2005ACF01 /* Place.m */,
 				3D06D77F18D9DD8B00145A02 /* PlaceModel.h */,
 				3D06D78018D9DD8B00145A02 /* PlaceModel.m */,
-				3DD371AD18FD8D120077AA4D /* MainNavigationController.h */,
-				3DD371AE18FD8D120077AA4D /* MainNavigationController.m */,
 				3DF62A961858CAC00052D245 /* API.h */,
 				3DF62A971858CAC00052D245 /* API.m */,
 				3D24E08B18CA1F6700127A6B /* PlaceDataManager.h */,
@@ -389,8 +361,6 @@
 				3DFB90311942069900FE5DD8 /* LoadingView.h */,
 				3DFB90321942069900FE5DD8 /* LoadingView.m */,
 				3DD316D61942082D00CAB768 /* LoadingView.xib */,
-				3DD316D81946018F00CAB768 /* CompassCustomSegue.h */,
-				3DD316D91946018F00CAB768 /* CompassCustomSegue.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -416,8 +386,6 @@
 		3D76BED11853A3F4002FD16F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				3DD93F2C1787A6F1003908A7 /* CompassHelper.h */,
-				3DD93F2D1787A6F1003908A7 /* CompassHelper.m */,
 				3DA654A8179D7B4A00424430 /* Util.h */,
 				3DA654A9179D7B4A00424430 /* Util.m */,
 			);
@@ -534,6 +502,7 @@
 				3DCF5313194F2D52008B52B9 /* icon_tabbar_navbar_list_starred_default@2x.png in Resources */,
 				3DFB9035194206B800FE5DD8 /* BookmarkItemCell.xib in Resources */,
 				3DCF530D194BD149008B52B9 /* icon.png in Resources */,
+				3D116DE019539AB800331B49 /* LICENSE.md in Resources */,
 				3D62760A1781C65B00A4B675 /* InfoPlist.strings in Resources */,
 				3DB281C81827F7AE008C7B82 /* CustomCell.xib in Resources */,
 				3DEFCAF019001F470029F48B /* icon_navbar_current_location_default@2x.png in Resources */,
@@ -631,25 +600,20 @@
 				3D62761F1781C65B00A4B675 /* CompassViewController.m in Sources */,
 				3DFB90331942069900FE5DD8 /* LoadingView.m in Sources */,
 				3D5CBCE018634A2B009BFDAD /* GogobotSignature.m in Sources */,
-				3DD93F2E1787A6F1003908A7 /* CompassHelper.m in Sources */,
 				3DF62A9B1860AAFE0052D245 /* NSString+QueryString.m in Sources */,
 				3D76BECD1853A0D8002FD16F /* TripCompass.xcdatamodeld in Sources */,
 				3DF62A981858CAC00052D245 /* API.m in Sources */,
-				3DDBDFE2184CEA5F00C48C08 /* MainUITabBarController.m in Sources */,
 				3D8E2CEF178EF4AD00AA0F0D /* PlaceViewController.m in Sources */,
 				3DB19325190E99220075D01E /* NoFavoritesView.m in Sources */,
 				3DA654AA179D7B4A00424430 /* Util.m in Sources */,
 				3DFB9028193F692800FE5DD8 /* BookmarkItemCell.m in Sources */,
 				3DAC8C3D18B12F1900E78C17 /* NoInternetView.m in Sources */,
-				3DD316DA1946018F00CAB768 /* CompassCustomSegue.m in Sources */,
 				3D4E6B59187C551700454293 /* NSString+URLEncoding.m in Sources */,
 				3D4E6B56187C548600454293 /* NSDictionary+QueryString.m in Sources */,
-				3DD371AF18FD8D120077AA4D /* MainNavigationController.m in Sources */,
 				3D32397517A953B2005ACF01 /* Place.m in Sources */,
 				3D177EC118A6889800DB599A /* UINavigationItem+BackButton.m in Sources */,
 				3D06D78118D9DD8B00145A02 /* PlaceModel.m in Sources */,
 				3D32397B17AAA3EF005ACF01 /* BookmarkViewController.m in Sources */,
-				3D0F70831896C17F00CAA80A /* TestViewController.m in Sources */,
 				3D4F871417C262500032B61C /* BookmarkItemViewController.m in Sources */,
 				3DDDDE5A17D8CD22006FD52D /* LocationSearchViewController.m in Sources */,
 				3DE1E10918A3EA6400773328 /* PlaceTypeViewController.m in Sources */,
@@ -661,8 +625,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D6276381781C65B00A4B675 /* TripCompassTests.m in Sources */,
-				3D8E2CE61787B44900AA0F0D /* CompassHelperTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

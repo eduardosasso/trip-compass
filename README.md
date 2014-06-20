@@ -45,3 +45,17 @@ https://mdev.gogobot.com/api/v3/search/regions.json?_v=2.1&lat=37.451940&lng=-12
 
 
 http://stackoverflow.com/questions/20687391/ios7-boundingrectwithsizeboundingsize-not-returning-the-needed-label-height
+
+https://github.com/MarcoMirisola/CLHeading-Bearing/blob/14abb1e10b9acc57a589f3035820d335f017f031/DemoBearing/DemoBearing/ViewController.m
+https://github.com/ekapradityagk/AraProject/blob/d6ce006d27de09bb1fb9ac3b024818dc008188e0/Gyro/Gyro/headingViewController.m
+https://github.com/rafapaulino/Bussola/blob/ef4cea4cead225894f2de32881fd123e63f2e503/Bussola/PrincipalViewController.m
+https://github.com/alextarrago/db_compass/blob/a9e2b3b61fc55c2a11b1a96d7fbecbd8d97fa6a7/Demo/DBLocationCompass/DBCompass.m
+
+
+//  http://stackoverflow.com/questions/4130821/iphone-compass-gps-direction
+//  http://www.sundh.com/blog/2011/09/stabalize-compass-of-iphone-with-gyroscope/
+//  https://github.com/tadelv/CLLocation-Bearing/blob/master/CLLocation%2BBearing.m
+  
+//  http://www.shawngrimes.me/2011/07/calculating-heading-with-corelocation/
+  
+//  http://stackoverflow.com/questions/10719115/ios-get-angle-to-geolocation-from-current-location-without-map

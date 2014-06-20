@@ -275,6 +275,43 @@
                                 <rect key="frame" x="57" y="152" width="207" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iI-Sc-kzN">
+                                <rect key="frame" x="20" y="311" width="99" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgT-ai-tsw">
+                                <rect key="frame" x="139" y="311" width="103" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgs-bv-DUv">
+                                <rect key="frame" x="20" y="340" width="106" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qvi-vX-KW9">
+                                <rect key="frame" x="139" y="340" width="155" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBp-fc-ZnR">
+                                <rect key="frame" x="20" y="477" width="115" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pV-e6-hou">
+                                <rect key="frame" x="148" y="477" width="116" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -309,6 +346,12 @@
                         <outlet property="addressLabel" destination="tvI-dY-vX3" id="cfR-mV-X1b"/>
                         <outlet property="compassImage" destination="p0W-62-roa" id="yxo-nk-04E"/>
                         <outlet property="distanceLabel" destination="H6a-qb-hAF" id="OTc-cf-uYQ"/>
+                        <outlet property="label1" destination="7iI-Sc-kzN" id="3PI-JA-hAa"/>
+                        <outlet property="label2" destination="vgT-ai-tsw" id="w1f-ET-ZTD"/>
+                        <outlet property="label3" destination="kgs-bv-DUv" id="ecw-K0-hIl"/>
+                        <outlet property="label4" destination="Qvi-vX-KW9" id="A5r-hF-EyF"/>
+                        <outlet property="label6" destination="iBp-fc-ZnR" id="Fgf-BY-b6Y"/>
+                        <outlet property="label7" destination="9pV-e6-hou" id="jHp-sK-yJo"/>
                         <outlet property="placeNameLabel" destination="DhE-mF-UP1" id="2hB-gG-A7b"/>
                     </connections>
                 </viewController>
@@ -339,10 +382,10 @@
             </objects>
             <point key="canvasLocation" x="-2280" y="1832"/>
         </scene>
-        <!--MainUI Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="93K-NU-yEj">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="HJl-0M-0Et" customClass="MainUITabBarController" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="HJl-0M-0Et" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Meh-JU-kXZ"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -359,10 +402,10 @@
             </objects>
             <point key="canvasLocation" x="-4132" y="1000"/>
         </scene>
-        <!--Main Navigation Controller - Places-->
+        <!--Navigation Controller - Places-->
         <scene sceneID="TpH-rR-fnK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sGY-t2-daj" customClass="MainNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sGY-t2-daj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Places" image="places.png" id="EGk-eK-pTR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gb6-zL-bgX">

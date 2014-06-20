@@ -1,10 +1,27 @@
-
-//  MainViewController.m
+//
+//  CompassViewController.m
 //  TripCompass
 //
 //  Created by Eduardo Sasso on 7/1/13.
-//  Copyright (c) 2013 Context Software. All rights reserved.
+//  Copyright (c) 2014 Eduardo Sasso
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
 
 #import "CompassViewController.h"
 #import "PlaceModel.h"
@@ -28,8 +45,9 @@
   
   UIColor *currentColor;
   
+  float pointingTolerance;
   float direction;
-  float directionPointing;
+  float newAngle;
   float directionToGo;
   
   bool isGoingRightWay;
@@ -61,6 +79,7 @@
   nearbyAnimationToggle = FALSE;
   
   [locationManager setHeadingFilter:.5];
+  pointingTolerance = 3;
   
   loadingView = [[LoadingView alloc] initWithFrame:self.view.frame];
   [self.view addSubview:loadingView];
@@ -138,12 +157,21 @@
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateHeading:(CLHeading*)newHeading {
   if (newHeading.headingAccuracy > 0) {
-    direction = -newHeading.trueHeading;
-    directionToGo = (direction * M_PI / 180) + geoAngle;
+    float directionDegrees = [newHeading magneticHeading];
+    self.label1.text = [NSString stringWithFormat:@"d %f", directionDegrees];
     
-    directionPointing = fabsf(geoAngle - fabsf((direction* M_PI / 180)));
-
-    isGoingRightWay = directionPointing >= 0 && directionPointing <= 0.5;
+    float directionRadians = -directionDegrees * (M_PI / 180);
+    self.label2.text = [NSString stringWithFormat:@"r %f", directionRadians];
+    
+    directionToGo = directionRadians + geoAngle;
+    self.label3.text = [NSString stringWithFormat:@"go %f", directionToGo];
+    
+    self.label4.text = [NSString stringWithFormat:@"geo %f", geoAngle];
+    
+    isGoingRightWay = (fabs(directionToGo) > 0 && fabs(directionToGo) < 0.25);
+    
+    self.label6.text = [NSString stringWithFormat:@"a %@", @(isGoingRightWay)];
+    self.label7.text = [NSString stringWithFormat:@"b %f", fabs(directionToGo)];
     
     NSString *headingName = [NSString stringWithFormat:@"icon_%@.png", [Util getHeadingDirectionName:newHeading]];
     UIImage* logoImage = [UIImage imageNamed:[headingName lowercaseString]];
@@ -153,8 +181,6 @@
     self.compassImage.tintColor = currentColor;
     self.distanceLabel.textColor = currentColor;
   
-//    [self.compassImage layoutIfNeeded];
-    
     //Move the compass to where you should go
     [UIView animateWithDuration:1 animations:^{
       self.compassImage.transform = CGAffineTransformMakeRotation(directionToGo);
