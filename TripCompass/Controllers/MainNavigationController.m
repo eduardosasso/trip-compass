@@ -1,9 +1,10 @@
 //
-//  CompassViewController.h
+//  MainNavigationController.m
 //  TripCompass
 //
-//  Created by Eduardo Sasso on 7/1/13.
-//  Copyright (c) 2014 Eduardo Sasso
+//  Created by Eduardo Sasso on 4/15/14.
+//  Created by Eduardo Sasso on 4/15/14.
+//  Copyright (c) 2014 Eduardo Sasso. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,23 +24,15 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <CoreData/CoreData.h>
-#import <CoreLocation/CoreLocation.h>
-#import "Place.h"
-#import "GAITrackedViewController.h"
+#import "MainNavigationController.h"
 
-@interface CompassViewController : GAITrackedViewController
+@interface MainNavigationController ()
 
-@property (nonatomic, retain) CLLocation *currentLocation;
+@end
 
-@property (strong, nonatomic) Place *place;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@implementation MainNavigationController
 
-@property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-
-@property (weak, nonatomic) IBOutlet UIImageView *compassImage;
-- (IBAction)checkpointAction:(id)sender;
+- (void)viewWillAppear:(BOOL)animated {
+}
 
 @end

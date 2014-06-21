@@ -71,6 +71,7 @@
 		3DFB902E1940AFDB00FE5DD8 /* powered_by_ggb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB902C1940AFDB00FE5DD8 /* powered_by_ggb@2x.png */; };
 		3DFB90331942069900FE5DD8 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB90321942069900FE5DD8 /* LoadingView.m */; };
 		3DFB9035194206B800FE5DD8 /* BookmarkItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB9034194206B800FE5DD8 /* BookmarkItemCell.xib */; };
+		3DFC2DA71954FFEF00E05047 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFC2DA61954FFEF00E05047 /* MainNavigationController.m */; };
 		A01548ADA0B341BEB2D8F853 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8ADDE2DB8744F0B935F7809 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -167,6 +168,8 @@
 		3DFB90311942069900FE5DD8 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
 		3DFB90321942069900FE5DD8 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
 		3DFB9034194206B800FE5DD8 /* BookmarkItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkItemCell.xib; sourceTree = "<group>"; };
+		3DFC2DA51954FFEF00E05047 /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
+		3DFC2DA61954FFEF00E05047 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
 		71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E8ADDE2DB8744F0B935F7809 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -274,6 +277,8 @@
 				3DF62A9318576D970052D245 /* GAUITableViewController.m */,
 				3DE1E10718A3EA6400773328 /* PlaceTypeViewController.h */,
 				3DE1E10818A3EA6400773328 /* PlaceTypeViewController.m */,
+				3DFC2DA51954FFEF00E05047 /* MainNavigationController.h */,
+				3DFC2DA61954FFEF00E05047 /* MainNavigationController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 				3DFB9028193F692800FE5DD8 /* BookmarkItemCell.m in Sources */,
 				3DAC8C3D18B12F1900E78C17 /* NoInternetView.m in Sources */,
 				3D4E6B59187C551700454293 /* NSString+URLEncoding.m in Sources */,
+				3DFC2DA71954FFEF00E05047 /* MainNavigationController.m in Sources */,
 				3D4E6B56187C548600454293 /* NSDictionary+QueryString.m in Sources */,
 				3D32397517A953B2005ACF01 /* Place.m in Sources */,
 				3D177EC118A6889800DB599A /* UINavigationItem+BackButton.m in Sources */,

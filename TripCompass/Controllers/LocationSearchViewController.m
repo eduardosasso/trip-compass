@@ -170,6 +170,8 @@
       cell.placeLabel.textColor = nil;
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    
     return cell;
   } else {
     //return the loading spinner cell

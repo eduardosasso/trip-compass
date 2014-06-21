@@ -45,12 +45,10 @@
   
   UIColor *currentColor;
   
-  float pointingTolerance;
-  float direction;
-  float newAngle;
+  float directionDegrees;
+  float directionRadians;
   float directionToGo;
   
-  bool isGoingRightWay;
   bool isNearDestination;
   
   LoadingView *loadingView;
@@ -79,7 +77,6 @@
   nearbyAnimationToggle = FALSE;
   
   [locationManager setHeadingFilter:.5];
-  pointingTolerance = 3;
   
   loadingView = [[LoadingView alloc] initWithFrame:self.view.frame];
   [self.view addSubview:loadingView];
@@ -143,6 +140,11 @@
   
   // distance is returned in meters by default
   isNearDestination = [self.place distanceTo:self.currentLocation.coordinate] <= 180;
+  
+  currentColor = isNearDestination ? customGreenColor : customMagentaColor;
+  self.compassImage.tintColor = currentColor;
+  self.distanceLabel.textColor = currentColor;
+  
   NSTimer* nearbyTimer;
   if (isNearDestination) {
     nearbyTimer = [self nearbyTimerAnimation];
@@ -157,30 +159,15 @@
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateHeading:(CLHeading*)newHeading {
   if (newHeading.headingAccuracy > 0) {
-    float directionDegrees = [newHeading magneticHeading];
-    self.label1.text = [NSString stringWithFormat:@"d %f", directionDegrees];
-    
-    float directionRadians = -directionDegrees * (M_PI / 180);
-    self.label2.text = [NSString stringWithFormat:@"r %f", directionRadians];
+    directionDegrees = [newHeading magneticHeading];
+    directionRadians = -directionDegrees * (M_PI / 180);
     
     directionToGo = directionRadians + geoAngle;
-    self.label3.text = [NSString stringWithFormat:@"go %f", directionToGo];
-    
-    self.label4.text = [NSString stringWithFormat:@"geo %f", geoAngle];
-    
-    isGoingRightWay = (fabs(directionToGo) > 0 && fabs(directionToGo) < 0.25);
-    
-    self.label6.text = [NSString stringWithFormat:@"a %@", @(isGoingRightWay)];
-    self.label7.text = [NSString stringWithFormat:@"b %f", fabs(directionToGo)];
     
     NSString *headingName = [NSString stringWithFormat:@"icon_%@.png", [Util getHeadingDirectionName:newHeading]];
     UIImage* logoImage = [UIImage imageNamed:[headingName lowercaseString]];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:logoImage];
 
-    currentColor = (isGoingRightWay || isNearDestination) ? customGreenColor : customMagentaColor;
-    self.compassImage.tintColor = currentColor;
-    self.distanceLabel.textColor = currentColor;
-  
     //Move the compass to where you should go
     [UIView animateWithDuration:1 animations:^{
       self.compassImage.transform = CGAffineTransformMakeRotation(directionToGo);
