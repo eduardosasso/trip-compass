@@ -70,7 +70,8 @@
 		3DFB90331942069900FE5DD8 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB90321942069900FE5DD8 /* LoadingView.m */; };
 		3DFB9035194206B800FE5DD8 /* BookmarkItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB9034194206B800FE5DD8 /* BookmarkItemCell.xib */; };
 		3DFC2DA71954FFEF00E05047 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFC2DA61954FFEF00E05047 /* MainNavigationController.m */; };
-		3DFC2DAA19550BF600E05047 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DFC2DA919550BF600E05047 /* Keys.plist */; };
+		3DFC2DAA19550BF600E05047 /* ConfigExample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DFC2DA919550BF600E05047 /* ConfigExample.plist */; };
+		3DFC2DAC19587F0300E05047 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DFC2DAB19587F0300E05047 /* Config.plist */; };
 		A01548ADA0B341BEB2D8F853 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8ADDE2DB8744F0B935F7809 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -167,7 +168,8 @@
 		3DFB9034194206B800FE5DD8 /* BookmarkItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkItemCell.xib; sourceTree = "<group>"; };
 		3DFC2DA51954FFEF00E05047 /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
 		3DFC2DA61954FFEF00E05047 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
-		3DFC2DA919550BF600E05047 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Keys.plist; path = TripCompass/Keys.plist; sourceTree = SOURCE_ROOT; };
+		3DFC2DA919550BF600E05047 /* ConfigExample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ConfigExample.plist; path = TripCompass/ConfigExample.plist; sourceTree = SOURCE_ROOT; };
+		3DFC2DAB19587F0300E05047 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E8ADDE2DB8744F0B935F7809 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -197,7 +199,6 @@
 			children = (
 				3D8DB35818575DD800DA2E6E /* README.md */,
 				3D116DDF19539AB800331B49 /* LICENSE.md */,
-				3DFC2DA919550BF600E05047 /* Keys.plist */,
 				71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */,
 				3D6276051781C65B00A4B675 /* TripCompass */,
 				3D6275FC1781C65B00A4B675 /* Frameworks */,
@@ -255,6 +256,8 @@
 				3D6276081781C65B00A4B675 /* InfoPlist.strings */,
 				3D6276071781C65B00A4B675 /* TripCompass-Info.plist */,
 				3D62760D1781C65B00A4B675 /* TripCompass-Prefix.pch */,
+				3DFC2DAB19587F0300E05047 /* Config.plist */,
+				3DFC2DA919550BF600E05047 /* ConfigExample.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -433,7 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DFC2DAA19550BF600E05047 /* Keys.plist in Resources */,
+				3DFC2DAA19550BF600E05047 /* ConfigExample.plist in Resources */,
 				3D177EBD18A53BB100DB599A /* Default.png in Resources */,
 				3DCF5313194F2D52008B52B9 /* favorite@2x.png in Resources */,
 				3DFB9035194206B800FE5DD8 /* BookmarkItemCell.xib in Resources */,
@@ -458,6 +461,7 @@
 				3DEFCAEF19001F470029F48B /* icon_filter_default@2x.png in Resources */,
 				3D177EBE18A53BB100DB599A /* Default@2x.png in Resources */,
 				3D36D2AD1922690A00B7AD8B /* icon_east@2x.png in Resources */,
+				3DFC2DAC19587F0300E05047 /* Config.plist in Resources */,
 				3DCF530F194BD149008B52B9 /* icon80.png in Resources */,
 				3DFB902D1940AFDB00FE5DD8 /* compass_arrow@2x.png in Resources */,
 				3D8DB35918575DD800DA2E6E /* README.md in Resources */,
