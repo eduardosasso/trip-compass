@@ -34,7 +34,7 @@
                                             <rect key="frame" x="150" y="12" width="20" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </activityIndicatorView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="powered_by_ggb.png" translatesAutoresizingMaskIntoConstraints="NO" id="4eW-hl-ZvY">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gogobot.png" translatesAutoresizingMaskIntoConstraints="NO" id="4eW-hl-ZvY">
                                             <rect key="frame" x="90" y="33" width="140" height="19"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -297,7 +297,7 @@
                                 <action selector="closeButtonClick:" destination="VTE-dE-fwI" id="Dky-5g-Ncc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="icon_tabbar_navbar_list_starred_default.png" style="done" id="Upl-Cp-eyq">
+                        <barButtonItem key="rightBarButtonItem" image="favorite.png" style="done" id="Upl-Cp-eyq">
                             <connections>
                                 <action selector="checkpointAction:" destination="VTE-dE-fwI" id="slN-id-GVQ"/>
                             </connections>
@@ -425,7 +425,7 @@
                                             <rect key="frame" x="150" y="12" width="20" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </activityIndicatorView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="powered_by_ggb.png" translatesAutoresizingMaskIntoConstraints="NO" id="vqL-2V-8QK">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gogobot.png" translatesAutoresizingMaskIntoConstraints="NO" id="vqL-2V-8QK">
                                             <rect key="frame" x="90" y="33" width="140" height="19"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -567,10 +567,10 @@
     <resources>
         <image name="compass_arrow.png" width="207" height="109"/>
         <image name="current_location.png" width="22" height="21"/>
+        <image name="favorite.png" width="22" height="21"/>
+        <image name="gogobot.png" width="119" height="18"/>
         <image name="icon_filter_default.png" width="22" height="21"/>
-        <image name="icon_tabbar_navbar_list_starred_default.png" width="22" height="21"/>
         <image name="places.png" width="28" height="22"/>
-        <image name="powered_by_ggb.png" width="119" height="18"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
