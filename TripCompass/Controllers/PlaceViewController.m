@@ -65,7 +65,6 @@
   
   [self resetTableView];
   [self startTrackingLocation];
-//  [self checkInternetConnection];
   
   [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"customCell"];
   
@@ -98,12 +97,6 @@
   [tableView reloadData];
   
   loading = false;
-}
-
-- (void)resetTableView {
-  page = 1;
-  apiResults = nil;
-  results = nil;
 }
 
 - (void)requestUpdateTableViewData:(CLLocation *)location {
@@ -181,6 +174,12 @@
 }
 
 #pragma mark UITableView
+
+- (void)resetTableView {
+  page = 1;
+  apiResults = nil;
+  results = nil;
+}
 
 - (IBAction)pullToRefresh:(id)sender {
   currentLocation = nil;
@@ -264,12 +263,9 @@
   if (scrollView.contentSize.height - scrollView.contentOffset.y < (self.view.bounds.size.height)) {
     if (!loading && !isSearching) {
       [self requestUpdateTableViewDataWithPagination];
-      //TODO this is calling the api if tries to scroll results
-      //if ([cell.reuseIdentifier isEqualToString:@"loadingCell"] && tableView != self.searchDisplayController.searchResultsTableView) [self requestUpdateTableViewDataWithPagination];
     }
   }
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -284,6 +280,7 @@
 }
 
 #pragma mark Search
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
   isSearching = NO;
   
@@ -324,6 +321,7 @@
 }
 
 #pragma mark Location Manager
+
 - (void)startTrackingLocation {
   locationManager = [[CLLocationManager alloc] init];
   locationManager.delegate = self;
@@ -495,7 +493,6 @@
     cell.placeLabel.textColor = customMagentaColor;
     return TRUE;
   } else {
-//    cell.placeLabel.textColor = nil;
     return FALSE;
   }
 }

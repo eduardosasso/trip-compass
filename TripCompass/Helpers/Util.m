@@ -73,13 +73,11 @@
   return [NSString stringWithFormat:format, roundDistance];
 }
 
-+(float) angleToRadians:(float) a {
++ (float) angleToRadians:(float) a {
   return ((a/180)*M_PI);
 }
 
-+(float) getHeadingForDirectionFromCoordinate:(CLLocationCoordinate2D)fromLoc toCoordinate:(CLLocationCoordinate2D)toLoc
-{
-  
++ (float) getHeadingForDirectionFromCoordinate:(CLLocationCoordinate2D)fromLoc toCoordinate:(CLLocationCoordinate2D)toLoc {
   float fLat = [self angleToRadians:fromLoc.latitude];
   float fLng = [self angleToRadians:fromLoc.longitude];
   float tLat = [self angleToRadians:toLoc.latitude];
@@ -88,7 +86,7 @@
   return atan2(sin(tLng-fLng)*cos(tLat), cos(fLat)*sin(tLat)-sin(fLat)*cos(tLat)*cos(tLng-fLng));
 }
 
-+(float)setLatLonForDistanceAndAngle:(CLLocationCoordinate2D)userlocation toCoordinate:(CLLocationCoordinate2D)toLoc {
++ (float)setLatLonForDistanceAndAngle:(CLLocationCoordinate2D)userlocation toCoordinate:(CLLocationCoordinate2D)toLoc {
   float lat1 = DegreesToRadians(userlocation.latitude);
   float lon1 = DegreesToRadians(userlocation.longitude);
   
@@ -121,25 +119,6 @@
 	} else if ((currentHeading > 225) && (currentHeading <= 315)) {
     strDirection = @"West";
 	}
-  
-//  if(currentHeading >23 && currentHeading <= 67){
-//    strDirection = @"North East";
-//  } else if(currentHeading >68 && currentHeading <= 112){
-//    strDirection = @"East";
-//  } else if(currentHeading >113 && currentHeading <= 167){
-//    strDirection = @"South East";
-//  } else if(currentHeading >168 && currentHeading <= 202){
-//    strDirection = @"South";
-//  } else if(currentHeading >203 && currentHeading <= 247){
-//    strDirection = @"South West";
-//  } else if(currentHeading >248 && currentHeading <= 293){
-//    strDirection = @"West";
-//  } else if(currentHeading >294 && currentHeading <= 337){
-//    strDirection = @"North West";
-//  } else if(currentHeading >=338 || currentHeading <= 22){
-//    strDirection = @"North";
-//  }
-  
   return strDirection;
 }
 

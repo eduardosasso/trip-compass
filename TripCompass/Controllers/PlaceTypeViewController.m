@@ -70,4 +70,8 @@
   }
 }
 
+- (NSString *)googleAnalyticsScreenName {
+  return NSStringFromClass([self class]);
+}
+
 @end

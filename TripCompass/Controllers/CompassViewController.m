@@ -210,7 +210,7 @@
 }
 
 - (IBAction)checkpointAction:(id)sender {
-  UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Checkpoint"
+  UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Add a Checkpoint"
                                                    message:@"Where are you now?"
                                                   delegate:self
                                          cancelButtonTitle:@"Cancel"
@@ -218,7 +218,7 @@
   
   alert.alertViewStyle = UIAlertViewStylePlainTextInput;
   UITextField * alertTextField = [alert textFieldAtIndex:0];
-  alertTextField.placeholder = @"e.g: Hard to find state park";
+  alertTextField.placeholder = @"e.g: Yosemite parking lot";
   
   [alert show];
 }

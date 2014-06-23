@@ -48,7 +48,7 @@
    [UIImage imageNamed:@"icon_navbar_back"]];
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
   [self startTrackingLocation];
   
   self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -56,6 +56,7 @@
 }
 
 #pragma mark Location Manager
+
 - (void)startTrackingLocation {
   locationManager = [[CLLocationManager alloc] init];
   locationManager.delegate = self;
@@ -94,7 +95,7 @@
   return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return places.count;
 }
 

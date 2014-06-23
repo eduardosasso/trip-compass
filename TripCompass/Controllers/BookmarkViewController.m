@@ -44,7 +44,7 @@
   [self.navigationController.view addSubview:noFavoritesView];
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
   [[super.tabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = nil;
   
   cities = [NSMutableArray arrayWithArray:[PlaceDataManager findCities]];
@@ -54,7 +54,7 @@
   [self.tableView reloadData];
 }
 
--(void)toggleNoFavoritesView:(BOOL)show {
+- (void)toggleNoFavoritesView:(BOOL)show {
   [noFavoritesView setHidden:!show];
   [self.tableView setHidden:show];
   
@@ -62,6 +62,7 @@
 }
 
 #pragma mark UITableView
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
@@ -84,14 +85,6 @@
   UIFontDescriptor *fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
   UIFontDescriptor *boldFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
   cell.detailLabel.font = [UIFont fontWithDescriptor:boldFontDescriptor size:0.f];
-
-//  cell.detailLabel.textColor = customMagentaColor;
-  
-//  CALayer *l = [ cell.detailLabel layer];
-//  [l setMasksToBounds:YES];
-//  [l setCornerRadius:10.0];
-//  [l setBorderWidth:1.0];
-//  [l setBorderColor:[customMagentaColor CGColor]];
 
   cell.detailLabel.backgroundColor = customMagentaColor;
   cell.detailLabel.layer.cornerRadius = 12;
@@ -121,6 +114,7 @@
 }
 
 #pragma mark Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   NSIndexPath *path = [self.tableView indexPathForSelectedRow];
   NSDictionary *place = [cities objectAtIndex:path.row];
@@ -131,7 +125,7 @@
 
 #pragma mark Undefined
 - (NSString *)googleAnalyticsScreenName {
-  return @"BookmarkViewController";
+  return NSStringFromClass([self class]);
 }
 
 @end

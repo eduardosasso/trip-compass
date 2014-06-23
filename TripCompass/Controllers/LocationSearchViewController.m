@@ -58,7 +58,7 @@
 
 #pragma mark API Delegate
 
--(void)didReceiveAPIResults:(NSDictionary *)dictionary {
+- (void)didReceiveAPIResults:(NSDictionary *)dictionary {
   [self.refreshControl endRefreshing];
 
   apiResults = [dictionary valueForKey:@"results"];
@@ -94,7 +94,7 @@
   return YES;
 }
 
--(void) searchTimerPopped:(NSTimer *)timer {
+- (void)searchTimerPopped:(NSTimer *)timer {
   NSString *searchString = (NSString*)[timer userInfo];
 
   [api searchCitiesNearby:searchString];

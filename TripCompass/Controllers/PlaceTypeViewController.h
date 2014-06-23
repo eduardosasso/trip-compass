@@ -24,12 +24,13 @@
 //  SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "GAUITableViewController.h"
 
 @protocol PlaceTypeDelegate <NSObject>
 - (void)didSelectPlaceType:(NSString *)type;
 @end
 
-@interface PlaceTypeViewController : UITableViewController
+@interface PlaceTypeViewController : GAUITableViewController
 
 @property (nonatomic, weak) id<PlaceTypeDelegate> delegate;
 @property (nonatomic, copy) NSString *placeType;
