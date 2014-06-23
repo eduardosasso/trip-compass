@@ -34,7 +34,12 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [NewRelicAgent startWithApplicationToken:@"AA95f3a9d6f4639454016ea81cba6b6205c22a448d"];
+  // Load config.plist into user defaults
+  NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+  [[NSUserDefaults standardUserDefaults] registerDefaults:config];
+  
+  NSString *newRelicKey = [[NSUserDefaults standardUserDefaults] stringForKey:@"NewRelic"];
+  [NewRelicAgent startWithApplicationToken:newRelicKey];
 
   [self setupGoogleAnalytics];
   
@@ -56,8 +61,9 @@
 }
 
 - (void)setupGoogleAnalytics {
+  NSString *googleAnalyticsKey = [[NSUserDefaults standardUserDefaults] stringForKey:@"GoogleAnalytics"];
   [[GAI sharedInstance] setTrackUncaughtExceptions:YES];
-  [[GAI sharedInstance] trackerWithTrackingId:@"UA-17707312-2"];
+  [[GAI sharedInstance] trackerWithTrackingId:googleAnalyticsKey];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
