@@ -30,9 +30,8 @@
 
 #include <CommonCrypto/CommonHMAC.h>
 
-//TODO Generate my own client_id at Gogobot
-#define GOGOBOT_OAUTH_CLIENT_ID @"0b4a01e2dd2cd6bf74f52a0e34db5626e32552ff6b86690e51fd3e73f9c6ac56"
-#define GOGOBOT_OAUTH_CLIENT_SECRET @"a7894673ccf9f2f0d2db879dd5cd4b6a72bb0b18aec67b32be756faa544c65f7"
+#define GOGOBOT_OAUTH_CLIENT_ID [[NSUserDefaults standardUserDefaults] stringForKey:@"GogobotClientId"]
+#define GOGOBOT_OAUTH_CLIENT_SECRET [[NSUserDefaults standardUserDefaults] stringForKey:@"GogobotClientSecret"]
 
 @implementation GogobotSignature
 
