@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3D06D78118D9DD8B00145A02 /* PlaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D06D78018D9DD8B00145A02 /* PlaceModel.m */; };
-		3D116DE019539AB800331B49 /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 3D116DDF19539AB800331B49 /* LICENSE.md */; };
 		3D177EBC18A53BB100DB599A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D177EB918A53BB100DB599A /* Default-568h@2x.png */; };
 		3D177EBD18A53BB100DB599A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D177EBA18A53BB100DB599A /* Default.png */; };
 		3D177EBE18A53BB100DB599A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D177EBB18A53BB100DB599A /* Default@2x.png */; };
@@ -72,13 +71,13 @@
 		3DFC2DA71954FFEF00E05047 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFC2DA61954FFEF00E05047 /* MainNavigationController.m */; };
 		3DFC2DAA19550BF600E05047 /* ConfigExample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DFC2DA919550BF600E05047 /* ConfigExample.plist */; };
 		3DFC2DAC19587F0300E05047 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DFC2DAB19587F0300E05047 /* Config.plist */; };
+		3DFC2DAE1959FB0700E05047 /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 3DFC2DAD1959FB0700E05047 /* LICENSE.md */; };
 		A01548ADA0B341BEB2D8F853 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8ADDE2DB8744F0B935F7809 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3D06D77F18D9DD8B00145A02 /* PlaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceModel.h; sourceTree = "<group>"; };
 		3D06D78018D9DD8B00145A02 /* PlaceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceModel.m; sourceTree = "<group>"; };
-		3D116DDF19539AB800331B49 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.md; path = TripCompass/LICENSE.md; sourceTree = "<group>"; };
 		3D177EB918A53BB100DB599A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3D177EBA18A53BB100DB599A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3D177EBB18A53BB100DB599A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -170,6 +169,7 @@
 		3DFC2DA61954FFEF00E05047 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
 		3DFC2DA919550BF600E05047 /* ConfigExample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ConfigExample.plist; path = TripCompass/ConfigExample.plist; sourceTree = SOURCE_ROOT; };
 		3DFC2DAB19587F0300E05047 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		3DFC2DAD1959FB0700E05047 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.md; sourceTree = "<group>"; };
 		71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E8ADDE2DB8744F0B935F7809 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -198,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				3D8DB35818575DD800DA2E6E /* README.md */,
-				3D116DDF19539AB800331B49 /* LICENSE.md */,
+				3DFC2DAD1959FB0700E05047 /* LICENSE.md */,
 				71BB837CDB524BE6BD1B4999 /* Pods.xcconfig */,
 				3D6276051781C65B00A4B675 /* TripCompass */,
 				3D6275FC1781C65B00A4B675 /* Frameworks */,
@@ -441,13 +441,13 @@
 				3DCF5313194F2D52008B52B9 /* favorite@2x.png in Resources */,
 				3DFB9035194206B800FE5DD8 /* BookmarkItemCell.xib in Resources */,
 				3DCF530D194BD149008B52B9 /* icon.png in Resources */,
-				3D116DE019539AB800331B49 /* LICENSE.md in Resources */,
 				3D62760A1781C65B00A4B675 /* InfoPlist.strings in Resources */,
 				3DB281C81827F7AE008C7B82 /* CustomCell.xib in Resources */,
 				3DFB902E1940AFDB00FE5DD8 /* gogobot@2x.png in Resources */,
 				3DCF530E194BD149008B52B9 /* icon58.png in Resources */,
 				3D6276191781C65B00A4B675 /* MainStoryboard.storyboard in Resources */,
 				3D36D2B01922690A00B7AD8B /* icon_west@2x.png in Resources */,
+				3DFC2DAE1959FB0700E05047 /* LICENSE.md in Resources */,
 				3DCF5309194BCF31008B52B9 /* places@2x.png in Resources */,
 				3D177EBC18A53BB100DB599A /* Default-568h@2x.png in Resources */,
 				3D36D2AF1922690A00B7AD8B /* icon_south@2x.png in Resources */,
