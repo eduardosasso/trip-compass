@@ -24,6 +24,8 @@
 //  SOFTWARE.
 
 #import "API.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 #import <CoreLocation/CoreLocation.h>
 #import "GogobotSignature.h"
 #import "NSDictionary+QueryString.h"
@@ -77,10 +79,9 @@ const int RESULTS_PER_PAGE = 20;
                                               if (httpResponse.statusCode == 200) {
                                                 [self handleResults:data];
                                               } else {
-                                                //TODO verify if need this else statement.
-                                                //NSString *error = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                                //TODO force error to see if its capture on newrelic or crashlitcs
-                                                //NSLog(@"Received HTTP %d: %@", httpResponse.statusCode, error);
+                                                id tracker = [[GAI sharedInstance] defaultTracker];
+                                                NSString *message = [NSString stringWithFormat:@"API error HTTP: %ld URL: %@", (long)httpResponse.statusCode, url];
+                                                [tracker send:[[GAIDictionaryBuilder createExceptionWithDescription:message withFatal:[NSNumber numberWithBool:NO]] build]];
                                               }
                                             });
                                           }];
@@ -94,8 +95,9 @@ const int RESULTS_PER_PAGE = 20;
   if (response) {
     [self.delegate didReceiveAPIResults:response];
   } else {
-    //TODO this error should go somewhere
-    NSLog(@"Error, %@", jsonError);
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    NSString *message = [NSString stringWithFormat:@"API JSON Error %@", jsonError];
+    [tracker send:[[GAIDictionaryBuilder createExceptionWithDescription:message withFatal:[NSNumber numberWithBool:NO]] build]];
   }
 }
 - (void)searchPlacesNearby:(NSString *)query {

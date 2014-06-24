@@ -145,13 +145,11 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   PlaceModel *place = [places objectAtIndex:indexPath.row];
   
-  //TODO return key
   [PlaceDataManager destroy:place.key];
   [places removeObjectAtIndex:indexPath.row];
   [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
   
   if ([places count] == 0) {
-    //TODO check to see if return to previous view
     [self.navigationController popViewControllerAnimated:YES];
   }
 }

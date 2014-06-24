@@ -25,6 +25,8 @@
 
 #import "PlaceDataManager.h"
 #import "AppDelegate.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @implementation PlaceDataManager
 
@@ -73,8 +75,12 @@
   
   NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
   
-  //TODO where to send?
-  //if (error)
+  if (error) {
+    NSString *message = [NSString stringWithFormat:@"Core Data error %@  %@", error, error.description];
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createExceptionWithDescription:message
+                                                                                            withFatal:[NSNumber numberWithBool:NO]] build]];
+  }
+  
   return (PlaceModel *)[results firstObject];
 }
 

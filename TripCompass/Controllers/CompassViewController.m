@@ -141,10 +141,6 @@
   // distance is returned in meters by default
   isNearDestination = [self.place distanceTo:self.currentLocation.coordinate] <= 180;
   
-  currentColor = isNearDestination ? customGreenColor : customMagentaColor;
-  self.compassImage.tintColor = currentColor;
-  self.distanceLabel.textColor = currentColor;
-  
   NSTimer* nearbyTimer;
   if (isNearDestination) {
     nearbyTimer = [self nearbyTimerAnimation];
@@ -163,6 +159,10 @@
     directionRadians = -directionDegrees * (M_PI / 180);
     
     directionToGo = directionRadians + geoAngle;
+    
+    currentColor = isNearDestination ? customGreenColor : customMagentaColor;
+    self.compassImage.tintColor = currentColor;
+    self.distanceLabel.textColor = currentColor;
     
     NSString *headingName = [NSString stringWithFormat:@"icon_%@.png", [Util getHeadingDirectionName:newHeading]];
     UIImage* logoImage = [UIImage imageNamed:[headingName lowercaseString]];
