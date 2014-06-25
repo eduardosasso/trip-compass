@@ -29,6 +29,8 @@
 #import "AppDelegate.h"
 #import "LoadingView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface CompassViewController () <CLLocationManagerDelegate, UIAlertViewDelegate>
   
@@ -42,8 +44,6 @@
   
   bool nearbyAnimationRunning;
   bool nearbyAnimationToggle;
-  
-  UIColor *currentColor;
   
   float directionDegrees;
   float directionRadians;
@@ -114,7 +114,7 @@
   locationManager = [[CLLocationManager alloc] init];
   locationManager.delegate = self;
   locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-  locationManager.distanceFilter = 50;
+  locationManager.distanceFilter = 10;
   
   if([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
     [locationManager startUpdatingLocation];
@@ -140,6 +140,10 @@
   
   // distance is returned in meters by default
   isNearDestination = [self.place distanceTo:self.currentLocation.coordinate] <= 180;
+  UIColor *currentColor = isNearDestination ? customGreenColor : customMagentaColor;
+  
+  self.compassImage.tintColor = currentColor;
+  self.distanceLabel.textColor = currentColor;
   
   NSTimer* nearbyTimer;
   if (isNearDestination) {
@@ -160,7 +164,7 @@
     
     directionToGo = directionRadians + geoAngle;
     
-    currentColor = isNearDestination ? customGreenColor : customMagentaColor;
+    UIColor *currentColor = isNearDestination ? customGreenColor : customMagentaColor;
     self.compassImage.tintColor = currentColor;
     self.distanceLabel.textColor = currentColor;
     
@@ -225,9 +229,12 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-  if([title isEqualToString:@"Ok"]) {
-    [self.navigationController popViewControllerAnimated:YES];
-  }
+
+  id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+  [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                        action:@"add_checkpoint"
+                                                         label:title
+                                                         value:nil] build]];
   
   if([title isEqualToString:@"Save"]) {
     NSString *name = [alertView textFieldAtIndex:0].text;

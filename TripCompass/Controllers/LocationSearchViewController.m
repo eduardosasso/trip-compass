@@ -27,6 +27,8 @@
 #import "API.h"
 #import "CustomCell.h"
 #import "AppDelegate.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @implementation LocationSearchViewController {
   CLLocationManager *locationManager;
@@ -194,6 +196,12 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
   } else {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                          action:@"gogobot_tap"
+                                                           label:@"LocationSearchViewController"
+                                                           value:nil] build]];
+    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/app/gogobot/id459590827?mt=8&ls=1"]];
   }
   

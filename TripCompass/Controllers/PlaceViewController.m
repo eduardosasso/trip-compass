@@ -31,6 +31,8 @@
 #import "CustomCell.h"
 #import "NoInternetView.h"
 #import "Reachability.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @implementation PlaceViewController {
   NSString *placeType;
@@ -273,6 +275,12 @@
   if ([cell isKindOfClass:CustomCell.class]) {
     [self performSegueWithIdentifier:@"CompassViewController" sender:self];
   } else {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                          action:@"gogobot_tap"
+                                                           label:@"PlaceViewController"
+                                                           value:nil] build]];
+    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/app/gogobot/id459590827?mt=8&ls=1"]];
   }
   
