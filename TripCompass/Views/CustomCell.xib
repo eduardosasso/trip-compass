@@ -34,7 +34,7 @@
                         <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tabbar_navbar_list_starred_default.png" highlightedImage="icon_tabbar_navbar_list_starred_active.png" translatesAutoresizingMaskIntoConstraints="NO" id="pha-57-zog">
+                    <imageView multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite.png" highlightedImage="favorite_highlighted.png" translatesAutoresizingMaskIntoConstraints="NO" id="pha-57-zog">
                         <rect key="frame" x="273" y="11" width="47" height="38"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <gestureRecognizers/>
@@ -65,7 +65,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icon_tabbar_navbar_list_starred_active.png" width="22" height="21"/>
-        <image name="icon_tabbar_navbar_list_starred_default.png" width="22" height="21"/>
+        <image name="favorite.png" width="22" height="21"/>
+        <image name="favorite_highlighted.png" width="22" height="21"/>
     </resources>
 </document>
