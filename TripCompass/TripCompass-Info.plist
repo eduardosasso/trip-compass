@@ -15,17 +15,8 @@
 			<key>CFBundleIconFiles</key>
 			<array>
 				<string>icon120</string>
-				<string>icon120_3</string>
-				<string>icon120_2</string>
-				<string>icon120_1</string>
 				<string>icon58</string>
 				<string>icon80</string>
-				<string>icon_white</string>
-				<string>icon_white_circle</string>
-				<string>icon_green</string>
-				<string>icon_green_circle</string>
-				<string>icon_4</string>
-				<string>icon</string>
 			</array>
 		</dict>
 	</dict>
