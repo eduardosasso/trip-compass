@@ -2,6 +2,10 @@ Trip Compass
 ------------
 Trip Compass is an utility app built for travelers and wanderers that love to explore new places/cities by walking but are terrible with directions (myself included).
 
+Screenshots
+-----------
+![Compass green](https://raw.githubusercontent.com/eduardosasso/trip-compass/master/TripCompass/Images/screenshots/compass_green.png)
+
 Getting Started
 ---------------
 1. Install [CocoaPods](http://cocoapods.org/)
