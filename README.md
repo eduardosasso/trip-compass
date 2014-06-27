@@ -4,8 +4,9 @@ Trip Compass is an utility app built for travelers and wanderers that love to ex
 
 Screenshots
 -----------
-![Compass green](https://raw.githubusercontent.com/eduardosasso/trip-compass/master/TripCompass/Images/screenshots/compass_green.png)
 ![Places](https://raw.githubusercontent.com/eduardosasso/trip-compass/master/TripCompass/Images/screenshots/places_add_favorites.png)
+![Compass green](https://raw.githubusercontent.com/eduardosasso/trip-compass/master/TripCompass/Images/screenshots/compass_green.png)
+![Compass magenta](https://raw.githubusercontent.com/eduardosasso/trip-compass/master/TripCompass/Images/screenshots/compass_magenta.png)
 
 Getting Started
 ---------------
