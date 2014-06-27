@@ -1,6 +1,6 @@
 PODS:
-  - GoogleAnalytics-iOS-SDK (3.0.3)
-  - NewRelicAgent (3.196)
+  - GoogleAnalytics-iOS-SDK (3.0.7)
+  - NewRelicAgent (3.343)
   - NSData+Base64 (1.0.0)
   - Reachability (3.1.1)
 
@@ -11,9 +11,9 @@ DEPENDENCIES:
   - Reachability (~> 3.1.1)
 
 SPEC CHECKSUMS:
-  GoogleAnalytics-iOS-SDK: 7b0e55cfe5e70d60478a7b105f15ac71e8bc373e
-  NewRelicAgent: 62288ee8200a83e0713f4420483030650a626f55
-  NSData+Base64: 4819562faee4544e3cf5703f2139820b09732b28
-  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+  GoogleAnalytics-iOS-SDK: bb285d8eef15a682f1b82971becd0d22edd0e53b
+  NewRelicAgent: 95b45c10c8f53738fb8a65034e6d6ae72e90570f
+  NSData+Base64: aae92a2e3f0bd88b29fe6093551ded3f5c062548
+  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.33.1
