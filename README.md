@@ -8,6 +8,8 @@ Screenshots
 ![Compass green](https://raw.githubusercontent.com/eduardosasso/trip-compass/master/TripCompass/Images/screenshots/compass_green.png)
 ![Compass magenta](https://raw.githubusercontent.com/eduardosasso/trip-compass/master/TripCompass/Images/screenshots/compass_magenta.png)
 
+More [screenshots](https://github.com/eduardosasso/trip-compass/tree/master/TripCompass/Images/screenshots)
+
 Getting Started
 ---------------
 1. Install [CocoaPods](http://cocoapods.org/)
