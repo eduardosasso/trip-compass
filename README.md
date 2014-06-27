@@ -2,11 +2,20 @@ Trip Compass
 ------------
 Trip Compass is an utility app built for travelers and wanderers that love to explore new places/cities by walking but are terrible with directions (myself included).
 
+Getting Started
+---------------
+1. Install [CocoaPods](http://cocoapods.org/)
+2. run `pod install`
+3. Rename `ConfigExample.plist` to `Config.plist`
+4. Request a Gogobot API key at <api@gogobot.com>
+5. Add your keys for [Google Analytics](http://www.google.com/analytics) and [NewRelic](http://newrelic.com/)
+6. Enjoy!
+
 License
 --------
 MIT License
 
-> Copyright (c) 2013 Eduardo Marconato Sasso
+> Copyright (c) 2014 Eduardo Sasso
 > 
 > Permission is hereby granted, free of charge, to any person obtaining 
 >a copy of this software and associated documentation files (the  
