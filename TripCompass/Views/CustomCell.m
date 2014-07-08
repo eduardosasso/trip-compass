@@ -53,9 +53,14 @@
   self.selectionStyle = UITableViewCellSelectionStyleDefault;
   
   //setup tap events like a button
-  UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleFavoriteTap:)];
+  UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleFavoriteTap)];
   [self.favoriteImage addGestureRecognizer:tapGestureRecognizer];
   tapGestureRecognizer.delegate = self;
+  
+  UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:nil];
+  [self.favoriteImage addGestureRecognizer:longPressGestureRecognizer];
+  longPressGestureRecognizer.delegate = self;
+  longPressGestureRecognizer.cancelsTouchesInView = NO;
   
   UIImage *img = [[self.favoriteImage image] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   self.favoriteImage.image = img;
@@ -66,7 +71,7 @@
   self.favoriteImage.highlighted = highlight;
 }
 
-- (void)toggleFavoriteTap:(UITapGestureRecognizer *)recognizer {
+- (void)toggleFavoriteTap {
   UIColor *color;
   
   BOOL saved = [self.delegate didTapAddToFavorite:self.tag];
