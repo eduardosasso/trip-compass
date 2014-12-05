@@ -61,6 +61,8 @@
 			<string>{320, 480}</string>
 		</dict>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>MainStoryboard</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
