@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <development version="5000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Select Location-->
@@ -30,13 +31,23 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0sG-TZ-Wg3">
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0sG-TZ-Wg3">
                                             <rect key="frame" x="150" y="12" width="20" height="20"/>
                                         </activityIndicatorView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gogobot.png" translatesAutoresizingMaskIntoConstraints="NO" id="4eW-hl-ZvY">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gogobot.png" translatesAutoresizingMaskIntoConstraints="NO" id="4eW-hl-ZvY">
                                             <rect key="frame" x="90" y="33" width="140" height="19"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="19" id="cEb-8a-Rcf"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="4eW-hl-ZvY" firstAttribute="centerX" secondItem="LHP-ZL-cnd" secondAttribute="centerX" id="9YF-pI-gkW"/>
+                                        <constraint firstItem="4eW-hl-ZvY" firstAttribute="leading" secondItem="LHP-ZL-cnd" secondAttribute="leadingMargin" constant="82" id="CZO-GZ-JCv"/>
+                                        <constraint firstItem="4eW-hl-ZvY" firstAttribute="top" secondItem="0sG-TZ-Wg3" secondAttribute="bottom" constant="1" id="SoU-1x-2I9"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="4eW-hl-ZvY" secondAttribute="bottom" constant="-0.5" id="cJz-Hg-fUM"/>
+                                        <constraint firstItem="4eW-hl-ZvY" firstAttribute="centerX" secondItem="0sG-TZ-Wg3" secondAttribute="centerX" id="nhm-5R-hnh"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DefaultCell" textLabel="AP4-bY-wCp" detailTextLabel="c7R-gY-UWK" style="IBUITableViewCellStyleSubtitle" id="5UJ-G0-oBS">
@@ -414,13 +425,23 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ydl-QP-rOI">
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ydl-QP-rOI">
                                             <rect key="frame" x="150" y="12" width="20" height="20"/>
                                         </activityIndicatorView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gogobot.png" translatesAutoresizingMaskIntoConstraints="NO" id="vqL-2V-8QK">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gogobot.png" translatesAutoresizingMaskIntoConstraints="NO" id="vqL-2V-8QK">
                                             <rect key="frame" x="90" y="33" width="140" height="19"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="19" id="b4R-RV-jy7"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="vqL-2V-8QK" firstAttribute="leading" secondItem="s6u-5E-I0o" secondAttribute="leadingMargin" constant="82" id="2vZ-Dw-iTa"/>
+                                        <constraint firstItem="vqL-2V-8QK" firstAttribute="top" secondItem="ydl-QP-rOI" secondAttribute="bottom" constant="1" id="LPv-oa-t2h"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="vqL-2V-8QK" secondAttribute="bottom" constant="-0.5" id="RuQ-8J-Sl3"/>
+                                        <constraint firstItem="vqL-2V-8QK" firstAttribute="centerX" secondItem="s6u-5E-I0o" secondAttribute="centerX" id="Y6g-gB-QTM"/>
+                                        <constraint firstItem="vqL-2V-8QK" firstAttribute="centerX" secondItem="ydl-QP-rOI" secondAttribute="centerX" id="msm-fB-1BU"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>

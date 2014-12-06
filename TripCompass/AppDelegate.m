@@ -32,6 +32,8 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize locationManager = _locationManager;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Load config.plist into user defaults
@@ -56,6 +58,12 @@
   
   [[UITabBar appearance] setTintColor:[UIColor grayColor]]; // for unselected items that are gray
   [[UITabBar appearance] setSelectedImageTintColor:customMagentaColor]; // for selected items that are green
+  
+  // Prompt for location access iOS8+
+  self.locationManager = [[CLLocationManager alloc] init];
+  if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+    [self.locationManager requestWhenInUseAuthorization];
+  }
   
   return YES;
 }
